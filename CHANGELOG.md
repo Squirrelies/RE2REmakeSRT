@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.0](https://drive.google.com) (2019-01-25)
+### [1.0.0](https://drive.google.com) (2019-01-25)
 * Health indicator added.
 * Poison flag added.
 * IGT added.
