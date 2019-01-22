@@ -3,6 +3,8 @@ An SRT (SpeedRun Tool) for Resident Evil 2 (2019).
 
 See the [CHANGELOG.md](CHANGELOG.md) file for downloads and changes.
 
+All builds from me will be digitally signed as 'Travis J Gutjahr'.
+
 Features anticipated:
 
 * Health as an integer w/ poison indicator.
