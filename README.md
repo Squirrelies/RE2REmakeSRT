@@ -1,7 +1,7 @@
 # RE2REmakeSRT
 An SRT (SpeedRun Tool) for Resident Evil 2 (2019).
 
-See the [CHANGELOG.md](../blob/master/CHANGELOG.md) file for downloads and changes.
+See the [CHANGELOG.md](master/CHANGELOG.md) file for downloads and changes.
 
 Features anticipated:
 
