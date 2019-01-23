@@ -10,6 +10,7 @@ assignees: ''
 **Computer Information:**
  - OS: [e.g. Windows 10 Version 1809 (Start + 'winver' to find out)]
  - Program Version [e.g. 1.0.2]
+ - Game Version [e.g. 1.01]
 
 **Describe the bug**
 A clear and concise description of what the bug is.
