@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Threading;
 
 namespace RE2REmakeSRT
@@ -13,11 +14,22 @@ namespace RE2REmakeSRT
         private REmake2VersionEnumeration gameVersion;
         public ProcessMemory.ProcessMemory memoryAccess;
 
+        public int CurrentHealth { get; private set; }
+        public bool IsPoisoned { get; private set; }
+        public float RawInGameTimer { get; private set; }
+
+        public TimeSpan InGameTimer { get { return TimeSpan.FromSeconds(RawInGameTimer); } }
+        public string InGameTimerString { get { return this.InGameTimer.ToString(@"hh\:mm\:ss\.fff", CultureInfo.InvariantCulture); } }
+
         public GameMemory(Process proc)
         {
             this.proc = proc;
             this.gameVersion = REmake2VersionDetector.GetVersion(this.proc);
             this.memoryAccess = new ProcessMemory.ProcessMemory(this.proc.Id);
+
+            this.CurrentHealth = 0;
+            this.IsPoisoned = false;
+            this.RawInGameTimer = 0f;
         }
 
         /// <summary>

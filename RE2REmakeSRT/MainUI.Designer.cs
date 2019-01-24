@@ -1,6 +1,4 @@
-﻿using RE2REmakeSRT.Controls;
-
-namespace RE2REmakeSRT
+﻿namespace RE2REmakeSRT
 {
     partial class MainUI
     {
@@ -31,9 +29,7 @@ namespace RE2REmakeSRT
         private void InitializeComponent()
         {
             this.playerHealthStatus = new System.Windows.Forms.PictureBox();
-            this.statisticsPanel = new DoubleBufferedPanel();
-            this.playerInfoPanel = new DoubleBufferedPanel();
-            this.inventoryPanel = new DoubleBufferedPanel();
+            this.statisticsPanel = new DoubleBuffered.DoubleBufferedPanel();
             ((System.ComponentModel.ISupportInitialize)(this.playerHealthStatus)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,30 +52,12 @@ namespace RE2REmakeSRT
             this.statisticsPanel.TabIndex = 2;
             this.statisticsPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.statisticsPanel_Paint);
             // 
-            // playerInfoPanel
-            // 
-            this.playerInfoPanel.Location = new System.Drawing.Point(1, 391);
-            this.playerInfoPanel.Name = "playerInfoPanel";
-            this.playerInfoPanel.Size = new System.Drawing.Size(348, 96);
-            this.playerInfoPanel.TabIndex = 3;
-            this.playerInfoPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.playerInfoPanel_Paint);
-            // 
-            // inventoryPanel
-            // 
-            this.inventoryPanel.Location = new System.Drawing.Point(157, 1);
-            this.inventoryPanel.Name = "inventoryPanel";
-            this.inventoryPanel.Size = new System.Drawing.Size(192, 384);
-            this.inventoryPanel.TabIndex = 4;
-            this.inventoryPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.inventoryPanel_Paint);
-            // 
-            // EnhancedUI
+            // MainUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(350, 488);
-            this.Controls.Add(this.playerInfoPanel);
-            this.Controls.Add(this.inventoryPanel);
+            this.ClientSize = new System.Drawing.Size(152, 386);
             this.Controls.Add(this.statisticsPanel);
             this.Controls.Add(this.playerHealthStatus);
             this.DoubleBuffered = true;
@@ -97,8 +75,6 @@ namespace RE2REmakeSRT
         #endregion
 
         private System.Windows.Forms.PictureBox playerHealthStatus;
-        private DoubleBufferedPanel statisticsPanel;
-        private DoubleBufferedPanel playerInfoPanel;
-        private DoubleBufferedPanel inventoryPanel;
+        private DoubleBuffered.DoubleBufferedPanel statisticsPanel;
     }
 }

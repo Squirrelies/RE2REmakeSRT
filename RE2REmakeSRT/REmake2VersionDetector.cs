@@ -8,9 +8,6 @@ namespace RE2REmakeSRT
 {
     public static class REmake2VersionDetector
     {
-        private static readonly byte[] remake2_Stock_1p00 = new byte[32]; // Undefined, we don't know the hashes yet!
-        private static readonly byte[] remake2_Stock_1p01 = new byte[32]; // Undefined, we don't know the hashes yet!
-
         private static byte[] GetSHA256Checksum(string filePath)
         {
             using (SHA256 checksumCalculator = SHA256.Create())
@@ -24,11 +21,15 @@ namespace RE2REmakeSRT
         {
             byte[] processHash = GetSHA256Checksum(remake2Proc.MainModule.FileName);
 
-            if (processHash.SequenceEqual(remake2_Stock_1p00))
+            if (processHash.SequenceEqual(GameHashes.Stock_1ShotDemo))
+            {
+                return REmake2VersionEnumeration.Demo;
+            }
+            else if (processHash.SequenceEqual(GameHashes.Stock_1p00))
             {
                 return REmake2VersionEnumeration.Stock_1p00;
             }
-            else if (processHash.SequenceEqual(remake2_Stock_1p01))
+            else if (processHash.SequenceEqual(GameHashes.Stock_1p01))
             {
                 return REmake2VersionEnumeration.Stock_1p01;
             }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RE2REmakeSRT", "RE2REmakeSR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessMemory", "..\ProcessMemory\ProcessMemory\ProcessMemory.csproj", "{F8BD5053-142C-4708-B346-D08C6261E293}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleBuffered", "..\DoubleBuffered\DoubleBuffered\DoubleBuffered.csproj", "{1E8FCF88-0023-45C8-BEE8-2C3E5F6A5322}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F8BD5053-142C-4708-B346-D08C6261E293}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8BD5053-142C-4708-B346-D08C6261E293}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8BD5053-142C-4708-B346-D08C6261E293}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E8FCF88-0023-45C8-BEE8-2C3E5F6A5322}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E8FCF88-0023-45C8-BEE8-2C3E5F6A5322}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E8FCF88-0023-45C8-BEE8-2C3E5F6A5322}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E8FCF88-0023-45C8-BEE8-2C3E5F6A5322}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -51,18 +51,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\DoubleBufferedPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\DoubleBufferedProgressBar.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="AttachUI.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AttachUI.Designer.cs">
       <DependentUpon>AttachUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="CharacterEnumeration.cs" />
+    <Compile Include="GameHashes.cs" />
     <Compile Include="MainUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +74,9 @@
     <Compile Include="GameMemory.cs" />
     <Compile Include="REmake2VersionDetector.cs" />
     <Compile Include="REmake2VersionEnumeration.cs" />
+    <EmbeddedResource Include="MainUI.resx">
+      <DependentUpon>MainUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -86,6 +85,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -101,10 +101,26 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DoubleBuffered\DoubleBuffered\DoubleBuffered.csproj">
+      <Project>{1e8fcf88-0023-45c8-bee8-2c3e5f6a5322}</Project>
+      <Name>DoubleBuffered</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ProcessMemory\ProcessMemory\ProcessMemory.csproj">
       <Project>{f8bd5053-142c-4708-b346-d08c6261e293}</Project>
       <Name>ProcessMemory</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FINE.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EMPTY.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DANGER.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CAUTION-YELLOW.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

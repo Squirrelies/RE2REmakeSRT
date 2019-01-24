@@ -42,21 +42,21 @@ namespace RE2REmakeSRT
                     // Update the last drawn time.
                     lastFullUIDraw = DateTime.UtcNow.Ticks;
 
-                    // Get the full amount of updated information from memory.
-                    Program.gameMem.Refresh(CancellationToken.None);
+                    //// Get the full amount of updated information from memory.
+                    //Program.gameMem.Refresh(CancellationToken.None);
 
                     //// Output some info to debug listeners.
                     //Debug.WriteLine("IGT: {0} {1}'s Health: {2} Poisoned: {3} {4} ({5} / {6})", Program.gameMem.InGameTimerString, Program.gameMem.CurrentCharacter, Program.gameMem.CurrentHealth, Program.gameMem.IsPoisoned, Program.gameMem.ItemSlots[Program.gameMem.EquippedItemSlotIndex].Item, Program.gameMem.EquippedCurrentAmmo, Program.gameMem.EquippedMaxAmmo);
 
                     // Only draw these periodically to reduce CPU usage.
                     uiForm.playerHealthStatus.Invalidate();
-                    uiForm.playerInfoPanel.Invalidate();
-                    uiForm.inventoryPanel.Invalidate();
+                    //uiForm.playerInfoPanel.Invalidate();
+                    //uiForm.inventoryPanel.Invalidate();
                 }
                 else
                 {
-                    // Get a slimmed-down amount of updated information from memory.
-                    Program.gameMem.RefreshSlim(CancellationToken.None);
+                    //// Get a slimmed-down amount of updated information from memory.
+                    //Program.gameMem.RefreshSlim(CancellationToken.None);
                 }
 
                 // Always draw this as these are simple text draws and contains the IGT/frame count.
@@ -81,7 +81,28 @@ namespace RE2REmakeSRT
             e.Graphics.InterpolationMode = interpolationMode;
             e.Graphics.PixelOffsetMode = pixelOffsetMode;
 
-            //// Draw health.
+            // Draw health.
+            if (Program.gameMem.CurrentHealth > 1200 || Program.gameMem.CurrentHealth < 0) // Dead?
+            {
+                e.Graphics.DrawText(15, 37, "DEAD", Brushes.Red);
+                playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.EMPTY, "EMPTY");
+            }
+            else if (Program.gameMem.CurrentHealth >= 801) // Fine (Green)
+            {
+                e.Graphics.DrawText(15, 37, Program.gameMem.CurrentHealth.ToString(), Brushes.LawnGreen);
+                playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.FINE, "FINE");
+            }
+            else if (Program.gameMem.CurrentHealth <= 800 && Program.gameMem.CurrentHealth >= 361) // Caution (Yellow)
+            {
+                e.Graphics.DrawText(15, 37, Program.gameMem.CurrentHealth.ToString(), Brushes.Goldenrod);
+                playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.CAUTION_YELLOW, "CAUTION_YELLOW");
+            }
+            else if (Program.gameMem.CurrentHealth <= 360) // Danger (Red)
+            {
+                e.Graphics.DrawText(15, 37, Program.gameMem.CurrentHealth.ToString(), Brushes.Red);
+                playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.DANGER, "DANGER");
+            }
+
             //if (Program.gameMem.CurrentCharacter == CharacterEnumeration.Chris)
             //{
             //    if (Program.gameMem.CurrentHealth > 1400 || Program.gameMem.CurrentHealth < 0) // Dead?
@@ -244,9 +265,9 @@ namespace RE2REmakeSRT
             // Increment for displaying text properly.
             int i = 1;
 
-            //e.Graphics.DrawText(0, 0, string.Format("{0}", Program.gameMem.InGameTimerString), Brushes.White, new Font("Consolas", 16, FontStyle.Bold));
-            //e.Graphics.DrawText(0, 26, "Raw IGT", Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
-            //e.Graphics.DrawText(52, 22, Program.gameMem.RawInGameTimer.ToString(), Brushes.Gray, new Font("Consolas", 12, FontStyle.Bold));
+            e.Graphics.DrawText(0, 0, string.Format("{0}", Program.gameMem.InGameTimerString), Brushes.White, new Font("Consolas", 16, FontStyle.Bold));
+            e.Graphics.DrawText(0, 26, "Raw IGT", Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
+            e.Graphics.DrawText(52, 22, Program.gameMem.RawInGameTimer.ToString(), Brushes.Gray, new Font("Consolas", 12, FontStyle.Bold));
             //e.Graphics.DrawText(0, 10 + (heightOffset * ++i), string.Format("Saves: {0}", Program.gameMem.TotalSaves), Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
             //e.Graphics.DrawText(0, 10 + (heightOffset * ++i), string.Format("Shots Fired: {0}", Program.gameMem.TotalShots), Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
             //e.Graphics.DrawText(0, 10 + (heightOffset * ++i), string.Format("Ammo: {0} / {1}", Program.gameMem.EquippedCurrentAmmo, Program.gameMem.EquippedMaxAmmo), Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
