@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("RE2REmakeSRT")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Resident Evil 2 (2019) SRT")]
+[assembly: AssemblyDescription("An informational display of your character in Resident Evil 2 (2019).")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("RE2REmakeSRT")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCompany("Travis J Gutjahr")]
+[assembly: AssemblyProduct("Resident Evil 2 (2019) SRT")]
+[assembly: AssemblyCopyright("Copyright © 2019 Travis J Gutjahr")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
