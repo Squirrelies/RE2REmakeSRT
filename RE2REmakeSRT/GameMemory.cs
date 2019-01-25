@@ -19,7 +19,13 @@ namespace RE2REmakeSRT
         public ulong BaseAddress { get; private set;}
         public uint PointerPlayer1 { get; private set; }
         public uint PointerPlayer2 { get; private set; }
+        public uint PointerPlayer3 { get; private set; }
+        public uint PointerPlayer4 { get; private set; }
+        public uint PointerPlayer5 { get; private set; }
+
         public uint PointerPlayerHP { get; private set; }
+        public uint PointerPlayerWeapon1 { get; private set; }
+        public uint PointerPlayerQuantity1 { get; private set; }
 
         // Values
         public int CurrentHealth { get; private set; }
@@ -54,7 +60,12 @@ namespace RE2REmakeSRT
                         await RefreshSlim(cToken);
 
                         // Now lookup the rest.
+                        this.PointerPlayer3 = await memoryAccess.GetUIntAtAsync(this.PointerPlayer2 + 0xA0U, cToken); // Alt 0x98U
+                        this.PointerPlayer4 = await memoryAccess.GetUIntAtAsync(this.PointerPlayer3 + 0x18U, cToken); // Alt 0x78U
+                        this.PointerPlayer5 = await memoryAccess.GetUIntAtAsync(this.PointerPlayer4 + 0x10U, cToken);
 
+                        this.PointerPlayerWeapon1 = await memoryAccess.GetUIntAtAsync(this.PointerPlayer5 + 0x14U, cToken);
+                        this.PointerPlayerQuantity1 = await memoryAccess.GetUIntAtAsync(this.PointerPlayer5 + 0x20U, cToken);
                         break;
                     }
                 default:
