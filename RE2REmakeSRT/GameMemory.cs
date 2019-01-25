@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -32,7 +33,8 @@ namespace RE2REmakeSRT
         public float RawInGameTimer { get; private set; }
 
         public TimeSpan InGameTimer { get { return TimeSpan.FromSeconds(RawInGameTimer); } }
-        public string InGameTimerString { get { return this.InGameTimer.ToString(@"hh\:mm\:ss\.fff", CultureInfo.InvariantCulture); } }
+        //public string InGameTimerString { get { return this.InGameTimer.ToString(@"hh\:mm\:ss\.fff", CultureInfo.InvariantCulture); } }
+        public string InGameTimerString { get; private set; }
 
         public GameMemory(Process proc)
         {
@@ -91,6 +93,14 @@ namespace RE2REmakeSRT
                         this.PointerPlayerHP = await memoryAccess.GetUIntAtAsync(this.PointerPlayer2 + 0x20U, cToken);
 
                         this.CurrentHealth = await memoryAccess.GetIntAtAsync(this.PointerPlayerHP + 0x58U, cToken);
+
+                        // Temporary. This is the rendered string in the pause menu and is only updated when paused... Searching for the backing value that is the basis for that string still...
+                        uint test1 = await memoryAccess.GetUIntAtAsync(this.BaseAddress + 0x0707E130U, cToken);
+                        uint test2 = await memoryAccess.GetUIntAtAsync(test1 + 0x80U, cToken);
+                        uint test3 = await memoryAccess.GetUIntAtAsync(test2 + 0x110U, cToken);
+                        uint test4 = await memoryAccess.GetUIntAtAsync(test3 + 0x58U, cToken);
+                        byte[] igtStringBytes = await memoryAccess.GetByteArrayAtAsync(test4, 8 * 2, cToken);
+                        InGameTimerString = Encoding.Unicode.GetString(igtStringBytes, 0, 8 * 2);
 
                         break;
                     }

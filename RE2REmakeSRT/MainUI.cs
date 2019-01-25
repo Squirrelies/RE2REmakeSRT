@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RE2REmakeSRT
@@ -43,9 +44,9 @@ namespace RE2REmakeSRT
                     lastFullUIDraw = DateTime.UtcNow.Ticks;
 
                     // Get the full amount of updated information from memory.
-                    Program.gameMem.Refresh(CancellationToken.None);
+                    Task.WaitAll(Program.gameMem.Refresh(CancellationToken.None));
 
-                    //// Output some info to debug listeners.
+                    // Output some info to debug listeners.
                     //Debug.WriteLine("IGT: {0} {1}'s Health: {2} Poisoned: {3} {4} ({5} / {6})", Program.gameMem.InGameTimerString, Program.gameMem.CurrentCharacter, Program.gameMem.CurrentHealth, Program.gameMem.IsPoisoned, Program.gameMem.ItemSlots[Program.gameMem.EquippedItemSlotIndex].Item, Program.gameMem.EquippedCurrentAmmo, Program.gameMem.EquippedMaxAmmo);
 
                     // Only draw these periodically to reduce CPU usage.
@@ -56,7 +57,7 @@ namespace RE2REmakeSRT
                 else
                 {
                     // Get a slimmed-down amount of updated information from memory.
-                    Program.gameMem.RefreshSlim(CancellationToken.None);
+                    Task.WaitAll(Program.gameMem.RefreshSlim(CancellationToken.None));
                 }
 
                 // Always draw this as these are simple text draws and contains the IGT/frame count.
