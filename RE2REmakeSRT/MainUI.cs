@@ -83,24 +83,24 @@ namespace RE2REmakeSRT
             e.Graphics.PixelOffsetMode = pixelOffsetMode;
 
             // Draw health.
-            if (Program.gameMem.CurrentHealth > 1200 || Program.gameMem.CurrentHealth < 0) // Dead?
+            if (Program.gameMem.PlayerCurrentHealth > 1200 || Program.gameMem.PlayerCurrentHealth < 0) // Dead?
             {
                 e.Graphics.DrawText(15, 37, "DEAD", Brushes.Red);
                 playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.EMPTY, "EMPTY");
             }
-            else if (Program.gameMem.CurrentHealth >= 801) // Fine (Green)
+            else if (Program.gameMem.PlayerCurrentHealth >= 801) // Fine (Green)
             {
-                e.Graphics.DrawText(15, 37, Program.gameMem.CurrentHealth.ToString(), Brushes.LawnGreen);
+                e.Graphics.DrawText(15, 37, Program.gameMem.PlayerCurrentHealth.ToString(), Brushes.LawnGreen);
                 playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.FINE, "FINE");
             }
-            else if (Program.gameMem.CurrentHealth <= 800 && Program.gameMem.CurrentHealth >= 361) // Caution (Yellow)
+            else if (Program.gameMem.PlayerCurrentHealth <= 800 && Program.gameMem.PlayerCurrentHealth >= 361) // Caution (Yellow)
             {
-                e.Graphics.DrawText(15, 37, Program.gameMem.CurrentHealth.ToString(), Brushes.Goldenrod);
+                e.Graphics.DrawText(15, 37, Program.gameMem.PlayerCurrentHealth.ToString(), Brushes.Goldenrod);
                 playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.CAUTION_YELLOW, "CAUTION_YELLOW");
             }
-            else if (Program.gameMem.CurrentHealth <= 360) // Danger (Red)
+            else if (Program.gameMem.PlayerCurrentHealth <= 360) // Danger (Red)
             {
-                e.Graphics.DrawText(15, 37, Program.gameMem.CurrentHealth.ToString(), Brushes.Red);
+                e.Graphics.DrawText(15, 37, Program.gameMem.PlayerCurrentHealth.ToString(), Brushes.Red);
                 playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.DANGER, "DANGER");
             }
 
@@ -267,8 +267,13 @@ namespace RE2REmakeSRT
             int i = 1;
 
             e.Graphics.DrawText(0, 0, string.Format("{0}", Program.gameMem.InGameTimerString), Brushes.White, new Font("Consolas", 16, FontStyle.Bold));
-            e.Graphics.DrawText(0, 26, "Raw IGT", Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
-            e.Graphics.DrawText(52, 22, Program.gameMem.RawInGameTimer.ToString(), Brushes.Gray, new Font("Consolas", 12, FontStyle.Bold));
+
+            if (Program.gameMem.BossCurrentHealth != 0 && Program.gameMem.BossMaxHealth != 0)
+                e.Graphics.DrawText(0, (heightOffset * ++i), string.Format("Boss: {0} ({1:P0})", Program.gameMem.BossCurrentHealth, (decimal)Program.gameMem.BossCurrentHealth / (decimal)Program.gameMem.BossMaxHealth), Brushes.Red, new Font("Consolas", 9, FontStyle.Bold));
+
+
+            //e.Graphics.DrawText(0, 26, "Raw IGT", Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
+            //e.Graphics.DrawText(52, 22, Program.gameMem.RawInGameTimer.ToString(), Brushes.Gray, new Font("Consolas", 12, FontStyle.Bold));
             //e.Graphics.DrawText(0, 10 + (heightOffset * ++i), string.Format("Saves: {0}", Program.gameMem.TotalSaves), Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
             //e.Graphics.DrawText(0, 10 + (heightOffset * ++i), string.Format("Shots Fired: {0}", Program.gameMem.TotalShots), Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
             //e.Graphics.DrawText(0, 10 + (heightOffset * ++i), string.Format("Ammo: {0} / {1}", Program.gameMem.EquippedCurrentAmmo, Program.gameMem.EquippedMaxAmmo), Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));

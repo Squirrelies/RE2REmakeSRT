@@ -29,7 +29,10 @@ namespace RE2REmakeSRT
         public uint PointerPlayerQuantity1 { get; private set; }
 
         // Values
-        public int CurrentHealth { get; private set; }
+        public int PlayerCurrentHealth { get; private set; }
+        public int PlayerMaxHealth { get; private set; }
+        public int BossCurrentHealth { get; private set; }
+        public int BossMaxHealth { get; private set; }
         public float RawInGameTimer { get; private set; }
 
         public TimeSpan InGameTimer { get { return TimeSpan.FromSeconds(RawInGameTimer); } }
@@ -43,7 +46,7 @@ namespace RE2REmakeSRT
             this.memoryAccess = new ProcessMemory.ProcessMemory(this.proc.Id);
             this.BaseAddress = (ulong)this.proc.MainModule.BaseAddress.ToInt64();
 
-            this.CurrentHealth = 0;
+            this.PlayerCurrentHealth = 0;
             this.RawInGameTimer = 0f;
         }
 
@@ -68,6 +71,16 @@ namespace RE2REmakeSRT
 
                         this.PointerPlayerWeapon1 = await memoryAccess.GetUIntAtAsync(this.PointerPlayer5 + 0x14U, cToken);
                         this.PointerPlayerQuantity1 = await memoryAccess.GetUIntAtAsync(this.PointerPlayer5 + 0x20U, cToken);
+
+                        uint bossPtr1 = await memoryAccess.GetUIntAtAsync(this.BaseAddress + 0x0707B758U, cToken);
+                        uint bossPtr2 = await memoryAccess.GetUIntAtAsync(bossPtr1 + 0x80U, cToken);
+                        uint bossPtr3 = await memoryAccess.GetUIntAtAsync(bossPtr2 + 0x88U, cToken);
+                        uint bossPtr4 = await memoryAccess.GetUIntAtAsync(bossPtr3 + 0x18U, cToken);
+                        uint bossPtr5 = await memoryAccess.GetUIntAtAsync(bossPtr4 + 0x1A0U, cToken);
+
+                        this.BossMaxHealth = await memoryAccess.GetIntAtAsync(bossPtr5 + 0x54U, cToken);
+                        this.BossCurrentHealth = await memoryAccess.GetIntAtAsync(bossPtr5 + 0x58U, cToken);
+
                         break;
                     }
                 default:
@@ -92,7 +105,8 @@ namespace RE2REmakeSRT
                         this.PointerPlayer2 = await memoryAccess.GetUIntAtAsync(this.PointerPlayer1 + 0x50U, cToken);
                         this.PointerPlayerHP = await memoryAccess.GetUIntAtAsync(this.PointerPlayer2 + 0x20U, cToken);
 
-                        this.CurrentHealth = await memoryAccess.GetIntAtAsync(this.PointerPlayerHP + 0x58U, cToken);
+                        this.PlayerMaxHealth = await memoryAccess.GetIntAtAsync(this.PointerPlayerHP + 0x54U, cToken);
+                        this.PlayerCurrentHealth = await memoryAccess.GetIntAtAsync(this.PointerPlayerHP + 0x58U, cToken);
 
                         // Temporary. This is the rendered string in the pause menu and is only updated when paused... Searching for the backing value that is the basis for that string still...
                         uint test1 = await memoryAccess.GetUIntAtAsync(this.BaseAddress + 0x0707E130U, cToken);
