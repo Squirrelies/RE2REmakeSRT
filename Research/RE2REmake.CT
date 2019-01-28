@@ -4,7 +4,7 @@
     <CheatEntry>
       <ID>20</ID>
       <Description>"IGT String"</Description>
-      <LastState RealAddress="122EBD50"/>
+      <LastState RealAddress="1411B450"/>
       <VariableType>String</VariableType>
       <Length>8</Length>
       <Unicode>1</Unicode>
@@ -21,7 +21,7 @@
     <CheatEntry>
       <ID>6</ID>
       <Description>"Current HP"</Description>
-      <LastState Value="1200" RealAddress="152653F8"/>
+      <LastState Value="1200" RealAddress="1387DEA8"/>
       <VariableType>4 Bytes</VariableType>
       <Address>"re2.exe"+070ACA88</Address>
       <Offsets>
@@ -33,14 +33,14 @@
         <CheatEntry>
           <ID>28</ID>
           <Description>"Max HP"</Description>
-          <LastState Value="1200" RealAddress="152653F4"/>
+          <LastState Value="1200" RealAddress="1387DEA4"/>
           <VariableType>4 Bytes</VariableType>
           <Address>-4</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>27</ID>
           <Description>"Interacting"</Description>
-          <LastState Value="0" RealAddress="152653FC"/>
+          <LastState Value="0" RealAddress="1387DEAC"/>
           <VariableType>4 Bytes</VariableType>
           <Address>+4</Address>
         </CheatEntry>
@@ -49,7 +49,7 @@
     <CheatEntry>
       <ID>30</ID>
       <Description>"Boss Current HP"</Description>
-      <LastState Value="800" RealAddress="12D78468"/>
+      <LastState Value="800" RealAddress="13E07658"/>
       <Color>0000FF</Color>
       <VariableType>4 Bytes</VariableType>
       <Address>"re2.exe"+0707B758</Address>
@@ -64,7 +64,7 @@
         <CheatEntry>
           <ID>31</ID>
           <Description>"Max HP"</Description>
-          <LastState Value="800" RealAddress="12D78464"/>
+          <LastState Value="800" RealAddress="13E07654"/>
           <Color>0000FF</Color>
           <VariableType>4 Bytes</VariableType>
           <Address>-4</Address>
@@ -74,7 +74,7 @@
     <CheatEntry>
       <ID>34</ID>
       <Description>"Equipped Weapon"</Description>
-      <LastState Value="170DC578" RealAddress="1527DA30"/>
+      <LastState Value="170DC578" RealAddress="14735E00"/>
       <ShowAsHex>1</ShowAsHex>
       <VariableType>4 Bytes</VariableType>
       <Address>"re2.exe"+070ACA88</Address>
@@ -88,7 +88,7 @@
         <CheatEntry>
           <ID>35</ID>
           <Description>"Slot ID"</Description>
-          <LastState Value="00000000" RealAddress="1527DA58"/>
+          <LastState Value="00000000" RealAddress="14735E28"/>
           <ShowAsHex>1</ShowAsHex>
           <VariableType>4 Bytes</VariableType>
           <Address>+28</Address>
@@ -96,7 +96,7 @@
         <CheatEntry>
           <ID>37</ID>
           <Description>"Weapon ID"</Description>
-          <LastState Value="00000001" RealAddress="1527DAA4"/>
+          <LastState Value="00000001" RealAddress="14735E74"/>
           <ShowAsHex>1</ShowAsHex>
           <VariableType>4 Bytes</VariableType>
           <Address>+74</Address>
@@ -104,14 +104,14 @@
         <CheatEntry>
           <ID>38</ID>
           <Description>"Attachments"</Description>
-          <LastState Value="0" RealAddress="1527DAA8"/>
+          <LastState Value="0" RealAddress="14735E78"/>
           <VariableType>4 Bytes</VariableType>
           <Address>+78</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>39</ID>
           <Description>"Quantity"</Description>
-          <LastState Value="5" RealAddress="1527DAB0"/>
+          <LastState Value="10" RealAddress="14735E80"/>
           <VariableType>4 Bytes</VariableType>
           <Address>+80</Address>
         </CheatEntry>
@@ -120,7 +120,7 @@
     <CheatEntry>
       <ID>40</ID>
       <Description>"Equipped Defense Item"</Description>
-      <LastState Value="170DC578" RealAddress="152638B0"/>
+      <LastState Value="170DC578" RealAddress="1387E040"/>
       <ShowAsHex>1</ShowAsHex>
       <VariableType>4 Bytes</VariableType>
       <Address>"re2.exe"+070ACA88</Address>
@@ -134,7 +134,7 @@
         <CheatEntry>
           <ID>41</ID>
           <Description>"Slot ID"</Description>
-          <LastState Value="FFFFFFFF" RealAddress="152638D8"/>
+          <LastState Value="FFFFFFFF" RealAddress="1387E068"/>
           <ShowAsHex>1</ShowAsHex>
           <VariableType>4 Bytes</VariableType>
           <Address>+28</Address>
@@ -142,7 +142,7 @@
         <CheatEntry>
           <ID>43</ID>
           <Description>"Weapon ID"</Description>
-          <LastState Value="FFFFFFFF" RealAddress="15263924"/>
+          <LastState Value="FFFFFFFF" RealAddress="1387E0B4"/>
           <ShowAsHex>1</ShowAsHex>
           <VariableType>4 Bytes</VariableType>
           <Address>+74</Address>
@@ -150,32 +150,47 @@
         <CheatEntry>
           <ID>45</ID>
           <Description>"Quantity"</Description>
-          <LastState Value="1" RealAddress="15263930"/>
+          <LastState Value="1" RealAddress="1387E0C0"/>
           <VariableType>4 Bytes</VariableType>
           <Address>+80</Address>
         </CheatEntry>
       </CheatEntries>
     </CheatEntry>
     <CheatEntry>
-      <ID>52</ID>
+      <ID>58</ID>
       <Description>"Active Time (Microseconds)"</Description>
-      <LastState Value="10673379645" RealAddress="1506E928"/>
+      <LastState Value="1642008519" RealAddress="1464A458"/>
       <VariableType>8 Bytes</VariableType>
-      <Address>1506E928</Address>
+      <Address>"re2.exe"+070ACAE0</Address>
+      <Offsets>
+        <Offset>18</Offset>
+        <Offset>60</Offset>
+        <Offset>710</Offset>
+        <Offset>610</Offset>
+        <Offset>218</Offset>
+        <Offset>2E0</Offset>
+      </Offsets>
       <CheatEntries>
         <CheatEntry>
           <ID>53</ID>
           <Description>"Cutscene Time (Microseconds)"</Description>
-          <LastState Value="4646102" RealAddress="1506E930"/>
-          <VariableType>4 Bytes</VariableType>
+          <LastState Value="11408663" RealAddress="1464A460"/>
+          <VariableType>8 Bytes</VariableType>
           <Address>+8</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>59</ID>
+          <Description>"Menu Time (Microseconds)"</Description>
+          <LastState Value="912845438" RealAddress="1464A468"/>
+          <VariableType>8 Bytes</VariableType>
+          <Address>+10</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>54</ID>
           <Description>"Paused Time (Microseconds)"</Description>
-          <LastState Value="733558" RealAddress="1506E938"/>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+10</Address>
+          <LastState Value="694239836" RealAddress="1464A470"/>
+          <VariableType>8 Bytes</VariableType>
+          <Address>+18</Address>
         </CheatEntry>
       </CheatEntries>
     </CheatEntry>
