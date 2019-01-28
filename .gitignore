@@ -328,5 +328,7 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
-*.PTR
-*.PTR.results.*
+
+# Cheat Engine Pointer Scan
+*.PTR*
+*.sqlite*

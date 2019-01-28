@@ -4,6 +4,7 @@
     <CheatEntry>
       <ID>20</ID>
       <Description>"IGT String"</Description>
+      <LastState RealAddress="122EBD50"/>
       <VariableType>String</VariableType>
       <Length>8</Length>
       <Unicode>1</Unicode>
@@ -20,7 +21,7 @@
     <CheatEntry>
       <ID>6</ID>
       <Description>"Current HP"</Description>
-      <LastState Value="1200" RealAddress="15273928"/>
+      <LastState Value="1200" RealAddress="152653F8"/>
       <VariableType>4 Bytes</VariableType>
       <Address>"re2.exe"+070ACA88</Address>
       <Offsets>
@@ -32,14 +33,14 @@
         <CheatEntry>
           <ID>28</ID>
           <Description>"Max HP"</Description>
-          <LastState Value="1200" RealAddress="15273924"/>
+          <LastState Value="1200" RealAddress="152653F4"/>
           <VariableType>4 Bytes</VariableType>
           <Address>-4</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>27</ID>
           <Description>"Interacting"</Description>
-          <LastState Value="0" RealAddress="1527392C"/>
+          <LastState Value="0" RealAddress="152653FC"/>
           <VariableType>4 Bytes</VariableType>
           <Address>+4</Address>
         </CheatEntry>
@@ -48,7 +49,7 @@
     <CheatEntry>
       <ID>30</ID>
       <Description>"Boss Current HP"</Description>
-      <LastState Value="1500" RealAddress="127D2808"/>
+      <LastState Value="800" RealAddress="12D78468"/>
       <Color>0000FF</Color>
       <VariableType>4 Bytes</VariableType>
       <Address>"re2.exe"+0707B758</Address>
@@ -63,7 +64,7 @@
         <CheatEntry>
           <ID>31</ID>
           <Description>"Max HP"</Description>
-          <LastState Value="1500" RealAddress="127D2804"/>
+          <LastState Value="800" RealAddress="12D78464"/>
           <Color>0000FF</Color>
           <VariableType>4 Bytes</VariableType>
           <Address>-4</Address>
@@ -71,1297 +72,112 @@
       </CheatEntries>
     </CheatEntry>
     <CheatEntry>
-      <ID>21</ID>
-      <Description>"Equipped Weapon Base Pointer"</Description>
-      <LastState Value="0" RealAddress="14FEA7A4"/>
+      <ID>34</ID>
+      <Description>"Equipped Weapon"</Description>
+      <LastState Value="170DC578" RealAddress="1527DA30"/>
+      <ShowAsHex>1</ShowAsHex>
       <VariableType>4 Bytes</VariableType>
       <Address>"re2.exe"+070ACA88</Address>
       <Offsets>
-        <Offset>64</Offset>
+        <Offset>0</Offset>
         <Offset>18</Offset>
         <Offset>A0</Offset>
         <Offset>50</Offset>
       </Offsets>
       <CheatEntries>
         <CheatEntry>
-          <ID>33</ID>
-          <Description>"Item ID"</Description>
-          <LastState Value="00000000" RealAddress="14FEA7B0"/>
-          <ShowAsHex>1</ShowAsHex>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+0C</Address>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>22</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="00000002" RealAddress="14FEA7B4"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+4</Address>
-              <CheatEntries>
-                <CheatEntry>
-                  <ID>23</ID>
-                  <Description>"Attachments"</Description>
-                  <LastState Value="00000000" RealAddress="14FEA7B8"/>
-                  <ShowAsHex>1</ShowAsHex>
-                  <VariableType>4 Bytes</VariableType>
-                  <Address>+4</Address>
-                  <CheatEntries>
-                    <CheatEntry>
-                      <ID>24</ID>
-                      <Description>"Maximum Qty"</Description>
-                      <LastState Value="26" RealAddress="14FEA7BC"/>
-                      <VariableType>4 Bytes</VariableType>
-                      <Address>+4</Address>
-                      <CheatEntries>
-                        <CheatEntry>
-                          <ID>25</ID>
-                          <Description>"Current Qty"</Description>
-                          <LastState Value="7" RealAddress="14FEA7C0"/>
-                          <VariableType>4 Bytes</VariableType>
-                          <Address>+4</Address>
-                        </CheatEntry>
-                      </CheatEntries>
-                    </CheatEntry>
-                  </CheatEntries>
-                </CheatEntry>
-              </CheatEntries>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-      </CheatEntries>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>60</ID>
-      <Description>"Inventory Pointer Table"</Description>
-      <LastState Value="0000000014FEA320" RealAddress="14FEA280"/>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>"re2.exe"+070ACA88</Address>
-      <Offsets>
-        <Offset>20</Offset>
-        <Offset>50</Offset>
-        <Offset>220</Offset>
-        <Offset>30</Offset>
-        <Offset>C8</Offset>
-      </Offsets>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>66</ID>
-          <Description>"Entry 1"</Description>
-          <LastState Value="170DC578" RealAddress="14FEA320"/>
-          <ShowAsHex>1</ShowAsHex>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+00</Address>
-          <Offsets>
-            <Offset>0</Offset>
-          </Offsets>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>86</ID>
-              <Description>"Slot"</Description>
-              <LastState Value="2" RealAddress="14FEA348"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+28</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>87</ID>
-              <Description>"Item ID"</Description>
-              <LastState Value="00000000" RealAddress="14FEA390"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+70</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>88</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="FFFFFFFF" RealAddress="14FEA394"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+74</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>89</ID>
-              <Description>"Attachments Flag"</Description>
-              <LastState Value="0" RealAddress="14FEA398"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+78</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>90</ID>
-              <Description>"???"</Description>
-              <LastState Value="0" RealAddress="14FEA39C"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+7C</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>91</ID>
-              <Description>"Quantity"</Description>
-              <LastState Value="1" RealAddress="14FEA3A0"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+80</Address>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>67</ID>
-          <Description>"Entry 2"</Description>
-          <LastState Value="170DC578" RealAddress="14FEA410"/>
-          <ShowAsHex>1</ShowAsHex>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+08</Address>
-          <Offsets>
-            <Offset>0</Offset>
-          </Offsets>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>92</ID>
-              <Description>"Slot"</Description>
-              <LastState Value="7" RealAddress="14FEA438"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+28</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>93</ID>
-              <Description>"Item ID"</Description>
-              <LastState Value="00000000" RealAddress="14FEA480"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+70</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>94</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="FFFFFFFF" RealAddress="14FEA484"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+74</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>95</ID>
-              <Description>"Attachments Flag"</Description>
-              <LastState Value="0" RealAddress="14FEA488"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+78</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>96</ID>
-              <Description>"???"</Description>
-              <LastState Value="0" RealAddress="14FEA48C"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+7C</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>97</ID>
-              <Description>"Quantity"</Description>
-              <LastState Value="4294967295" RealAddress="14FEA490"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+80</Address>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>68</ID>
-          <Description>"Entry 3"</Description>
-          <LastState Value="170DC578" RealAddress="14FEA560"/>
-          <ShowAsHex>1</ShowAsHex>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+10</Address>
-          <Offsets>
-            <Offset>0</Offset>
-          </Offsets>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>98</ID>
-              <Description>"Slot"</Description>
-              <LastState Value="1" RealAddress="14FEA588"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+28</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>99</ID>
-              <Description>"Item ID"</Description>
-              <LastState Value="00000000" RealAddress="14FEA5D0"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+70</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>100</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="0000000B" RealAddress="14FEA5D4"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+74</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>101</ID>
-              <Description>"Attachments Flag"</Description>
-              <LastState Value="3" RealAddress="14FEA5D8"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+78</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>102</ID>
-              <Description>"???"</Description>
-              <LastState Value="16" RealAddress="14FEA5DC"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+7C</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>103</ID>
-              <Description>"Quantity"</Description>
-              <LastState Value="8" RealAddress="14FEA5E0"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+80</Address>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>69</ID>
-          <Description>"Entry 4"</Description>
-          <LastState Value="170DC578" RealAddress="14FEA650"/>
-          <ShowAsHex>1</ShowAsHex>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+18</Address>
-          <Offsets>
-            <Offset>0</Offset>
-          </Offsets>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>104</ID>
-              <Description>"Slot"</Description>
-              <LastState Value="6" RealAddress="14FEA678"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+28</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>105</ID>
-              <Description>"Item ID"</Description>
-              <LastState Value="0000001F" RealAddress="14FEA6C0"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+70</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>106</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="FFFFFFFF" RealAddress="14FEA6C4"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+74</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>107</ID>
-              <Description>"Attachments Flag"</Description>
-              <LastState Value="0" RealAddress="14FEA6C8"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+78</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>108</ID>
-              <Description>"???"</Description>
-              <LastState Value="0" RealAddress="14FEA6CC"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+7C</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>109</ID>
-              <Description>"Quantity"</Description>
-              <LastState Value="1" RealAddress="14FEA6D0"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+80</Address>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>70</ID>
-          <Description>"Entry 5"</Description>
-          <LastState Value="170DC578" RealAddress="14FEA740"/>
-          <ShowAsHex>1</ShowAsHex>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+20</Address>
-          <Offsets>
-            <Offset>0</Offset>
-          </Offsets>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>110</ID>
-              <Description>"Slot"</Description>
-              <LastState Value="0" RealAddress="14FEA768"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+28</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>111</ID>
-              <Description>"Item ID"</Description>
-              <LastState Value="00000000" RealAddress="14FEA7B0"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+70</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>112</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="00000002" RealAddress="14FEA7B4"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+74</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>113</ID>
-              <Description>"Attachments Flag"</Description>
-              <LastState Value="0" RealAddress="14FEA7B8"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+78</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>114</ID>
-              <Description>"???"</Description>
-              <LastState Value="26" RealAddress="14FEA7BC"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+7C</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>115</ID>
-              <Description>"Quantity"</Description>
-              <LastState Value="7" RealAddress="14FEA7C0"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+80</Address>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>71</ID>
-          <Description>"Entry 6"</Description>
-          <LastState Value="170DC578" RealAddress="14FEA830"/>
+          <ID>35</ID>
+          <Description>"Slot ID"</Description>
+          <LastState Value="00000000" RealAddress="1527DA58"/>
           <ShowAsHex>1</ShowAsHex>
           <VariableType>4 Bytes</VariableType>
           <Address>+28</Address>
-          <Offsets>
-            <Offset>0</Offset>
-          </Offsets>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>116</ID>
-              <Description>"Slot"</Description>
-              <LastState Value="8" RealAddress="14FEA858"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+28</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>117</ID>
-              <Description>"Item ID"</Description>
-              <LastState Value="00000000" RealAddress="14FEA8A0"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+70</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>118</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="FFFFFFFF" RealAddress="14FEA8A4"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+74</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>119</ID>
-              <Description>"Attachments Flag"</Description>
-              <LastState Value="0" RealAddress="14FEA8A8"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+78</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>120</ID>
-              <Description>"???"</Description>
-              <LastState Value="0" RealAddress="14FEA8AC"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+7C</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>121</ID>
-              <Description>"Quantity"</Description>
-              <LastState Value="4294967295" RealAddress="14FEA8B0"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+80</Address>
-            </CheatEntry>
-          </CheatEntries>
         </CheatEntry>
         <CheatEntry>
-          <ID>72</ID>
-          <Description>"Entry 7"</Description>
-          <LastState Value="170DC578" RealAddress="14FEA920"/>
+          <ID>37</ID>
+          <Description>"Weapon ID"</Description>
+          <LastState Value="00000001" RealAddress="1527DAA4"/>
           <ShowAsHex>1</ShowAsHex>
           <VariableType>4 Bytes</VariableType>
-          <Address>+30</Address>
-          <Offsets>
-            <Offset>0</Offset>
-          </Offsets>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>122</ID>
-              <Description>"Slot"</Description>
-              <LastState Value="4" RealAddress="14FEA948"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+28</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>123</ID>
-              <Description>"Item ID"</Description>
-              <LastState Value="0000001A" RealAddress="14FEA990"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+70</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>124</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="FFFFFFFF" RealAddress="14FEA994"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+74</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>125</ID>
-              <Description>"Attachments Flag"</Description>
-              <LastState Value="0" RealAddress="14FEA998"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+78</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>126</ID>
-              <Description>"???"</Description>
-              <LastState Value="0" RealAddress="14FEA99C"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+7C</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>127</ID>
-              <Description>"Quantity"</Description>
-              <LastState Value="56" RealAddress="14FEA9A0"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+80</Address>
-            </CheatEntry>
-          </CheatEntries>
+          <Address>+74</Address>
         </CheatEntry>
         <CheatEntry>
-          <ID>73</ID>
-          <Description>"Entry 8"</Description>
-          <LastState Value="170DC578" RealAddress="14FEAA10"/>
-          <ShowAsHex>1</ShowAsHex>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+38</Address>
-          <Offsets>
-            <Offset>0</Offset>
-          </Offsets>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>128</ID>
-              <Description>"Slot"</Description>
-              <LastState Value="5" RealAddress="14FEAA38"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+28</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>129</ID>
-              <Description>"Item ID"</Description>
-              <LastState Value="00000010" RealAddress="14FEAA80"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+70</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>130</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="FFFFFFFF" RealAddress="14FEAA84"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+74</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>131</ID>
-              <Description>"Attachments Flag"</Description>
-              <LastState Value="0" RealAddress="14FEAA88"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+78</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>132</ID>
-              <Description>"???"</Description>
-              <LastState Value="0" RealAddress="14FEAA8C"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+7C</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>133</ID>
-              <Description>"Quantity"</Description>
-              <LastState Value="2" RealAddress="14FEAA90"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+80</Address>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>74</ID>
-          <Description>"Entry 9"</Description>
-          <LastState Value="170DC578" RealAddress="14FEAB00"/>
-          <ShowAsHex>1</ShowAsHex>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+40</Address>
-          <Offsets>
-            <Offset>0</Offset>
-          </Offsets>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>134</ID>
-              <Description>"Slot"</Description>
-              <LastState Value="3" RealAddress="14FEAB28"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+28</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>135</ID>
-              <Description>"Item ID"</Description>
-              <LastState Value="0000000B" RealAddress="14FEAB70"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+70</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>136</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="FFFFFFFF" RealAddress="14FEAB74"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+74</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>137</ID>
-              <Description>"Attachments Flag"</Description>
-              <LastState Value="0" RealAddress="14FEAB78"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+78</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>138</ID>
-              <Description>"???"</Description>
-              <LastState Value="0" RealAddress="14FEAB7C"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+7C</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>139</ID>
-              <Description>"Quantity"</Description>
-              <LastState Value="1" RealAddress="14FEAB80"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+80</Address>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>75</ID>
-          <Description>"Entry 10"</Description>
-          <LastState Value="170DC578" RealAddress="14FEABF0"/>
-          <ShowAsHex>1</ShowAsHex>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+48</Address>
-          <Offsets>
-            <Offset>0</Offset>
-          </Offsets>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>140</ID>
-              <Description>"Slot"</Description>
-              <LastState Value="9" RealAddress="14FEAC18"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+28</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>141</ID>
-              <Description>"Item ID"</Description>
-              <LastState Value="00000000" RealAddress="14FEAC60"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+70</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>142</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="FFFFFFFF" RealAddress="14FEAC64"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+74</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>143</ID>
-              <Description>"Attachments Flag"</Description>
-              <LastState Value="0" RealAddress="14FEAC68"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+78</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>144</ID>
-              <Description>"???"</Description>
-              <LastState Value="0" RealAddress="14FEAC6C"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+7C</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>145</ID>
-              <Description>"Quantity"</Description>
-              <LastState Value="1" RealAddress="14FEAC70"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+80</Address>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>76</ID>
-          <Description>"Entry 11"</Description>
-          <LastState Value="170DC578" RealAddress="14FEACE0"/>
-          <ShowAsHex>1</ShowAsHex>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+50</Address>
-          <Offsets>
-            <Offset>0</Offset>
-          </Offsets>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>146</ID>
-              <Description>"Slot"</Description>
-              <LastState Value="10" RealAddress="14FEAD08"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+28</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>147</ID>
-              <Description>"Item ID"</Description>
-              <LastState Value="00000000" RealAddress="14FEAD50"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+70</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>148</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="FFFFFFFF" RealAddress="14FEAD54"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+74</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>149</ID>
-              <Description>"Attachments Flag"</Description>
-              <LastState Value="0" RealAddress="14FEAD58"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+78</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>150</ID>
-              <Description>"???"</Description>
-              <LastState Value="0" RealAddress="14FEAD5C"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+7C</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>151</ID>
-              <Description>"Quantity"</Description>
-              <LastState Value="1" RealAddress="14FEAD60"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+80</Address>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>77</ID>
-          <Description>"Entry 12"</Description>
-          <LastState Value="170DC578" RealAddress="14FEADD0"/>
-          <ShowAsHex>1</ShowAsHex>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+58</Address>
-          <Offsets>
-            <Offset>0</Offset>
-          </Offsets>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>152</ID>
-              <Description>"Slot"</Description>
-              <LastState Value="11" RealAddress="14FEADF8"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+28</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>153</ID>
-              <Description>"Item ID"</Description>
-              <LastState Value="00000000" RealAddress="14FEAE40"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+70</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>154</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="FFFFFFFF" RealAddress="14FEAE44"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+74</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>155</ID>
-              <Description>"Attachments Flag"</Description>
-              <LastState Value="0" RealAddress="14FEAE48"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+78</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>156</ID>
-              <Description>"???"</Description>
-              <LastState Value="0" RealAddress="14FEAE4C"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+7C</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>157</ID>
-              <Description>"Quantity"</Description>
-              <LastState Value="1" RealAddress="14FEAE50"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+80</Address>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>78</ID>
-          <Description>"Entry 13"</Description>
-          <LastState Value="170DC578" RealAddress="14FEAEC0"/>
-          <ShowAsHex>1</ShowAsHex>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+60</Address>
-          <Offsets>
-            <Offset>0</Offset>
-          </Offsets>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>158</ID>
-              <Description>"Slot"</Description>
-              <LastState Value="12" RealAddress="14FEAEE8"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+28</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>159</ID>
-              <Description>"Item ID"</Description>
-              <LastState Value="00000000" RealAddress="14FEAF30"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+70</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>160</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="FFFFFFFF" RealAddress="14FEAF34"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+74</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>161</ID>
-              <Description>"Attachments Flag"</Description>
-              <LastState Value="0" RealAddress="14FEAF38"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+78</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>162</ID>
-              <Description>"???"</Description>
-              <LastState Value="0" RealAddress="14FEAF3C"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+7C</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>163</ID>
-              <Description>"Quantity"</Description>
-              <LastState Value="1" RealAddress="14FEAF40"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+80</Address>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>79</ID>
-          <Description>"Entry 14"</Description>
-          <LastState Value="170DC578" RealAddress="14FEAFB0"/>
-          <ShowAsHex>1</ShowAsHex>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+68</Address>
-          <Offsets>
-            <Offset>0</Offset>
-          </Offsets>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>164</ID>
-              <Description>"Slot"</Description>
-              <LastState Value="13" RealAddress="14FEAFD8"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+28</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>165</ID>
-              <Description>"Item ID"</Description>
-              <LastState Value="00000000" RealAddress="14FEB020"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+70</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>166</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="FFFFFFFF" RealAddress="14FEB024"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+74</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>167</ID>
-              <Description>"Attachments Flag"</Description>
-              <LastState Value="0" RealAddress="14FEB028"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+78</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>168</ID>
-              <Description>"???"</Description>
-              <LastState Value="0" RealAddress="14FEB02C"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+7C</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>169</ID>
-              <Description>"Quantity"</Description>
-              <LastState Value="1" RealAddress="14FEB030"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+80</Address>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>80</ID>
-          <Description>"Entry 15"</Description>
-          <LastState Value="170DC578" RealAddress="14FEB0A0"/>
-          <ShowAsHex>1</ShowAsHex>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+70</Address>
-          <Offsets>
-            <Offset>0</Offset>
-          </Offsets>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>170</ID>
-              <Description>"Slot"</Description>
-              <LastState Value="14" RealAddress="14FEB0C8"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+28</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>171</ID>
-              <Description>"Item ID"</Description>
-              <LastState Value="00000000" RealAddress="14FEB110"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+70</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>172</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="FFFFFFFF" RealAddress="14FEB114"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+74</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>173</ID>
-              <Description>"Attachments Flag"</Description>
-              <LastState Value="0" RealAddress="14FEB118"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+78</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>174</ID>
-              <Description>"???"</Description>
-              <LastState Value="0" RealAddress="14FEB11C"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+7C</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>175</ID>
-              <Description>"Quantity"</Description>
-              <LastState Value="1" RealAddress="14FEB120"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+80</Address>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>81</ID>
-          <Description>"Entry 16"</Description>
-          <LastState Value="170DC578" RealAddress="14FEB190"/>
-          <ShowAsHex>1</ShowAsHex>
+          <ID>38</ID>
+          <Description>"Attachments"</Description>
+          <LastState Value="0" RealAddress="1527DAA8"/>
           <VariableType>4 Bytes</VariableType>
           <Address>+78</Address>
-          <Offsets>
-            <Offset>0</Offset>
-          </Offsets>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>176</ID>
-              <Description>"Slot"</Description>
-              <LastState Value="15" RealAddress="14FEB1B8"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+28</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>177</ID>
-              <Description>"Item ID"</Description>
-              <LastState Value="00000000" RealAddress="14FEB200"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+70</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>178</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="FFFFFFFF" RealAddress="14FEB204"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+74</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>179</ID>
-              <Description>"Attachments Flag"</Description>
-              <LastState Value="0" RealAddress="14FEB208"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+78</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>180</ID>
-              <Description>"???"</Description>
-              <LastState Value="0" RealAddress="14FEB20C"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+7C</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>181</ID>
-              <Description>"Quantity"</Description>
-              <LastState Value="1" RealAddress="14FEB210"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+80</Address>
-            </CheatEntry>
-          </CheatEntries>
         </CheatEntry>
         <CheatEntry>
-          <ID>82</ID>
-          <Description>"Entry 17"</Description>
-          <LastState Value="170DC578" RealAddress="14FEB280"/>
-          <ShowAsHex>1</ShowAsHex>
+          <ID>39</ID>
+          <Description>"Quantity"</Description>
+          <LastState Value="5" RealAddress="1527DAB0"/>
           <VariableType>4 Bytes</VariableType>
           <Address>+80</Address>
-          <Offsets>
-            <Offset>0</Offset>
-          </Offsets>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>182</ID>
-              <Description>"Slot"</Description>
-              <LastState Value="16" RealAddress="14FEB2A8"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+28</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>183</ID>
-              <Description>"Item ID"</Description>
-              <LastState Value="00000000" RealAddress="14FEB2F0"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+70</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>184</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="FFFFFFFF" RealAddress="14FEB2F4"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+74</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>185</ID>
-              <Description>"Attachments Flag"</Description>
-              <LastState Value="0" RealAddress="14FEB2F8"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+78</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>186</ID>
-              <Description>"???"</Description>
-              <LastState Value="0" RealAddress="14FEB2FC"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+7C</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>187</ID>
-              <Description>"Quantity"</Description>
-              <LastState Value="1" RealAddress="14FEB300"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+80</Address>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>83</ID>
-          <Description>"Entry 18"</Description>
-          <LastState Value="170DC578" RealAddress="14FEB370"/>
-          <ShowAsHex>1</ShowAsHex>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+88</Address>
-          <Offsets>
-            <Offset>0</Offset>
-          </Offsets>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>188</ID>
-              <Description>"Slot"</Description>
-              <LastState Value="17" RealAddress="14FEB398"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+28</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>189</ID>
-              <Description>"Item ID"</Description>
-              <LastState Value="00000000" RealAddress="14FEB3E0"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+70</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>190</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="FFFFFFFF" RealAddress="14FEB3E4"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+74</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>191</ID>
-              <Description>"Attachments Flag"</Description>
-              <LastState Value="0" RealAddress="14FEB3E8"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+78</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>192</ID>
-              <Description>"???"</Description>
-              <LastState Value="0" RealAddress="14FEB3EC"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+7C</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>193</ID>
-              <Description>"Quantity"</Description>
-              <LastState Value="1" RealAddress="14FEB3F0"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+80</Address>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>84</ID>
-          <Description>"Entry 19"</Description>
-          <LastState Value="170DC578" RealAddress="14FEB460"/>
-          <ShowAsHex>1</ShowAsHex>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+90</Address>
-          <Offsets>
-            <Offset>0</Offset>
-          </Offsets>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>194</ID>
-              <Description>"Slot"</Description>
-              <LastState Value="18" RealAddress="14FEB488"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+28</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>195</ID>
-              <Description>"Item ID"</Description>
-              <LastState Value="00000000" RealAddress="14FEB4D0"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+70</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>196</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="FFFFFFFF" RealAddress="14FEB4D4"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+74</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>197</ID>
-              <Description>"Attachments Flag"</Description>
-              <LastState Value="0" RealAddress="14FEB4D8"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+78</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>198</ID>
-              <Description>"???"</Description>
-              <LastState Value="0" RealAddress="14FEB4DC"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+7C</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>199</ID>
-              <Description>"Quantity"</Description>
-              <LastState Value="1" RealAddress="14FEB4E0"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+80</Address>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>85</ID>
-          <Description>"Entry 20"</Description>
-          <LastState Value="170DC578" RealAddress="14FEB5B0"/>
-          <ShowAsHex>1</ShowAsHex>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+98</Address>
-          <Offsets>
-            <Offset>0</Offset>
-          </Offsets>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>200</ID>
-              <Description>"Slot"</Description>
-              <LastState Value="19" RealAddress="14FEB5D8"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+28</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>201</ID>
-              <Description>"Item ID"</Description>
-              <LastState Value="00000000" RealAddress="14FEB620"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+70</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>202</ID>
-              <Description>"Weapon ID"</Description>
-              <LastState Value="FFFFFFFF" RealAddress="14FEB624"/>
-              <ShowAsHex>1</ShowAsHex>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+74</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>203</ID>
-              <Description>"Attachments Flag"</Description>
-              <LastState Value="0" RealAddress="14FEB628"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+78</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>204</ID>
-              <Description>"???"</Description>
-              <LastState Value="0" RealAddress="14FEB62C"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+7C</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>205</ID>
-              <Description>"Quantity"</Description>
-              <LastState Value="1" RealAddress="14FEB630"/>
-              <VariableType>4 Bytes</VariableType>
-              <Address>+80</Address>
-            </CheatEntry>
-          </CheatEntries>
         </CheatEntry>
       </CheatEntries>
     </CheatEntry>
     <CheatEntry>
-      <ID>65</ID>
-      <Description>"Inventory Pointer Table"</Description>
-      <LastState Value="0000000014FEA320" RealAddress="14FEA280"/>
+      <ID>40</ID>
+      <Description>"Equipped Defense Item"</Description>
+      <LastState Value="170DC578" RealAddress="152638B0"/>
       <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
+      <VariableType>4 Bytes</VariableType>
       <Address>"re2.exe"+070ACA88</Address>
       <Offsets>
-        <Offset>20</Offset>
-        <Offset>50</Offset>
-        <Offset>80</Offset>
-        <Offset>38</Offset>
-        <Offset>C8</Offset>
-      </Offsets>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>61</ID>
-      <Description>"Inventory Pointer Table"</Description>
-      <LastState Value="0000000014FEA320" RealAddress="14FEA280"/>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>"re2.exe"+070ACA88</Address>
-      <Offsets>
-        <Offset>20</Offset>
-        <Offset>80</Offset>
-        <Offset>10</Offset>
-        <Offset>38</Offset>
-        <Offset>C8</Offset>
-      </Offsets>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>62</ID>
-      <Description>"Inventory Pointer Table"</Description>
-      <LastState Value="0000000014FEA320" RealAddress="14FEA280"/>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>"re2.exe"+070ACA88</Address>
-      <Offsets>
-        <Offset>20</Offset>
-        <Offset>80</Offset>
-        <Offset>1B0</Offset>
-        <Offset>30</Offset>
-        <Offset>C8</Offset>
-      </Offsets>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>63</ID>
-      <Description>"Inventory Pointer Table"</Description>
-      <LastState Value="0000000014FEA320" RealAddress="14FEA280"/>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>"re2.exe"+070ACA88</Address>
-      <Offsets>
-        <Offset>20</Offset>
-        <Offset>80</Offset>
-        <Offset>300</Offset>
-        <Offset>28</Offset>
-        <Offset>C8</Offset>
-      </Offsets>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>64</ID>
-      <Description>"Inventory Pointer Table"</Description>
-      <LastState Value="0000000014FEA320" RealAddress="14FEA280"/>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>"re2.exe"+070ACA88</Address>
-      <Offsets>
-        <Offset>20</Offset>
-        <Offset>10</Offset>
+        <Offset>0</Offset>
+        <Offset>18</Offset>
         <Offset>A8</Offset>
-        <Offset>38</Offset>
-        <Offset>C8</Offset>
+        <Offset>50</Offset>
       </Offsets>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>41</ID>
+          <Description>"Slot ID"</Description>
+          <LastState Value="FFFFFFFF" RealAddress="152638D8"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>4 Bytes</VariableType>
+          <Address>+28</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>43</ID>
+          <Description>"Weapon ID"</Description>
+          <LastState Value="FFFFFFFF" RealAddress="15263924"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>4 Bytes</VariableType>
+          <Address>+74</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>45</ID>
+          <Description>"Quantity"</Description>
+          <LastState Value="1" RealAddress="15263930"/>
+          <VariableType>4 Bytes</VariableType>
+          <Address>+80</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>52</ID>
+      <Description>"Active Time (Microseconds)"</Description>
+      <LastState Value="10673379645" RealAddress="1506E928"/>
+      <VariableType>8 Bytes</VariableType>
+      <Address>1506E928</Address>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>53</ID>
+          <Description>"Cutscene Time (Microseconds)"</Description>
+          <LastState Value="4646102" RealAddress="1506E930"/>
+          <VariableType>4 Bytes</VariableType>
+          <Address>+8</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>54</ID>
+          <Description>"Paused Time (Microseconds)"</Description>
+          <LastState Value="733558" RealAddress="1506E938"/>
+          <VariableType>4 Bytes</VariableType>
+          <Address>+10</Address>
+        </CheatEntry>
+      </CheatEntries>
     </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols/>
