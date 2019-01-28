@@ -285,8 +285,13 @@ namespace RE2REmakeSRT
 
             ulong rawIGT = Program.gameMem.IGTRunningTimer - Program.gameMem.IGTCutsceneTimer - Program.gameMem.IGTPausedTimer;
             double millisecondsIGT = rawIGT / 1000d;
+            TimeSpan timespanIGT;
+            if (millisecondsIGT <= TimeSpan.MaxValue.TotalMilliseconds)
+                timespanIGT = TimeSpan.FromMilliseconds(millisecondsIGT);
+            else
+                timespanIGT = new TimeSpan();
 
-            e.Graphics.DrawText(0, 0, string.Format("{0}", TimeSpan.FromMilliseconds(millisecondsIGT).ToString(@"hh\:mm\:ss\.fff", CultureInfo.InvariantCulture)), Brushes.White, new Font("Consolas", 16, FontStyle.Bold));
+            e.Graphics.DrawText(0, 0, string.Format("{0}", timespanIGT.ToString(@"hh\:mm\:ss\.fff", CultureInfo.InvariantCulture)), Brushes.White, new Font("Consolas", 16, FontStyle.Bold));
             e.Graphics.DrawText(0, 26, "Raw IGT", Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
             e.Graphics.DrawText(52, 22, rawIGT.ToString(), Brushes.Gray, new Font("Consolas", 12, FontStyle.Bold));
 
