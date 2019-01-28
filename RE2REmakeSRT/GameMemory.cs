@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Globalization;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,6 +16,7 @@ namespace RE2REmakeSRT
 
         // Pointers
         public ulong BaseAddress { get; private set;}
+        public uint PointerIGT { get; private set; }
         public uint PointerPlayerHP { get; private set; }
         public uint PointerBossHP { get; private set; }
 
@@ -27,12 +26,18 @@ namespace RE2REmakeSRT
         public int BossCurrentHealth { get; private set; }
         public int BossMaxHealth { get; private set; }
 
+        public ulong IGTRunningTimer { get; private set; }
+        public ulong IGTCutsceneTimer { get; private set; }
+        public ulong IGTMenuTimer { get; private set; }
+        public ulong IGTPausedTimer { get; private set; }
+
         public GameMemory(Process proc)
         {
             this.proc = proc;
             this.gameVersion = REmake2VersionDetector.GetVersion(this.proc);
             this.memoryAccess = new ProcessMemory.ProcessMemory(this.proc.Id);
             this.BaseAddress = (ulong)this.proc.MainModule.BaseAddress.ToInt64();
+            this.PointerIGT = 0U;
             this.PointerPlayerHP = 0U;
             this.PointerBossHP = 0U;
 
@@ -49,6 +54,13 @@ namespace RE2REmakeSRT
                 case REmake2VersionEnumeration.Stock_1p00:
                 case REmake2VersionEnumeration.Stock_1p01:
                     {
+                        uint igt1 = await memoryAccess.GetUIntAtAsync(this.BaseAddress + 0x070ACAE0U, cToken);
+                        uint igt2 = await memoryAccess.GetUIntAtAsync(igt1 + 0x2E0U, cToken);
+                        uint igt3 = await memoryAccess.GetUIntAtAsync(igt2 + 0x218U, cToken);
+                        uint igt4 = await memoryAccess.GetUIntAtAsync(igt3 + 0x610U, cToken);
+                        uint igt5 = await memoryAccess.GetUIntAtAsync(igt4 + 0x710U, cToken);
+                        this.PointerIGT = await memoryAccess.GetUIntAtAsync(igt5 + 0x60U, cToken);
+
                         uint playerPtr1 = await memoryAccess.GetUIntAtAsync(this.BaseAddress + 0x070ACA88U, cToken);
                         uint playerPtr2 = await memoryAccess.GetUIntAtAsync(playerPtr1 + 0x50U, cToken);
                         this.PointerPlayerHP = await memoryAccess.GetUIntAtAsync(playerPtr2 + 0x20U, cToken);
@@ -79,6 +91,12 @@ namespace RE2REmakeSRT
                 case REmake2VersionEnumeration.Stock_1p00:
                 case REmake2VersionEnumeration.Stock_1p01:
                     {
+                        // IGT
+                        this.IGTRunningTimer = await memoryAccess.GetULongAtAsync(this.PointerIGT + 0x18U, cToken);
+                        this.IGTCutsceneTimer = await memoryAccess.GetULongAtAsync(this.PointerIGT + 0x20U, cToken);
+                        this.IGTMenuTimer = await memoryAccess.GetULongAtAsync(this.PointerIGT + 0x28U, cToken);
+                        this.IGTPausedTimer = await memoryAccess.GetULongAtAsync(this.PointerIGT + 0x30U, cToken);
+
                         // Player HP
                         this.PlayerMaxHealth = await memoryAccess.GetIntAtAsync(this.PointerPlayerHP + 0x54U, cToken);
                         this.PlayerCurrentHealth = await memoryAccess.GetIntAtAsync(this.PointerPlayerHP + 0x58U, cToken);

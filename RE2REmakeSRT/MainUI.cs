@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -280,16 +281,21 @@ namespace RE2REmakeSRT
             int heightOffset = 15;
 
             // Increment for displaying text properly.
-            int i = 0;
+            int i = 1;
+
+            ulong rawIGT = Program.gameMem.IGTRunningTimer - Program.gameMem.IGTCutsceneTimer - Program.gameMem.IGTPausedTimer;
+            double millisecondsIGT = rawIGT / 1000d;
+
+            e.Graphics.DrawText(0, 0, string.Format("{0}", TimeSpan.FromMilliseconds(millisecondsIGT).ToString(@"hh\:mm\:ss\.fff", CultureInfo.InvariantCulture)), Brushes.White, new Font("Consolas", 16, FontStyle.Bold));
+            e.Graphics.DrawText(0, 26, "Raw IGT", Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
+            e.Graphics.DrawText(52, 22, rawIGT.ToString(), Brushes.Gray, new Font("Consolas", 12, FontStyle.Bold));
 
             if (Program.gameMem.BossCurrentHealth != 0 && Program.gameMem.BossMaxHealth != 0)
             {
-                e.Graphics.DrawText(0, 0, "Boss", Brushes.Red, new Font("Consolas", 10, FontStyle.Bold));
-                e.Graphics.DrawText(0, (heightOffset * ++i), string.Format("{0} ({1:P1})", Program.gameMem.BossCurrentHealth, (decimal)Program.gameMem.BossCurrentHealth / (decimal)Program.gameMem.BossMaxHealth), Brushes.Red, new Font("Consolas", 10, FontStyle.Bold));
+                e.Graphics.DrawText(0, 10 + (heightOffset * ++i), "Boss", Brushes.Red, new Font("Consolas", 10, FontStyle.Bold));
+                e.Graphics.DrawText(0, 10 + (heightOffset * ++i), string.Format("{0} ({1:P1})", Program.gameMem.BossCurrentHealth, (decimal)Program.gameMem.BossCurrentHealth / (decimal)Program.gameMem.BossMaxHealth), Brushes.Red, new Font("Consolas", 10, FontStyle.Bold));
             }
 
-            //e.Graphics.DrawText(0, 26, "Raw IGT", Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
-            //e.Graphics.DrawText(52, 22, Program.gameMem.RawInGameTimer.ToString(), Brushes.Gray, new Font("Consolas", 12, FontStyle.Bold));
             //e.Graphics.DrawText(0, 10 + (heightOffset * ++i), string.Format("Saves: {0}", Program.gameMem.TotalSaves), Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
             //e.Graphics.DrawText(0, 10 + (heightOffset * ++i), string.Format("Shots Fired: {0}", Program.gameMem.TotalShots), Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
             //e.Graphics.DrawText(0, 10 + (heightOffset * ++i), string.Format("Ammo: {0} / {1}", Program.gameMem.EquippedCurrentAmmo, Program.gameMem.EquippedMaxAmmo), Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
