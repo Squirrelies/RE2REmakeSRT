@@ -10,11 +10,15 @@ namespace RE2REmakeSRT
 {
     public partial class MainUI : Form
     {
-        // How often to perform a full-UI redraw. 200 Milliseconds.
-        public const long FULL_UI_DRAW_TICKS = TimeSpan.TicksPerMillisecond * 200L;
+        // How often to perform more expensive operations.
+        // Every 2500 milliseconds for updating pointers, 333 milliseconds for a full info scan.
+        public const long PTR_UPDATE_TICKS = TimeSpan.TicksPerMillisecond * 2500L;
+        public const long FULL_UI_DRAW_TICKS = TimeSpan.TicksPerMillisecond * 333L;
 
         private System.Timers.Timer memoryPollingTimer;
+        private long lastPtrUpdate;
         private long lastFullUIDraw;
+        
         private SmoothingMode smoothingMode = SmoothingMode.HighSpeed;
         private PixelOffsetMode pixelOffsetMode = PixelOffsetMode.HighSpeed;
         private CompositingQuality compositingQuality = CompositingQuality.HighSpeed;
@@ -24,8 +28,10 @@ namespace RE2REmakeSRT
         public MainUI()
         {
             InitializeComponent();
+            lastPtrUpdate = DateTime.UtcNow.Ticks;
             lastFullUIDraw = DateTime.UtcNow.Ticks;
-            memoryPollingTimer = new System.Timers.Timer() { AutoReset = false, Interval = 15 };
+            
+            memoryPollingTimer = new System.Timers.Timer() { AutoReset = false, Interval = 16 };
             memoryPollingTimer.Elapsed += MemoryPollingTimer_Elapsed;
             memoryPollingTimer.Start();
         }
@@ -36,6 +42,16 @@ namespace RE2REmakeSRT
             {
                 // Suspend UI layout logic to perform redrawing.
                 MainUI uiForm = (MainUI)Program.mainContext.MainForm;
+
+                // Only perform a pointer update occasionally.
+                if (DateTime.UtcNow.Ticks - lastPtrUpdate >= PTR_UPDATE_TICKS)
+                {
+                    // Update the last drawn time.
+                    lastPtrUpdate = DateTime.UtcNow.Ticks;
+
+                    // Update the pointers.
+                    Task.WaitAll(Program.gameMem.UpdatePointers(CancellationToken.None));
+                }
 
                 // Only draw occasionally, not as often as the stats panel.
                 if (DateTime.UtcNow.Ticks - lastFullUIDraw >= FULL_UI_DRAW_TICKS)
@@ -264,13 +280,13 @@ namespace RE2REmakeSRT
             int heightOffset = 15;
 
             // Increment for displaying text properly.
-            int i = 1;
-
-            e.Graphics.DrawText(0, 0, string.Format("{0}", Program.gameMem.InGameTimerString), Brushes.White, new Font("Consolas", 16, FontStyle.Bold));
+            int i = 0;
 
             if (Program.gameMem.BossCurrentHealth != 0 && Program.gameMem.BossMaxHealth != 0)
-                e.Graphics.DrawText(0, (heightOffset * ++i), string.Format("Boss: {0} ({1:P0})", Program.gameMem.BossCurrentHealth, (decimal)Program.gameMem.BossCurrentHealth / (decimal)Program.gameMem.BossMaxHealth), Brushes.Red, new Font("Consolas", 9, FontStyle.Bold));
-
+            {
+                e.Graphics.DrawText(0, 0, "Boss", Brushes.Red, new Font("Consolas", 10, FontStyle.Bold));
+                e.Graphics.DrawText(0, (heightOffset * ++i), string.Format("{0} ({1:P1})", Program.gameMem.BossCurrentHealth, (decimal)Program.gameMem.BossCurrentHealth / (decimal)Program.gameMem.BossMaxHealth), Brushes.Red, new Font("Consolas", 10, FontStyle.Bold));
+            }
 
             //e.Graphics.DrawText(0, 26, "Raw IGT", Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
             //e.Graphics.DrawText(52, 22, Program.gameMem.RawInGameTimer.ToString(), Brushes.Gray, new Font("Consolas", 12, FontStyle.Bold));
