@@ -5,11 +5,17 @@ See the [CHANGELOG.md](CHANGELOG.md) file for downloads and changes.
 
 All builds from me will be digitally signed as 'Travis J Gutjahr'.
 
-Features anticipated:
+Features implemented:
 
-* Health as an integer w/ poison indicator.
-* IGT (In-Game Timer).
+* Player health.
+* Boss health and percentage.
+* In-game timer.
+
+Features planned:
+
 * Inventory display.
-* Enemy/boss HP display.
+* Equipped weapon and equipped defensive item.
+* Rank progress.
+* Saves used.
 
-Notice: Not all planned features will be available upon initial release. Some features may be cancelled due to practicality or other issues. This list is not intended to be a guarantee.
+Notice: Some planned features may be cancelled due to practicality or other issues. This list is not intended to be a guarantee.
