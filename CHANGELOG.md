@@ -1,8 +1,25 @@
 # Changelog
 
-### [1.0.0](https://drive.google.com) (2019-01-25)
-* Health indicator added.
-* Poison flag added.
-* IGT added.
+### [1.0.3.2](https://cdn.discordapp.com/attachments/456037941370814465/539555143306313728/RE2REmakeSRT-1032-Alpha-Signed-Release.7z) (2019-01-28)
+* First public alpha.
+* Added requireAdministrator to app.manifest.
 
-THIS IS AN EXAMPLE TO SET THE FORMAT UNTIL THE FIRST RELEASE IS POSTED.
+### [1.0.3.1](about:blank) (2019-01-28)
+* Fixed a bug where the in-game timer would thrown an exception if the SRT was started before starting a new game.
+
+### [1.0.3.0](about:blank) (2019-01-28)
+* In-game timer added.
+
+### [1.0.2.0](about:blank) (2019-01-28)
+* Performance improvements.
+
+### [1.0.1.0](about:blank) (2019-01-26)
+* Player health added.
+* Boss health and percentage added.
+
+### [1.0.0.0](about:blank) (2019-01-24)
+* Initial commit.
+
+
+#### Notes and known issues:
+* Boss HP sometimes shows when there is not a boss. I suspect this is really enemy HP and not exclusive to bosses.
