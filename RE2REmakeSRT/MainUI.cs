@@ -51,7 +51,7 @@ namespace RE2REmakeSRT
                     lastPtrUpdate = DateTime.UtcNow.Ticks;
 
                     // Update the pointers.
-                    Task.WaitAll(Program.gameMem.UpdatePointers(CancellationToken.None));
+                    Program.gameMem.UpdatePointers();
                 }
 
                 // Only draw occasionally, not as often as the stats panel.
@@ -61,7 +61,7 @@ namespace RE2REmakeSRT
                     lastFullUIDraw = DateTime.UtcNow.Ticks;
 
                     // Get the full amount of updated information from memory.
-                    Task.WaitAll(Program.gameMem.Refresh(CancellationToken.None));
+                    Program.gameMem.Refresh();
 
                     // Output some info to debug listeners.
                     //Debug.WriteLine("IGT: {0} {1}'s Health: {2} Poisoned: {3} {4} ({5} / {6})", Program.gameMem.InGameTimerString, Program.gameMem.CurrentCharacter, Program.gameMem.CurrentHealth, Program.gameMem.IsPoisoned, Program.gameMem.ItemSlots[Program.gameMem.EquippedItemSlotIndex].Item, Program.gameMem.EquippedCurrentAmmo, Program.gameMem.EquippedMaxAmmo);
@@ -74,7 +74,7 @@ namespace RE2REmakeSRT
                 else
                 {
                     // Get a slimmed-down amount of updated information from memory.
-                    Task.WaitAll(Program.gameMem.RefreshSlim(CancellationToken.None));
+                    Program.gameMem.RefreshSlim();
                 }
 
                 // Always draw this as these are simple text draws and contains the IGT/frame count.
@@ -246,7 +246,7 @@ namespace RE2REmakeSRT
             e.Graphics.InterpolationMode = interpolationMode;
             e.Graphics.PixelOffsetMode = pixelOffsetMode;
 
-            Brush slotColor;
+            //Brush slotColor;
 
             //// Draw inventory and quantity.
             //e.Graphics.DrawInvItem(ItemPositionEnumeration.InvItemSlot1, GameMemory.ItemToImageTranslation[Program.gameMem.ItemSlots[0].Item], Program.gameMem.ItemSlots[0].GetQuantityText(out slotColor), slotColor);
@@ -283,17 +283,9 @@ namespace RE2REmakeSRT
             // Increment for displaying text properly.
             int i = 1;
 
-            ulong rawIGT = Program.gameMem.IGTRunningTimer - Program.gameMem.IGTCutsceneTimer - Program.gameMem.IGTPausedTimer;
-            double millisecondsIGT = rawIGT / 1000d;
-            TimeSpan timespanIGT;
-            if (millisecondsIGT <= TimeSpan.MaxValue.TotalMilliseconds)
-                timespanIGT = TimeSpan.FromMilliseconds(millisecondsIGT);
-            else
-                timespanIGT = new TimeSpan();
-
-            e.Graphics.DrawText(0, 0, string.Format("{0}", timespanIGT.ToString(@"hh\:mm\:ss\.fff", CultureInfo.InvariantCulture)), Brushes.White, new Font("Consolas", 16, FontStyle.Bold));
+            e.Graphics.DrawText(0, 0, string.Format("{0}", Program.gameMem.IGTString), Brushes.White, new Font("Consolas", 16, FontStyle.Bold));
             e.Graphics.DrawText(0, 26, "Raw IGT", Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
-            e.Graphics.DrawText(52, 22, rawIGT.ToString(), Brushes.Gray, new Font("Consolas", 12, FontStyle.Bold));
+            e.Graphics.DrawText(52, 22, Program.gameMem.IGTRaw.ToString(), Brushes.Gray, new Font("Consolas", 12, FontStyle.Bold));
 
             if (Program.gameMem.BossCurrentHealth != 0 && Program.gameMem.BossMaxHealth != 0)
             {
