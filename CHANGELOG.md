@@ -1,6 +1,6 @@
 # Changelog
 
-### [1.0.3.2](https://cdn.discordapp.com/attachments/456037941370814465/539555143306313728/RE2REmakeSRT-1032-Alpha-Signed-Release.7z) (2019-01-28)
+### [1.0.3.2](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1032-Alpha-Signed-Release.7z) (2019-01-28)
 * First public alpha.
 * Added requireAdministrator to app.manifest.
 
