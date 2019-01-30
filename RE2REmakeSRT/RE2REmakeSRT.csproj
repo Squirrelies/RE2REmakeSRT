@@ -62,6 +62,7 @@
     </Compile>
     <Compile Include="CharacterEnumeration.cs" />
     <Compile Include="GameHashes.cs" />
+    <Compile Include="InventoryEntry.cs" />
     <Compile Include="MainUI.cs">
       <SubType>Form</SubType>
     </Compile>
