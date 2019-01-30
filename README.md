@@ -5,6 +5,8 @@ See the [CHANGELOG.md](CHANGELOG.md) file for downloads and changes.
 
 All builds from me will be digitally signed as 'Travis J Gutjahr'.
 
+For information on how to build the source code yourself, see [BUILDING.md](BUILDING.md).
+
 Features implemented:
 
 * Player health.
