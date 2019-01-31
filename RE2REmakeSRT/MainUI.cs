@@ -161,10 +161,11 @@ namespace RE2REmakeSRT
             e.Graphics.DrawText(0, heightOffset + (heightGap * ++i), string.Format("Rank: {0}", Program.gameMem.Rank), Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
             e.Graphics.DrawText(0, heightOffset + (heightGap * ++i), string.Format("Score: {0}", Program.gameMem.RankScore), Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
 
-            if (Program.gameMem.BossCurrentHealth != 0 && Program.gameMem.BossMaxHealth != 0)
+            e.Graphics.DrawText(0, heightOffset + (heightGap * ++i), "Enemies", Brushes.Red, new Font("Consolas", 10, FontStyle.Bold));
+            for (int ehi = 0; ehi < Program.gameMem.EnemyCurrentHealth.Length; ++ehi)
             {
-                e.Graphics.DrawText(0, heightOffset + (heightGap * ++i), "Boss", Brushes.Red, new Font("Consolas", 10, FontStyle.Bold));
-                e.Graphics.DrawText(0, heightOffset + (heightGap * ++i), string.Format("{0} {1:P1}", Program.gameMem.BossCurrentHealth, (decimal)Program.gameMem.BossCurrentHealth / (decimal)Program.gameMem.BossMaxHealth), Brushes.Red, new Font("Consolas", 10, FontStyle.Bold));
+                if (Program.gameMem.EnemyCurrentHealth[ehi] != 0 && Program.gameMem.EnemyMaxHealth[ehi] != 0)
+                    e.Graphics.DrawText(0, heightOffset + (heightGap * ++i), string.Format("{0} {1:P1}", Program.gameMem.EnemyCurrentHealth[ehi], (decimal)Program.gameMem.EnemyCurrentHealth[ehi] / (decimal)Program.gameMem.EnemyMaxHealth[ehi]), Brushes.Red, new Font("Consolas", 10, FontStyle.Bold));
             }
         }
     }
