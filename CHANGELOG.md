@@ -3,6 +3,9 @@
 [.NET Framework v4.7.2 or newer](https://dotnet.microsoft.com/download/dotnet-framework-runtime) required!
 [Click here](https://dotnet.microsoft.com/download/dotnet-framework-runtime) to download the latest version of [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework-runtime).
 
+### [Download 1.0.5.0 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1050-Alpha-Signed-Release.7z) (2019-01-31)
+* Renamed 'Boss' HP to Enemy HP. Now shows all enemies HP (including inactive enemies). Options planned for future release whether to just show boss HP, show all enemy HP or only show enemies that are active currently.
+
 ### [Download 1.0.4.0 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1040-Alpha-Signed-Release.7z) (2019-01-30)
 * Increased resolution of the raw IGT to the highest possible amount available by the game engine.
 * Performance improvements by not checking for arithmatic overflows in IGT calculation.
