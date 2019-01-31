@@ -3,7 +3,7 @@
 [.NET Framework v4.7.2 or newer](https://dotnet.microsoft.com/download/dotnet-framework-runtime) required!
 [Click here](https://dotnet.microsoft.com/download/dotnet-framework-runtime) to download the latest version of [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework-runtime).
 
-### [1.0.4.0 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1040-Alpha-Signed-Release.7z) (2019-01-30)
+### [Download 1.0.4.0 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1040-Alpha-Signed-Release.7z) (2019-01-30)
 * Increased resolution of the raw IGT to the highest possible amount available by the game engine.
 * Performance improvements by not checking for arithmatic overflows in IGT calculation.
 * Adjustments made to IGT in the hopes of fixing another overflow with TimeSpan.
@@ -11,7 +11,7 @@
 * Cleaned up a lot of hold-over code that was commented out.
 * Added Rank and Score to the UI.
 
-### [1.0.3.2 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1032-Alpha-Signed-Release.7z) (2019-01-28)
+### [Download 1.0.3.2 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1032-Alpha-Signed-Release.7z) (2019-01-28)
 * First public alpha.
 * Added requireAdministrator to app.manifest.
 
