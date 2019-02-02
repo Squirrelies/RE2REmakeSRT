@@ -10,14 +10,20 @@ For information on how to build the source code yourself, see [BUILDING.md](BUIL
 Features implemented:
 
 * Player health.
-* Boss health and percentage.
+* Enemy health and percentage.
 * In-game timer.
+* Rank and score progress.
 
 Features planned:
 
 * Inventory display.
 * Equipped weapon and equipped defensive item.
-* Rank progress.
 * Saves used.
 
 Notice: Some planned features may be cancelled due to practicality or other issues. This list is not intended to be a guarantee.
+
+## Special thanks!
+
+* [Dudley](https://www.twitch.tv/Dudley) for file hosting, public relations, marketing and testing. :P
+* [CursedToast](https://www.twitch.tv/CursedToast) for collaboration/assistance with IGT and idea soundboarding.
+* [Pasta](https://www.twitch.tv/ImPasta) for breaking the SRT in a few places ensuring more stable builds reach the masses.
