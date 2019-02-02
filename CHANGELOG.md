@@ -3,6 +3,9 @@
 [.NET Framework v4.7.2 or newer](https://dotnet.microsoft.com/download/dotnet-framework-runtime) required!
 [Click here](https://dotnet.microsoft.com/download/dotnet-framework-runtime) to download the latest version of [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework-runtime).
 
+### [Download 1.0.6.1 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1061-Alpha-Signed-Release.7z) (2019-02-02)
+* Added --Skip-Checksum command-line option to check the file checksum validation step.
+
 ### [Download 1.0.6.0 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1060-Alpha-Signed-Release.7z) (2019-02-02)
 * Fixed a bug where rank and score would show 0 instead of their expected value.
 
