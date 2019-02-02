@@ -10,14 +10,14 @@ For information on how to build the source code yourself, see [BUILDING.md](BUIL
 Features implemented:
 
 * Player health.
-* Boss health and percentage.
+* Enemy health and percentage.
 * In-game timer.
+* Rank and score progress.
 
 Features planned:
 
 * Inventory display.
 * Equipped weapon and equipped defensive item.
-* Rank progress.
 * Saves used.
 
 Notice: Some planned features may be cancelled due to practicality or other issues. This list is not intended to be a guarantee.
