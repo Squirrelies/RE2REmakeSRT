@@ -71,7 +71,7 @@ namespace RE2REmakeSRT
                 case REmake2VersionEnumeration.Stock_1p01:
                     {
                         PointerIGT = new MultilevelPointer(memoryAccess, BaseAddress + 0x070ACAE0, 0x2E0, 0x218, 0x610, 0x710, 0x60);
-                        PointerRank = new MultilevelPointer(memoryAccess, BaseAddress + 0x0707DF80, 0x168, 0x40, 0xF0, 0x138, 0x20);
+                        PointerRank = new MultilevelPointer(memoryAccess, BaseAddress + 0x07086DB0);
                         PointerPlayerHP = new MultilevelPointer(memoryAccess, BaseAddress + 0x070ACA88, 0x50, 0x20);
 
                         PointerEnemyEntries = new MultilevelPointer[32];
