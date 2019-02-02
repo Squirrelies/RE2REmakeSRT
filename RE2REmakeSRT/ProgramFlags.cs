@@ -6,7 +6,7 @@ namespace RE2REmakeSRT
     public enum ProgramFlags : byte
     {
         None = 0x00,
-        // ...
-        Debug = None
+        SkipChecksumCheck = 0x01,
+        Debug = SkipChecksumCheck
     }
 }

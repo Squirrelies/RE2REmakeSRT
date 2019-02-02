@@ -23,13 +23,12 @@ namespace RE2REmakeSRT
             {
                 if (string.Equals(arg, "--Help", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    //MessageBox.Show(null, "Command-line arguments:\r\n\r\n--Coords\t\tShows player coordinates.\r\n--Debug\t\tShows debug info.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    MessageBox.Show(null, "Command-line arguments:\r\n\r\n--Debug\t\tShows debug info.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(null, "Command-line arguments:\r\n\r\n--Skip-Checksum\t\tSkips the checksum file validation step.\r\n--Debug\t\tDebug mode.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Environment.Exit(0);
                 }
 
-                //if (string.Equals(arg, "--Coords", StringComparison.InvariantCultureIgnoreCase))
-                //    programSpecialOptions |= ProgramFlags.Coords;
+                if (string.Equals(arg, "--Skip-Checksum", StringComparison.InvariantCultureIgnoreCase))
+                    programSpecialOptions |= ProgramFlags.SkipChecksumCheck;
 
                 // Assigning here because debug will always be the sum of all of the options being on.
                 if (string.Equals(arg, "--Debug", StringComparison.InvariantCultureIgnoreCase))
