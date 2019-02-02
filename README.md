@@ -1,7 +1,9 @@
 # RE2REmakeSRT
 An SRT (SpeedRun Tool) for Resident Evil 2 (2019).
 
-See the [CHANGELOG.md](CHANGELOG.md) file for downloads and changes.
+See the [CHANGELOG.md](CHANGELOG.md) file for release downloads and changes.
+
+[![Build status](https://dev.azure.com/Squirrelies/RE2REmakeSRT/_apis/build/status/x64)](https://dev.azure.com/Squirrelies/RE2REmakeSRT/_build/latest?definitionId=1)
 
 All builds from me will be digitally signed as 'Travis J Gutjahr'.
 
