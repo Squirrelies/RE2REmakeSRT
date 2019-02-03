@@ -202,6 +202,5 @@ namespace RE2REmakeSRT
         public AttachmentsFlag Attachments;
 
         public bool Equals(Weapon other) => (int)this.WeaponID == (int)other.WeaponID && (int)this.Attachments == (int)other.Attachments;
-        public Rectangle GetRect() => GameMemory.WeaponToImageTranslation[this];
     }
 }

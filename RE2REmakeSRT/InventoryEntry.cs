@@ -33,7 +33,7 @@ namespace RE2REmakeSRT
         public AttachmentsFlag Attachments => (AttachmentsFlag)ProcessMemory.HighPerfBitConverter.ToInt32(data, 0xA8);
         public int Quantity => ProcessMemory.HighPerfBitConverter.ToInt32(data, 0xB0);
 
-        public bool IsEmptySlot => ItemID == ItemEnumeration.None && WeaponID == WeaponEnumeration.None;
+        public bool IsEmptySlot => ItemID == ItemEnumeration.None && (WeaponID == WeaponEnumeration.None || WeaponID == 0);
         public bool IsItem => ItemID != ItemEnumeration.None && WeaponID == WeaponEnumeration.None;
         public bool IsWeapon => ItemID == ItemEnumeration.None && WeaponID != WeaponEnumeration.None;
 
