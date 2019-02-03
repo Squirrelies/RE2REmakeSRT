@@ -49,7 +49,7 @@
             // 
             this.statisticsPanel.Location = new System.Drawing.Point(1, 67);
             this.statisticsPanel.Name = "statisticsPanel";
-            this.statisticsPanel.Size = new System.Drawing.Size(150, 494);
+            this.statisticsPanel.Size = new System.Drawing.Size(150, 354);
             this.statisticsPanel.TabIndex = 2;
             this.statisticsPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.statisticsPanel_Paint);
             // 
@@ -57,7 +57,7 @@
             // 
             this.inventoryPanel.Location = new System.Drawing.Point(157, 1);
             this.inventoryPanel.Name = "inventoryPanel";
-            this.inventoryPanel.Size = new System.Drawing.Size(448, 560);
+            this.inventoryPanel.Size = new System.Drawing.Size(336, 420);
             this.inventoryPanel.TabIndex = 3;
             this.inventoryPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.inventoryPanel_Paint);
             // 
@@ -66,7 +66,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(607, 563);
+            this.ClientSize = new System.Drawing.Size(494, 422);
             this.Controls.Add(this.inventoryPanel);
             this.Controls.Add(this.statisticsPanel);
             this.Controls.Add(this.playerHealthStatus);

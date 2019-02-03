@@ -150,13 +150,17 @@ namespace RE2REmakeSRT
 
                 int slotColumn = inv.SlotPosition % 4;
                 int slotRow = inv.SlotPosition / 4;
-                int imageX = slotColumn * GameMemory.INV_SLOT_WIDTH;
-                int imageY = slotRow * GameMemory.INV_SLOT_HEIGHT;
+                int imageX = slotColumn * Program.INV_SLOT_WIDTH;
+                int imageY = slotRow * Program.INV_SLOT_HEIGHT;
                 int textX = imageX + imageRect.Width - 35;
                 int textY = imageY + imageRect.Height - 25;
+                Brush textBrush = Brushes.White;
+
+                if (inv.Quantity == 0)
+                    textBrush = Brushes.DarkRed;
 
                 e.Graphics.DrawImage(Program.inventoryImage, imageX, imageY, imageRect, GraphicsUnit.Pixel);
-                e.Graphics.DrawString(inv.Quantity.ToString(), new Font("Consolas", 14, FontStyle.Bold), Brushes.White, textX, textY);
+                e.Graphics.DrawString(inv.Quantity.ToString(), new Font("Consolas", 14, FontStyle.Bold), textBrush, textX, textY);
             }
         }
 

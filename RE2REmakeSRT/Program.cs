@@ -12,7 +12,10 @@ namespace RE2REmakeSRT
         public static ProgramFlags programSpecialOptions;
         public static Process gameProc;
         public static GameMemory gameMem;
-        public static Bitmap inventoryImage;
+        public static Bitmap inventoryImage; // The inventory item sheet.
+        public const double INV_SLOT_SCALING = 0.75; // Scaling factor for the inventory images.
+        public const int INV_SLOT_WIDTH = (int)(112 * INV_SLOT_SCALING); // Individual inventory slot width.
+        public const int INV_SLOT_HEIGHT = (int)(112 * INV_SLOT_SCALING); // Individual inventory slot height.
 
         /// <summary>
         /// The main entry point for the application.
@@ -44,6 +47,10 @@ namespace RE2REmakeSRT
 
             // Transform the inventory image in resources down from 32bpp w/ Alpha to 16bpp w/o Alpha. This greatly improve performance especially when coupled with CompositingMode.SourceCopy because no complex alpha blending needs to occur.
             inventoryImage = Properties.Resources.ui0100_iam_texout.Clone(new Rectangle(0, 0, Properties.Resources.ui0100_iam_texout.Width, Properties.Resources.ui0100_iam_texout.Height), PixelFormat.Format16bppRgb555);
+
+            // Rescales the image down if the scaling factor is not 1.
+            if (INV_SLOT_SCALING != 1d)
+                inventoryImage = new Bitmap(inventoryImage, (int)(inventoryImage.Width * INV_SLOT_SCALING), (int)(inventoryImage.Height * INV_SLOT_SCALING));
 
             // This form finds the process for re2.exe (assigned to gameProc) or waits until it is found.
             using (mainContext = new ApplicationContext(new AttachUI()))
