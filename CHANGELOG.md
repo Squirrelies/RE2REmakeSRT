@@ -3,6 +3,9 @@
 [.NET Framework v4.7.2 or newer](https://dotnet.microsoft.com/download/dotnet-framework-runtime) required!
 [Click here](https://dotnet.microsoft.com/download/dotnet-framework-runtime) to download the latest version of [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework-runtime).
 
+### [Download 1.1.0.0 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1100-Alpha-Signed-Release.7z) (2019-02-03)
+* Added inventory display.
+
 ### [Download 1.0.6.1 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1061-Alpha-Signed-Release.7z) (2019-02-02)
 * Added --Skip-Checksum command-line option to check the file checksum validation step.
 
@@ -39,7 +42,3 @@
 
 ### [1.0.0.0 Alpha](about:blank) (2019-01-24)
 * Initial commit.
-
-
-#### Notes and known issues:
-* Boss HP sometimes shows when there is not a boss. I suspect this is really enemy HP and not exclusive to bosses.
