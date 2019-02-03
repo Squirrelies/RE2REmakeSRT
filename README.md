@@ -24,8 +24,11 @@ Features planned:
 
 Notice: Some planned features may be cancelled due to practicality or other issues. This list is not intended to be a guarantee.
 
-## Special thanks!
+### Thanks to the following people for helping make this tool possible.
 
-* [Dudley](https://www.twitch.tv/Dudley) for file hosting, public relations, marketing and testing. :P
+* [Dudley](https://www.twitch.tv/Dudley) for file hosting, public relations, marketing and testing.
 * [CursedToast](https://www.twitch.tv/CursedToast) for collaboration/assistance with IGT and idea soundboarding.
-* [Pasta](https://www.twitch.tv/ImPasta) for breaking the SRT in a few places ensuring more stable builds reach the masses.
+* [Pasta](https://www.twitch.tv/ImPasta) for testing.
+* [SophLUL](https://www.twitch.tv/SophLUL) for testing.
+* [Darazanjoll](https://www.twitch.tv/Darazanjoll) for testing.
+* [AGENTiCE](https://www.twitch.tv/AGENTiCEX) for feedback on image handling.
