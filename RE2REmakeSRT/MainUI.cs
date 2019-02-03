@@ -2,9 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Globalization;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace RE2REmakeSRT
@@ -27,7 +25,7 @@ namespace RE2REmakeSRT
         private PixelOffsetMode pixelOffsetMode = PixelOffsetMode.HighSpeed;
         private CompositingQuality compositingQuality = CompositingQuality.HighSpeed;
         private CompositingMode compositingMode = CompositingMode.SourceOver;
-        private InterpolationMode interpolationMode = InterpolationMode.Low;
+        private InterpolationMode interpolationMode = InterpolationMode.NearestNeighbor;
 
         public MainUI()
         {
@@ -69,6 +67,7 @@ namespace RE2REmakeSRT
 
                     // Only draw these periodically to reduce CPU usage.
                     uiForm.playerHealthStatus.Invalidate();
+                    uiForm.inventoryPanel.Invalidate();
                 }
                 else
                 {
@@ -137,6 +136,28 @@ namespace RE2REmakeSRT
             e.Graphics.CompositingMode = compositingMode;
             e.Graphics.InterpolationMode = interpolationMode;
             e.Graphics.PixelOffsetMode = pixelOffsetMode;
+
+            foreach (InventoryEntry inv in Program.gameMem.PlayerInventory)
+            {
+                if (inv == default || inv.IsEmptySlot)
+                    continue;
+
+                Rectangle imageRect;
+                if (inv.IsItem)
+                    imageRect = GameMemory.ItemToImageTranslation[inv.ItemID];
+                else
+                    imageRect = GameMemory.WeaponToImageTranslation[new Weapon() { WeaponID = inv.WeaponID, Attachments = inv.Attachments }];
+
+                int slotColumn = inv.SlotPosition % 4;
+                int slotRow = inv.SlotPosition / 4;
+                int imageX = slotColumn * GameMemory.INV_SLOT_WIDTH;
+                int imageY = slotRow * GameMemory.INV_SLOT_HEIGHT;
+                int textX = imageX + imageRect.Width - 35;
+                int textY = imageY + imageRect.Height - 25;
+
+                e.Graphics.DrawImage(Program.inventoryImage, imageX, imageY, imageRect, GraphicsUnit.Pixel);
+                e.Graphics.DrawString(inv.Quantity.ToString(), new Font("Consolas", 14, FontStyle.Bold), Brushes.White, textX, textY);
+            }
         }
 
         private void statisticsPanel_Paint(object sender, PaintEventArgs e)

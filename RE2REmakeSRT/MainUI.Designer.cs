@@ -30,6 +30,7 @@
         {
             this.playerHealthStatus = new System.Windows.Forms.PictureBox();
             this.statisticsPanel = new DoubleBuffered.DoubleBufferedPanel();
+            this.inventoryPanel = new DoubleBuffered.DoubleBufferedPanel();
             ((System.ComponentModel.ISupportInitialize)(this.playerHealthStatus)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,16 +49,25 @@
             // 
             this.statisticsPanel.Location = new System.Drawing.Point(1, 67);
             this.statisticsPanel.Name = "statisticsPanel";
-            this.statisticsPanel.Size = new System.Drawing.Size(150, 318);
+            this.statisticsPanel.Size = new System.Drawing.Size(150, 494);
             this.statisticsPanel.TabIndex = 2;
             this.statisticsPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.statisticsPanel_Paint);
+            // 
+            // inventoryPanel
+            // 
+            this.inventoryPanel.Location = new System.Drawing.Point(157, 1);
+            this.inventoryPanel.Name = "inventoryPanel";
+            this.inventoryPanel.Size = new System.Drawing.Size(448, 560);
+            this.inventoryPanel.TabIndex = 3;
+            this.inventoryPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.inventoryPanel_Paint);
             // 
             // MainUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(152, 386);
+            this.ClientSize = new System.Drawing.Size(607, 563);
+            this.Controls.Add(this.inventoryPanel);
             this.Controls.Add(this.statisticsPanel);
             this.Controls.Add(this.playerHealthStatus);
             this.DoubleBuffered = true;
@@ -76,5 +86,6 @@
 
         private System.Windows.Forms.PictureBox playerHealthStatus;
         private DoubleBuffered.DoubleBufferedPanel statisticsPanel;
+        private DoubleBuffered.DoubleBufferedPanel inventoryPanel;
     }
 }
