@@ -3,6 +3,12 @@
 [.NET Framework v4.7.2 or newer](https://dotnet.microsoft.com/download/dotnet-framework-runtime) required!
 [Click here](https://dotnet.microsoft.com/download/dotnet-framework-runtime) to download the latest version of [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework-runtime).
 
+### [Download 1.1.3.0 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1130-Alpha-Signed-Release.7z) (2019-02-04)
+* Fixed a text display bug with large quantities being cut off in the inventory display.
+
+### [Download 1.1.2.0 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1120-Alpha-Signed-Release.7z) (2019-02-03)
+* Added resizing/scaling to the inventory icons. Set to 75% of the original size so the inventory doesn't take up so much screen space.
+
 ### [Download 1.1.1.0 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1110-Alpha-Signed-Release.7z) (2019-02-03)
 * Fixed a KeyNotFoundException when the SRT was ran from the main menu.
 
