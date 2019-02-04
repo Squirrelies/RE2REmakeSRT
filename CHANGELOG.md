@@ -3,6 +3,9 @@
 [.NET Framework v4.7.2 or newer](https://dotnet.microsoft.com/download/dotnet-framework-runtime) required!
 [Click here](https://dotnet.microsoft.com/download/dotnet-framework-runtime) to download the latest version of [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework-runtime).
 
+### [Download 1.1.4.1 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1141-Alpha-Signed-Release.7z) (2019-02-04)
+* Fixed (potentially) the inventory weirdness that happens occasionally.
+
 ### [Download 1.1.3.1 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1131-Alpha-Signed-Release.7z) (2019-02-04)
 * Added some sanity checking for invalid Item/Weapon IDs in the inventory display. It now shows a red X when these are encountered.
 * Added some sanity checking for invalid Slot IDs. It now skips any inventory entry with a Slot ID not within 0 through 19.
