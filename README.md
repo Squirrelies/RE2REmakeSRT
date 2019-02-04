@@ -32,3 +32,4 @@ Notice: Some planned features may be cancelled due to practicality or other issu
 * [SophLUL](https://www.twitch.tv/SophLUL) for testing.
 * [Darazanjoll](https://www.twitch.tv/Darazanjoll) for testing.
 * [AGENTiCE](https://www.twitch.tv/AGENTiCEX) for feedback on image handling.
+* [Orchlon](https://www.twitch.tv/Orchlon) for testing.
