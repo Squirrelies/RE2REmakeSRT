@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace RE2REmakeSRT
@@ -27,15 +29,15 @@ namespace RE2REmakeSRT
         private readonly byte[] data; // 240 (0xF0) bytes.
 
         // Public accessor properties.
-        public int SlotPosition => ProcessMemory.HighPerfBitConverter.ToInt32(data, 0x58);
-        public ItemEnumeration ItemID => (ItemEnumeration)ProcessMemory.HighPerfBitConverter.ToInt32(data, 0xA0);
-        public WeaponEnumeration WeaponID => (WeaponEnumeration)ProcessMemory.HighPerfBitConverter.ToInt32(data, 0xA4);
-        public AttachmentsFlag Attachments => (AttachmentsFlag)ProcessMemory.HighPerfBitConverter.ToInt32(data, 0xA8);
-        public int Quantity => ProcessMemory.HighPerfBitConverter.ToInt32(data, 0xB0);
+        public int SlotPosition => ProcessMemory.HighPerfBitConverter.ToInt32(data, 0x28);
+        public ItemEnumeration ItemID => (ItemEnumeration)ProcessMemory.HighPerfBitConverter.ToInt32(data, 0x70);
+        public WeaponEnumeration WeaponID => (WeaponEnumeration)ProcessMemory.HighPerfBitConverter.ToInt32(data, 0x74);
+        public AttachmentsFlag Attachments => (AttachmentsFlag)ProcessMemory.HighPerfBitConverter.ToInt32(data, 0x78);
+        public int Quantity => ProcessMemory.HighPerfBitConverter.ToInt32(data, 0x80);
 
         public bool IsEmptySlot => ItemID == ItemEnumeration.None && (WeaponID == WeaponEnumeration.None || WeaponID == 0);
-        public bool IsItem => ItemID != ItemEnumeration.None && WeaponID == WeaponEnumeration.None;
-        public bool IsWeapon => ItemID == ItemEnumeration.None && WeaponID != WeaponEnumeration.None;
+        public bool IsItem => ItemID != ItemEnumeration.None && (WeaponID == WeaponEnumeration.None || WeaponID == 0);
+        public bool IsWeapon => ItemID == ItemEnumeration.None && WeaponID != WeaponEnumeration.None && WeaponID != 0;
 
         public InventoryEntry(byte[] data)
         {
@@ -45,6 +47,24 @@ namespace RE2REmakeSRT
         public bool Equals(InventoryEntry other)
         {
             return data.ByteArrayEquals(other.data);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is InventoryEntry)
+                return this.Equals((InventoryEntry)obj);
+            else
+                return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
         }
 
         public static bool operator ==(InventoryEntry obj1, InventoryEntry obj2)

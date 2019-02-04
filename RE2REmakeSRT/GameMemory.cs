@@ -81,7 +81,7 @@ namespace RE2REmakeSRT
 
                         PointerInventoryEntries = new MultilevelPointer[20];
                         for (int i = 0; i < PointerInventoryEntries.Length; ++i)
-                            PointerInventoryEntries[i] = new MultilevelPointer(memoryAccess, BaseAddress + 0x070ACA88, 0x50, 0x98, 0x10, 0x20 + (i * 0x08), 0x18, 0x10);
+                            PointerInventoryEntries[i] = new MultilevelPointer(memoryAccess, BaseAddress + 0x070ACA88, 0x50, 0x98, 0x10, 0x20 + (i * 0x08), 0x18);
 
                         break;
                     }
@@ -157,7 +157,7 @@ namespace RE2REmakeSRT
 
             // Inventory
             for (int i = 0; i < PointerInventoryEntries.Length; ++i)
-                PlayerInventory[i] = new InventoryEntry(PointerInventoryEntries[i].DerefByteArray(-0x90, 0xF0));
+                PlayerInventory[i] = new InventoryEntry(PointerInventoryEntries[i].DerefByteArray(0x00, 0xF0));
 
             // Rank
             Rank = PointerRank.DerefInt(0x58);

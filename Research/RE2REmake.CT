@@ -2,8 +2,9 @@
 <CheatTable CheatEngineTableVersion="28">
   <CheatEntries>
     <CheatEntry>
-      <ID>6</ID>
+      <ID>18</ID>
       <Description>"Current HP"</Description>
+      <LastState Value="1200" RealAddress="13F86088"/>
       <VariableType>4 Bytes</VariableType>
       <Address>"re2.exe"+070ACA88</Address>
       <Offsets>
@@ -15,36 +16,33 @@
         <CheatEntry>
           <ID>28</ID>
           <Description>"Max HP"</Description>
+          <LastState Value="1200" RealAddress="13F86084"/>
           <VariableType>4 Bytes</VariableType>
           <Address>-4</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>27</ID>
           <Description>"Interacting"</Description>
+          <LastState Value="0" RealAddress="13F8608C"/>
           <VariableType>4 Bytes</VariableType>
           <Address>+4</Address>
         </CheatEntry>
       </CheatEntries>
     </CheatEntry>
     <CheatEntry>
-      <ID>95</ID>
+      <ID>100</ID>
       <Description>"Rank"</Description>
-      <LastState Value="5" RealAddress="15DF2FC8"/>
+      <LastState Value="3" RealAddress="15DF2FC8"/>
       <VariableType>4 Bytes</VariableType>
-      <Address>"re2.exe"+0x0707DF80</Address>
+      <Address>"re2.exe"+07086DB0</Address>
       <Offsets>
         <Offset>58</Offset>
-        <Offset>20</Offset>
-        <Offset>138</Offset>
-        <Offset>F0</Offset>
-        <Offset>40</Offset>
-        <Offset>168</Offset>
       </Offsets>
       <CheatEntries>
         <CheatEntry>
-          <ID>96</ID>
+          <ID>101</ID>
           <Description>"Score"</Description>
-          <LastState Value="5500" RealAddress="15DF2FCC"/>
+          <LastState Value="3237.451416" RealAddress="15DF2FCC"/>
           <VariableType>Float</VariableType>
           <Address>+4</Address>
         </CheatEntry>
@@ -53,6 +51,7 @@
     <CheatEntry>
       <ID>20</ID>
       <Description>"IGT String"</Description>
+      <LastState RealAddress="10B91020"/>
       <VariableType>String</VariableType>
       <Length>8</Length>
       <Unicode>1</Unicode>
@@ -69,7 +68,7 @@
     <CheatEntry>
       <ID>58</ID>
       <Description>"Active Time (Microseconds)"</Description>
-      <LastState Value="0" RealAddress="15CBD858"/>
+      <LastState Value="25734623082" RealAddress="12806808"/>
       <VariableType>8 Bytes</VariableType>
       <Address>"re2.exe"+070ACAE0</Address>
       <Offsets>
@@ -84,21 +83,21 @@
         <CheatEntry>
           <ID>53</ID>
           <Description>"Cutscene Time (Microseconds)"</Description>
-          <LastState Value="0" RealAddress="15CBD860"/>
+          <LastState Value="1527456980" RealAddress="12806810"/>
           <VariableType>8 Bytes</VariableType>
           <Address>+8</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>59</ID>
           <Description>"Menu Time (Microseconds)"</Description>
-          <LastState Value="0" RealAddress="15CBD868"/>
+          <LastState Value="5154364450" RealAddress="12806818"/>
           <VariableType>8 Bytes</VariableType>
           <Address>+10</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>54</ID>
           <Description>"Paused Time (Microseconds)"</Description>
-          <LastState Value="0" RealAddress="15CBD870"/>
+          <LastState Value="3125235749" RealAddress="12806820"/>
           <VariableType>8 Bytes</VariableType>
           <Address>+18</Address>
         </CheatEntry>
@@ -107,6 +106,7 @@
     <CheatEntry>
       <ID>86</ID>
       <Description>"Player X Coordinate"</Description>
+      <LastState Value="-118.0320816" RealAddress="13F85D40"/>
       <VariableType>Float</VariableType>
       <Address>"re2.exe"+070ACA88</Address>
       <Offsets>
@@ -120,12 +120,14 @@
         <CheatEntry>
           <ID>85</ID>
           <Description>"Player Z Coordinate"</Description>
+          <LastState Value="0.441452086" RealAddress="13F85D44"/>
           <VariableType>Float</VariableType>
           <Address>+4</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>84</ID>
           <Description>"Player Y Coordinate"</Description>
+          <LastState Value="18.87693214" RealAddress="13F85D48"/>
           <VariableType>Float</VariableType>
           <Address>+8</Address>
         </CheatEntry>
@@ -134,7 +136,7 @@
     <CheatEntry>
       <ID>91</ID>
       <Description>"Map ID"</Description>
-      <LastState Value="0" RealAddress="1470ACEE4"/>
+      <LastState Value="420" RealAddress="1470ACEE4"/>
       <VariableType>4 Bytes</VariableType>
       <Address>"re2.exe"+0488A730</Address>
       <Offsets>
@@ -144,7 +146,7 @@
     <CheatEntry>
       <ID>90</ID>
       <Description>"State - In Control"</Description>
-      <LastState Value="00" RealAddress="15DF1AA0"/>
+      <LastState Value="01" RealAddress="15DF1AA0"/>
       <ShowAsHex>1</ShowAsHex>
       <VariableType>Byte</VariableType>
       <Address>"re2.exe"+0707A510</Address>
@@ -174,7 +176,7 @@
     <CheatEntry>
       <ID>93</ID>
       <Description>"State - Menu"</Description>
-      <LastState Value="00" RealAddress="15DF1AA2"/>
+      <LastState Value="01" RealAddress="15DF1AA2"/>
       <ShowAsHex>1</ShowAsHex>
       <VariableType>Byte</VariableType>
       <Address>"re2.exe"+0707A510</Address>
@@ -204,6 +206,7 @@
     <CheatEntry>
       <ID>34</ID>
       <Description>"Equipped Weapon"</Description>
+      <LastState Value="170EC578" RealAddress="13FC2B00"/>
       <ShowAsHex>1</ShowAsHex>
       <VariableType>4 Bytes</VariableType>
       <Address>"re2.exe"+070ACA88</Address>
@@ -217,6 +220,7 @@
         <CheatEntry>
           <ID>35</ID>
           <Description>"Slot ID"</Description>
+          <LastState Value="00000002" RealAddress="13FC2B28"/>
           <ShowAsHex>1</ShowAsHex>
           <VariableType>4 Bytes</VariableType>
           <Address>+28</Address>
@@ -224,6 +228,7 @@
         <CheatEntry>
           <ID>37</ID>
           <Description>"Weapon ID"</Description>
+          <LastState Value="0000002A" RealAddress="13FC2B74"/>
           <ShowAsHex>1</ShowAsHex>
           <VariableType>4 Bytes</VariableType>
           <Address>+74</Address>
@@ -231,12 +236,14 @@
         <CheatEntry>
           <ID>38</ID>
           <Description>"Attachments"</Description>
+          <LastState Value="1" RealAddress="13FC2B78"/>
           <VariableType>4 Bytes</VariableType>
           <Address>+78</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>39</ID>
           <Description>"Quantity"</Description>
+          <LastState Value="1" RealAddress="13FC2B80"/>
           <VariableType>4 Bytes</VariableType>
           <Address>+80</Address>
         </CheatEntry>
@@ -245,6 +252,7 @@
     <CheatEntry>
       <ID>40</ID>
       <Description>"Equipped Defense Item"</Description>
+      <LastState Value="170EC578" RealAddress="13FC2290"/>
       <ShowAsHex>1</ShowAsHex>
       <VariableType>4 Bytes</VariableType>
       <Address>"re2.exe"+070ACA88</Address>
@@ -258,6 +266,7 @@
         <CheatEntry>
           <ID>41</ID>
           <Description>"Slot ID"</Description>
+          <LastState Value="00000006" RealAddress="13FC22B8"/>
           <ShowAsHex>1</ShowAsHex>
           <VariableType>4 Bytes</VariableType>
           <Address>+28</Address>
@@ -265,6 +274,7 @@
         <CheatEntry>
           <ID>43</ID>
           <Description>"Weapon ID"</Description>
+          <LastState Value="00000042" RealAddress="13FC2304"/>
           <ShowAsHex>1</ShowAsHex>
           <VariableType>4 Bytes</VariableType>
           <Address>+74</Address>
@@ -272,218 +282,451 @@
         <CheatEntry>
           <ID>45</ID>
           <Description>"Quantity"</Description>
+          <LastState Value="3" RealAddress="13FC2310"/>
           <VariableType>4 Bytes</VariableType>
           <Address>+80</Address>
         </CheatEntry>
       </CheatEntries>
     </CheatEntry>
     <CheatEntry>
-      <ID>60</ID>
-      <Description>"Enemy Info Table"</Description>
-      <Color>000000</Color>
-      <VariableType>4 Bytes</VariableType>
-      <Address>"re2.exe"+0707B758</Address>
-      <Offsets>
-        <Offset>0</Offset>
-        <Offset>1A0</Offset>
-        <Offset>18</Offset>
-        <Offset>88</Offset>
-        <Offset>80</Offset>
-      </Offsets>
+      <ID>126</ID>
+      <Description>"Enemies"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
-          <ID>62</ID>
-          <Description>"Max HP"</Description>
-          <Color>0000FF</Color>
+          <ID>60</ID>
+          <Description>"Enemy Info Table"</Description>
+          <LastState Value="387164088" RealAddress="11FB85B0"/>
+          <Color>000000</Color>
           <VariableType>4 Bytes</VariableType>
-          <Address>+54</Address>
+          <Address>"re2.exe"+0707B758</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>1A0</Offset>
+            <Offset>18</Offset>
+            <Offset>88</Offset>
+            <Offset>80</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>62</ID>
+              <Description>"Max HP"</Description>
+              <LastState Value="15000" RealAddress="11FB8604"/>
+              <Color>0000FF</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+54</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>63</ID>
+              <Description>"Current HP"</Description>
+              <LastState Value="15000" RealAddress="11FB8608"/>
+              <Color>0000FF</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+58</Address>
+            </CheatEntry>
+          </CheatEntries>
         </CheatEntry>
         <CheatEntry>
-          <ID>63</ID>
-          <Description>"Current HP"</Description>
-          <Color>0000FF</Color>
+          <ID>64</ID>
+          <Description>"Enemy Info Table"</Description>
+          <Color>000000</Color>
           <VariableType>4 Bytes</VariableType>
-          <Address>+58</Address>
+          <Address>"re2.exe"+0707B758</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>1A0</Offset>
+            <Offset>18</Offset>
+            <Offset>88</Offset>
+            <Offset>88</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>65</ID>
+              <Description>"Max HP"</Description>
+              <Color>0000FF</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+54</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>66</ID>
+              <Description>"Current HP"</Description>
+              <Color>0000FF</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+58</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>67</ID>
+          <Description>"Enemy Info Table"</Description>
+          <Color>000000</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"re2.exe"+0707B758</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>1A0</Offset>
+            <Offset>18</Offset>
+            <Offset>88</Offset>
+            <Offset>90</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>68</ID>
+              <Description>"Max HP"</Description>
+              <Color>0000FF</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+54</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>69</ID>
+              <Description>"Current HP"</Description>
+              <Color>0000FF</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+58</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>70</ID>
+          <Description>"Enemy Info Table"</Description>
+          <Color>000000</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"re2.exe"+0707B758</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>1A0</Offset>
+            <Offset>18</Offset>
+            <Offset>88</Offset>
+            <Offset>98</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>71</ID>
+              <Description>"Max HP"</Description>
+              <Color>0000FF</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+54</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>72</ID>
+              <Description>"Current HP"</Description>
+              <Color>0000FF</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+58</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>76</ID>
+          <Description>"Enemy Info Table"</Description>
+          <Color>000000</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"re2.exe"+0707B758</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>1A0</Offset>
+            <Offset>18</Offset>
+            <Offset>88</Offset>
+            <Offset>A0</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>77</ID>
+              <Description>"Max HP"</Description>
+              <Color>0000FF</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+54</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>78</ID>
+              <Description>"Current HP"</Description>
+              <Color>0000FF</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+58</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>73</ID>
+          <Description>"Enemy Info Table"</Description>
+          <Color>000000</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"re2.exe"+0707B758</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>1A0</Offset>
+            <Offset>18</Offset>
+            <Offset>88</Offset>
+            <Offset>A8</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>74</ID>
+              <Description>"Max HP"</Description>
+              <Color>0000FF</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+54</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>75</ID>
+              <Description>"Current HP"</Description>
+              <Color>0000FF</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+58</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>79</ID>
+          <Description>"Enemy Info Table"</Description>
+          <Color>000000</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"re2.exe"+0707B758</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>1A0</Offset>
+            <Offset>18</Offset>
+            <Offset>88</Offset>
+            <Offset>B0</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>80</ID>
+              <Description>"Max HP"</Description>
+              <Color>0000FF</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+54</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>81</ID>
+              <Description>"Current HP"</Description>
+              <Color>0000FF</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+58</Address>
+            </CheatEntry>
+          </CheatEntries>
         </CheatEntry>
       </CheatEntries>
     </CheatEntry>
     <CheatEntry>
-      <ID>64</ID>
-      <Description>"Enemy Info Table"</Description>
-      <Color>000000</Color>
-      <VariableType>4 Bytes</VariableType>
-      <Address>"re2.exe"+0707B758</Address>
-      <Offsets>
-        <Offset>0</Offset>
-        <Offset>1A0</Offset>
-        <Offset>18</Offset>
-        <Offset>88</Offset>
-        <Offset>88</Offset>
-      </Offsets>
+      <ID>127</ID>
+      <Description>"Inventory"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
-          <ID>65</ID>
-          <Description>"Max HP"</Description>
-          <Color>0000FF</Color>
+          <ID>120</ID>
+          <Description>"Inventory 1 Base"</Description>
+          <LastState Value="386844024" RealAddress="13FC1F60"/>
           <VariableType>4 Bytes</VariableType>
-          <Address>+54</Address>
+          <Address>"re2.exe"+0x070ACA88</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>18</Offset>
+            <Offset>20</Offset>
+            <Offset>10</Offset>
+            <Offset>98</Offset>
+            <Offset>50</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>121</ID>
+              <Description>"Slot ID"</Description>
+              <LastState Value="9" RealAddress="13FC1F88"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+28</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>122</ID>
+              <Description>"Item ID"</Description>
+              <LastState Value="00000016" RealAddress="13FC1FD0"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+70</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>123</ID>
+              <Description>"Weapon ID"</Description>
+              <LastState Value="FFFFFFFF" RealAddress="13FC1FD4"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+74</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>124</ID>
+              <Description>"Attachments Flag"</Description>
+              <LastState Value="00000000" RealAddress="13FC1FD8"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+78</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>125</ID>
+              <Description>"Quantity"</Description>
+              <LastState Value="1" RealAddress="13FC1FE0"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+80</Address>
+            </CheatEntry>
+          </CheatEntries>
         </CheatEntry>
         <CheatEntry>
-          <ID>66</ID>
-          <Description>"Current HP"</Description>
-          <Color>0000FF</Color>
+          <ID>114</ID>
+          <Description>"Inventory 2 Base"</Description>
+          <LastState Value="386844024" RealAddress="13FC20B0"/>
           <VariableType>4 Bytes</VariableType>
-          <Address>+58</Address>
-        </CheatEntry>
-      </CheatEntries>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>67</ID>
-      <Description>"Enemy Info Table"</Description>
-      <Color>000000</Color>
-      <VariableType>4 Bytes</VariableType>
-      <Address>"re2.exe"+0707B758</Address>
-      <Offsets>
-        <Offset>0</Offset>
-        <Offset>1A0</Offset>
-        <Offset>18</Offset>
-        <Offset>88</Offset>
-        <Offset>90</Offset>
-      </Offsets>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>68</ID>
-          <Description>"Max HP"</Description>
-          <Color>0000FF</Color>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+54</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>69</ID>
-          <Description>"Current HP"</Description>
-          <Color>0000FF</Color>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+58</Address>
-        </CheatEntry>
-      </CheatEntries>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>70</ID>
-      <Description>"Enemy Info Table"</Description>
-      <Color>000000</Color>
-      <VariableType>4 Bytes</VariableType>
-      <Address>"re2.exe"+0707B758</Address>
-      <Offsets>
-        <Offset>0</Offset>
-        <Offset>1A0</Offset>
-        <Offset>18</Offset>
-        <Offset>88</Offset>
-        <Offset>98</Offset>
-      </Offsets>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>71</ID>
-          <Description>"Max HP"</Description>
-          <Color>0000FF</Color>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+54</Address>
+          <Address>"re2.exe"+0x070ACA88</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>18</Offset>
+            <Offset>28</Offset>
+            <Offset>10</Offset>
+            <Offset>98</Offset>
+            <Offset>50</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>115</ID>
+              <Description>"Slot ID"</Description>
+              <LastState Value="8" RealAddress="13FC20D8"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+28</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>116</ID>
+              <Description>"Item ID"</Description>
+              <LastState Value="202" RealAddress="13FC2120"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+70</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>117</ID>
+              <Description>"Weapon ID"</Description>
+              <LastState Value="4294967295" RealAddress="13FC2124"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+74</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>118</ID>
+              <Description>"Attachments Flag"</Description>
+              <LastState Value="0" RealAddress="13FC2128"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+78</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>119</ID>
+              <Description>"Quantity"</Description>
+              <LastState Value="1" RealAddress="13FC2130"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+80</Address>
+            </CheatEntry>
+          </CheatEntries>
         </CheatEntry>
         <CheatEntry>
-          <ID>72</ID>
-          <Description>"Current HP"</Description>
-          <Color>0000FF</Color>
+          <ID>108</ID>
+          <Description>"Inventory 3 Base"</Description>
+          <LastState Value="386844024" RealAddress="13FC21A0"/>
           <VariableType>4 Bytes</VariableType>
-          <Address>+58</Address>
-        </CheatEntry>
-      </CheatEntries>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>76</ID>
-      <Description>"Enemy Info Table"</Description>
-      <Color>000000</Color>
-      <VariableType>4 Bytes</VariableType>
-      <Address>"re2.exe"+0707B758</Address>
-      <Offsets>
-        <Offset>0</Offset>
-        <Offset>1A0</Offset>
-        <Offset>18</Offset>
-        <Offset>88</Offset>
-        <Offset>A0</Offset>
-      </Offsets>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>77</ID>
-          <Description>"Max HP"</Description>
-          <Color>0000FF</Color>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+54</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>78</ID>
-          <Description>"Current HP"</Description>
-          <Color>0000FF</Color>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+58</Address>
-        </CheatEntry>
-      </CheatEntries>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>73</ID>
-      <Description>"Enemy Info Table"</Description>
-      <Color>000000</Color>
-      <VariableType>4 Bytes</VariableType>
-      <Address>"re2.exe"+0707B758</Address>
-      <Offsets>
-        <Offset>0</Offset>
-        <Offset>1A0</Offset>
-        <Offset>18</Offset>
-        <Offset>88</Offset>
-        <Offset>A8</Offset>
-      </Offsets>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>74</ID>
-          <Description>"Max HP"</Description>
-          <Color>0000FF</Color>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+54</Address>
+          <Address>"re2.exe"+0x070ACA88</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>18</Offset>
+            <Offset>30</Offset>
+            <Offset>10</Offset>
+            <Offset>98</Offset>
+            <Offset>50</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>109</ID>
+              <Description>"Slot ID"</Description>
+              <LastState Value="12" RealAddress="13FC21C8"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+28</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>110</ID>
+              <Description>"Item ID"</Description>
+              <LastState Value="0" RealAddress="13FC2210"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+70</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>111</ID>
+              <Description>"Weapon ID"</Description>
+              <LastState Value="65" RealAddress="13FC2214"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+74</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>112</ID>
+              <Description>"Attachments Flag"</Description>
+              <LastState Value="0" RealAddress="13FC2218"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+78</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>113</ID>
+              <Description>"Quantity"</Description>
+              <LastState Value="1" RealAddress="13FC2220"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+80</Address>
+            </CheatEntry>
+          </CheatEntries>
         </CheatEntry>
         <CheatEntry>
-          <ID>75</ID>
-          <Description>"Current HP"</Description>
-          <Color>0000FF</Color>
+          <ID>102</ID>
+          <Description>"Inventory 4 Base"</Description>
+          <LastState Value="386844024" RealAddress="13FC2290"/>
           <VariableType>4 Bytes</VariableType>
-          <Address>+58</Address>
-        </CheatEntry>
-      </CheatEntries>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>79</ID>
-      <Description>"Enemy Info Table"</Description>
-      <Color>000000</Color>
-      <VariableType>4 Bytes</VariableType>
-      <Address>"re2.exe"+0707B758</Address>
-      <Offsets>
-        <Offset>0</Offset>
-        <Offset>1A0</Offset>
-        <Offset>18</Offset>
-        <Offset>88</Offset>
-        <Offset>B0</Offset>
-      </Offsets>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>80</ID>
-          <Description>"Max HP"</Description>
-          <Color>0000FF</Color>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+54</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>81</ID>
-          <Description>"Current HP"</Description>
-          <Color>0000FF</Color>
-          <VariableType>4 Bytes</VariableType>
-          <Address>+58</Address>
+          <Address>"re2.exe"+0x070ACA88</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>18</Offset>
+            <Offset>38</Offset>
+            <Offset>10</Offset>
+            <Offset>98</Offset>
+            <Offset>50</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>103</ID>
+              <Description>"Slot ID"</Description>
+              <LastState Value="6" RealAddress="13FC22B8"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+28</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>104</ID>
+              <Description>"Item ID"</Description>
+              <LastState Value="0" RealAddress="13FC2300"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+70</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>105</ID>
+              <Description>"Weapon ID"</Description>
+              <LastState Value="66" RealAddress="13FC2304"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+74</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>106</ID>
+              <Description>"Attachments Flag"</Description>
+              <LastState Value="0" RealAddress="13FC2308"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+78</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>107</ID>
+              <Description>"Quantity"</Description>
+              <LastState Value="3" RealAddress="13FC2310"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+80</Address>
+            </CheatEntry>
+          </CheatEntries>
         </CheatEntry>
       </CheatEntries>
     </CheatEntry>
