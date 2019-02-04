@@ -13,6 +13,7 @@ namespace RE2REmakeSRT
         public static Process gameProc;
         public static GameMemory gameMem;
         public static Bitmap inventoryImage; // The inventory item sheet.
+        public static Bitmap inventoryError; // An error image.
         public const double INV_SLOT_SCALING = 0.75; // Scaling factor for the inventory images.
         public const int INV_SLOT_WIDTH = (int)(112 * INV_SLOT_SCALING); // Individual inventory slot width.
         public const int INV_SLOT_HEIGHT = (int)(112 * INV_SLOT_SCALING); // Individual inventory slot height.
@@ -51,6 +52,15 @@ namespace RE2REmakeSRT
             // Rescales the image down if the scaling factor is not 1.
             if (INV_SLOT_SCALING != 1d)
                 inventoryImage = new Bitmap(inventoryImage, (int)(inventoryImage.Width * INV_SLOT_SCALING), (int)(inventoryImage.Height * INV_SLOT_SCALING));
+
+            // Create a black slot image for when side-pack is not equipped.
+            inventoryError = new Bitmap(INV_SLOT_WIDTH, INV_SLOT_HEIGHT, PixelFormat.Format16bppRgb555);
+            using (Graphics grp = Graphics.FromImage(inventoryError))
+            {
+                grp.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0, 0)), 0, 0, inventoryError.Width, inventoryError.Height);
+                grp.DrawLine(new Pen(Color.FromArgb(150, 255, 0, 0), 3), 0, 0, inventoryError.Width, inventoryError.Height);
+                grp.DrawLine(new Pen(Color.FromArgb(150, 255, 0, 0), 3), inventoryError.Width, 0, 0, inventoryError.Height);
+            }
 
             // This form finds the process for re2.exe (assigned to gameProc) or waits until it is found.
             using (mainContext = new ApplicationContext(new AttachUI()))

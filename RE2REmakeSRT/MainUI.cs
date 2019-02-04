@@ -32,6 +32,9 @@ namespace RE2REmakeSRT
         {
             InitializeComponent();
 
+            // Set titlebar.
+            this.Text += string.Format(" v{0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+
             lastPtrUpdate = DateTime.UtcNow.Ticks;
             lastFullUIDraw = DateTime.UtcNow.Ticks;
             
@@ -140,14 +143,21 @@ namespace RE2REmakeSRT
 
             foreach (InventoryEntry inv in Program.gameMem.PlayerInventory)
             {
-                if (inv == default || inv.IsEmptySlot)
+                if (inv == default || inv.SlotPosition < 0 || inv.SlotPosition > 19 || inv.IsEmptySlot)
                     continue;
 
+                Image image = Program.inventoryImage;
                 Rectangle imageRect;
-                if (inv.IsItem)
+                Weapon weapon;
+                if (inv.IsItem && GameMemory.ItemToImageTranslation.ContainsKey(inv.ItemID))
                     imageRect = GameMemory.ItemToImageTranslation[inv.ItemID];
+                else if (inv.IsWeapon && GameMemory.WeaponToImageTranslation.ContainsKey(weapon = new Weapon() { WeaponID = inv.WeaponID, Attachments = inv.Attachments }))
+                    imageRect = GameMemory.WeaponToImageTranslation[weapon];
                 else
-                    imageRect = GameMemory.WeaponToImageTranslation[new Weapon() { WeaponID = inv.WeaponID, Attachments = inv.Attachments }];
+                {
+                    imageRect = new Rectangle(0, 0, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT);
+                    image = Program.inventoryError;
+                }
 
                 int slotColumn = inv.SlotPosition % 4;
                 int slotRow = inv.SlotPosition / 4;
@@ -160,7 +170,7 @@ namespace RE2REmakeSRT
                 if (inv.Quantity == 0)
                     textBrush = Brushes.DarkRed;
 
-                e.Graphics.DrawImage(Program.inventoryImage, imageX, imageY, imageRect, GraphicsUnit.Pixel);
+                e.Graphics.DrawImage(image, imageX, imageY, imageRect, GraphicsUnit.Pixel);
                 e.Graphics.DrawString(inv.Quantity.ToString(), new Font("Consolas", 14, FontStyle.Bold), textBrush, textX, textY, stringFormat);
             }
         }
