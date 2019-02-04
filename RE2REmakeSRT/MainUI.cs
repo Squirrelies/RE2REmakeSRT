@@ -26,6 +26,7 @@ namespace RE2REmakeSRT
         private CompositingQuality compositingQuality = CompositingQuality.HighSpeed;
         private CompositingMode compositingMode = CompositingMode.SourceOver;
         private InterpolationMode interpolationMode = InterpolationMode.NearestNeighbor;
+        private StringFormat stringFormat = new StringFormat(StringFormat.GenericDefault) { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Far };
 
         public MainUI()
         {
@@ -152,15 +153,15 @@ namespace RE2REmakeSRT
                 int slotRow = inv.SlotPosition / 4;
                 int imageX = slotColumn * Program.INV_SLOT_WIDTH;
                 int imageY = slotRow * Program.INV_SLOT_HEIGHT;
-                int textX = imageX + imageRect.Width - 35;
-                int textY = imageY + imageRect.Height - 25;
+                int textX = imageX + imageRect.Width;
+                int textY = imageY + imageRect.Height;
                 Brush textBrush = Brushes.White;
 
                 if (inv.Quantity == 0)
                     textBrush = Brushes.DarkRed;
 
                 e.Graphics.DrawImage(Program.inventoryImage, imageX, imageY, imageRect, GraphicsUnit.Pixel);
-                e.Graphics.DrawString(inv.Quantity.ToString(), new Font("Consolas", 14, FontStyle.Bold), textBrush, textX, textY);
+                e.Graphics.DrawString(inv.Quantity.ToString(), new Font("Consolas", 14, FontStyle.Bold), textBrush, textX, textY, stringFormat);
             }
         }
 
