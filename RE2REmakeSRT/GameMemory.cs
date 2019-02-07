@@ -157,7 +157,11 @@ namespace RE2REmakeSRT
 
             // Inventory
             for (int i = 0; i < PointerInventoryEntries.Length; ++i)
-                PlayerInventory[i] = new InventoryEntry(PointerInventoryEntries[i].DerefByteArray(0x00, 0xF0));
+            {
+                long invDataPointer = PointerInventoryEntries[i].DerefLong(0x10);
+                long invDataOffset = invDataPointer - PointerInventoryEntries[i].Addresses[PointerInventoryEntries[i].Addresses.Count - 1];
+                PlayerInventory[i] = new InventoryEntry(PointerInventoryEntries[i].DerefInt(0x28), PointerInventoryEntries[i].DerefByteArray(invDataOffset + 0x10, 0x14));
+            }
 
             // Rank
             Rank = PointerRank.DerefInt(0x58);

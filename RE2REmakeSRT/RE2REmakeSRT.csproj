@@ -71,6 +71,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="ItemEnumeration.cs" />
     <Compile Include="ItemPositionEnumeration.cs" />
+    <Compile Include="PInvoke.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramFlags.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

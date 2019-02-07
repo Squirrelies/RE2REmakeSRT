@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoubleBuffered;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -32,6 +33,9 @@ namespace RE2REmakeSRT
         {
             InitializeComponent();
 
+            if (Program.programSpecialOptions.HasFlag(ProgramFlags.NoTitleBar))
+                this.FormBorderStyle = FormBorderStyle.None;
+
             // Set titlebar.
             this.Text += string.Format(" v{0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
 
@@ -49,6 +53,14 @@ namespace RE2REmakeSRT
             {
                 // Suspend UI layout logic to perform redrawing.
                 MainUI uiForm = (MainUI)Program.mainContext.MainForm;
+
+                if (Program.programSpecialOptions.HasFlag(ProgramFlags.AlwaysOnTop))
+                {
+                    if (uiForm.InvokeRequired)
+                        uiForm.Invoke(new Action(() => uiForm.TopMost = true));
+                    else
+                        uiForm.TopMost = true;
+                }
 
                 // Only perform a pointer update occasionally.
                 if (DateTime.UtcNow.Ticks - lastPtrUpdate >= PTR_UPDATE_TICKS)
@@ -203,6 +215,30 @@ namespace RE2REmakeSRT
                 if (Program.gameMem.EnemyCurrentHealth[ehi] != 0 && Program.gameMem.EnemyMaxHealth[ehi] != 0)
                     e.Graphics.DrawText(0, heightOffset + (heightGap * ++i), string.Format("{0} {1:P1}", Program.gameMem.EnemyCurrentHealth[ehi], (decimal)Program.gameMem.EnemyCurrentHealth[ehi] / (decimal)Program.gameMem.EnemyMaxHealth[ehi]), Brushes.Red, new Font("Consolas", 10, FontStyle.Bold));
             }
+        }
+
+        private void inventoryPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+                PInvoke.DragControl(((DoubleBufferedPanel)sender).Parent.Handle);
+        }
+
+        private void statisticsPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+                PInvoke.DragControl(((DoubleBufferedPanel)sender).Parent.Handle);
+        }
+
+        private void playerHealthStatus_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+                PInvoke.DragControl(((PictureBox)sender).Parent.Handle);
+        }
+
+        private void MainUI_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+                PInvoke.DragControl(((Form)sender).Handle);
         }
     }
 }

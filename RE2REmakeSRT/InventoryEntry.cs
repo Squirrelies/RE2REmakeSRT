@@ -25,28 +25,29 @@ namespace RE2REmakeSRT
             }
         }
 
-        // Private storage variable.
-        private readonly byte[] data; // 240 (0xF0) bytes.
+        // Storage variable.
+        public readonly int SlotPosition;
+        public readonly byte[] Data;
 
-        // Public accessor properties.
-        public int SlotPosition => ProcessMemory.HighPerfBitConverter.ToInt32(data, 0x28);
-        public ItemEnumeration ItemID => (ItemEnumeration)ProcessMemory.HighPerfBitConverter.ToInt32(data, 0x70);
-        public WeaponEnumeration WeaponID => (WeaponEnumeration)ProcessMemory.HighPerfBitConverter.ToInt32(data, 0x74);
-        public AttachmentsFlag Attachments => (AttachmentsFlag)ProcessMemory.HighPerfBitConverter.ToInt32(data, 0x78);
-        public int Quantity => ProcessMemory.HighPerfBitConverter.ToInt32(data, 0x80);
-
-        public bool IsEmptySlot => ItemID == ItemEnumeration.None && (WeaponID == WeaponEnumeration.None || WeaponID == 0);
+        // Accessor properties.
+        public ItemEnumeration ItemID => (ItemEnumeration)ProcessMemory.HighPerfBitConverter.ToInt32(Data, 0x00);
+        public WeaponEnumeration WeaponID => (WeaponEnumeration)ProcessMemory.HighPerfBitConverter.ToInt32(Data, 0x04);
+        public AttachmentsFlag Attachments => (AttachmentsFlag)ProcessMemory.HighPerfBitConverter.ToInt32(Data, 0x08);
+        public int Quantity => ProcessMemory.HighPerfBitConverter.ToInt32(Data, 0x10);
+        
         public bool IsItem => ItemID != ItemEnumeration.None && (WeaponID == WeaponEnumeration.None || WeaponID == 0);
         public bool IsWeapon => ItemID == ItemEnumeration.None && WeaponID != WeaponEnumeration.None && WeaponID != 0;
+        public bool IsEmptySlot => !IsItem && !IsWeapon;
 
-        public InventoryEntry(byte[] data)
+        public InventoryEntry(int slotPosition, byte[] data)
         {
-            this.data = data;
+            this.SlotPosition = slotPosition;
+            this.Data = data;
         }
 
         public bool Equals(InventoryEntry other)
         {
-            return data.ByteArrayEquals(other.data);
+            return Data.ByteArrayEquals(other.Data);
         }
 
         public override bool Equals(object obj)
@@ -78,7 +79,7 @@ namespace RE2REmakeSRT
             if (ReferenceEquals(obj2, null))
                 return false;
 
-            return obj1.data.ByteArrayEquals(obj2.data);
+            return obj1.Data.ByteArrayEquals(obj2.Data);
         }
 
         public static bool operator !=(InventoryEntry obj1, InventoryEntry obj2)

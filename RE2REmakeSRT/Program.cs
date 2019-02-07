@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Text;
 using System.Windows.Forms;
 
 namespace RE2REmakeSRT
@@ -30,12 +31,24 @@ namespace RE2REmakeSRT
             {
                 if (string.Equals(arg, "--Help", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    MessageBox.Show(null, "Command-line arguments:\r\n\r\n--Skip-Checksum\t\tSkips the checksum file validation step.\r\n--Debug\t\tDebug mode.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    StringBuilder message = new StringBuilder("Command-line arguments:\r\n\r\n");
+                    message.AppendFormat("{0}\r\n\t{1}\r\n\r\n", "--Skip-Checksum", "Skip the checksum file validation step.");
+                    message.AppendFormat("{0}\r\n\t{1}\r\n\r\n", "--No-Titlebar", "Hide the titlebar and window frame.");
+                    message.AppendFormat("{0}\r\n\t{1}\r\n\r\n", "--Always-On-Top", "Always appear on top of other windows.");
+                    message.AppendFormat("{0}\r\n\t{1}\r\n\r\n", "--Debug", "Debug mode.");
+
+                    MessageBox.Show(null, message.ToString().Trim(), string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Environment.Exit(0);
                 }
 
                 if (string.Equals(arg, "--Skip-Checksum", StringComparison.InvariantCultureIgnoreCase))
                     programSpecialOptions |= ProgramFlags.SkipChecksumCheck;
+
+                if (string.Equals(arg, "--No-Titlebar", StringComparison.InvariantCultureIgnoreCase))
+                    programSpecialOptions |= ProgramFlags.NoTitleBar;
+
+                if (string.Equals(arg, "--Always-On-Top", StringComparison.InvariantCultureIgnoreCase))
+                    programSpecialOptions |= ProgramFlags.AlwaysOnTop;
 
                 // Assigning here because debug will always be the sum of all of the options being on.
                 if (string.Equals(arg, "--Debug", StringComparison.InvariantCultureIgnoreCase))
