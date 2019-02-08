@@ -3,6 +3,9 @@
 [.NET Framework v4.7.2 or newer](https://dotnet.microsoft.com/download/dotnet-framework-runtime) required!
 [Click here](https://dotnet.microsoft.com/download/dotnet-framework-runtime) to download the latest version of [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework-runtime).
 
+### [Download 1.1.5.1 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1151-Alpha-Signed-Release.7z) (2019-02-08)
+* Fixed a bug where the program would crash and not open if a --ScalingFactor was not set.
+
 ### [Download 1.1.5.0 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1150-Alpha-Signed-Release.7z) (2019-02-07)
 * Added --Transparent which sets the background to be transparent.
 * Added ScalingFactor=n which defines what the size of an inventory icon will be relative to the original size where n is a value between 0.0 and 1.0. The default value is 0.75 (75%).
