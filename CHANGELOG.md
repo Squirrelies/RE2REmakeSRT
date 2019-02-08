@@ -3,6 +3,10 @@
 [.NET Framework v4.7.2 or newer](https://dotnet.microsoft.com/download/dotnet-framework-runtime) required!
 [Click here](https://dotnet.microsoft.com/download/dotnet-framework-runtime) to download the latest version of [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework-runtime).
 
+### [Download 1.1.4.3 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1143-Alpha-Signed-Release.7z) (2019-02-06)
+* Potential fix for inventory display bugs that were happening mid to late game and after auto-save loading/continuing.
+* Initial code for --No-Titlebar and --Always-On-Top support. It works but there is no transparency yet so it is not ideal yet.
+
 ### [Download 1.1.4.2 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1142-Alpha-Signed-Release.7z) (2019-02-04)
 * Fixed some incorrectly mapped weapons. The attachment portion was mapped incorrectly and caused Red X error images to be displayed for Spark Shot and Chemical Flamethrower.
 
