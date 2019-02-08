@@ -7,7 +7,7 @@
 * Added --Transparent which sets the background to be transparent.
 * Added ScalingFactor=n which defines what the size of an inventory icon will be relative to the original size where n is a value between 0.0 and 1.0. The default value is 0.75 (75%).
 
-Notes: Using --Always-On-Top and --Transparent will allow the SRT to function LIKE an in-game overlay. It is not an overlay in technical terms but it will fit the request without using DirectX 2D drawing and additional custom code.
+Notes: Using --No-Titlebar --Always-On-Top --Transparent will allow the SRT to function LIKE an in-game overlay. It is not an overlay in technical terms but it will fit the request without using DirectX 2D drawing and additional custom code.
 
 ### [Download 1.1.4.3 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1143-Alpha-Signed-Release.7z) (2019-02-06)
 * Potential fix for inventory display bugs that were happening mid to late game and after auto-save loading/continuing.
