@@ -15,9 +15,9 @@ namespace RE2REmakeSRT
         public static GameMemory gameMem;
         public static Bitmap inventoryImage; // The inventory item sheet.
         public static Bitmap inventoryError; // An error image.
-        public const double INV_SLOT_SCALING = 0.75; // Scaling factor for the inventory images.
-        public const int INV_SLOT_WIDTH = (int)(112 * INV_SLOT_SCALING); // Individual inventory slot width.
-        public const int INV_SLOT_HEIGHT = (int)(112 * INV_SLOT_SCALING); // Individual inventory slot height.
+        public static double INV_SLOT_SCALING; // Scaling factor for the inventory images.
+        public static int INV_SLOT_WIDTH;
+        public static int INV_SLOT_HEIGHT;
 
         /// <summary>
         /// The main entry point for the application.
@@ -29,38 +29,52 @@ namespace RE2REmakeSRT
             programSpecialOptions = ProgramFlags.None;
             foreach (string arg in args)
             {
-                if (string.Equals(arg, "--Help", StringComparison.InvariantCultureIgnoreCase))
+                if (arg.Equals("--Help", StringComparison.InvariantCultureIgnoreCase))
                 {
                     StringBuilder message = new StringBuilder("Command-line arguments:\r\n\r\n");
                     message.AppendFormat("{0}\r\n\t{1}\r\n\r\n", "--Skip-Checksum", "Skip the checksum file validation step.");
                     message.AppendFormat("{0}\r\n\t{1}\r\n\r\n", "--No-Titlebar", "Hide the titlebar and window frame.");
                     message.AppendFormat("{0}\r\n\t{1}\r\n\r\n", "--Always-On-Top", "Always appear on top of other windows.");
+                    message.AppendFormat("{0}\r\n\t{1}\r\n\r\n", "--Transparent", "Make the background transparent.");
+                    message.AppendFormat("{0}\r\n\t{1}\r\n\r\n", "--ScalingFactor=n", "Set the inventory slot scaling factor on a scale of 0.0 to 1.0. Default: 0.75 (75%)");
                     message.AppendFormat("{0}\r\n\t{1}\r\n\r\n", "--Debug", "Debug mode.");
 
                     MessageBox.Show(null, message.ToString().Trim(), string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Environment.Exit(0);
                 }
 
-                if (string.Equals(arg, "--Skip-Checksum", StringComparison.InvariantCultureIgnoreCase))
+                if (arg.Equals("--Skip-Checksum", StringComparison.InvariantCultureIgnoreCase))
                     programSpecialOptions |= ProgramFlags.SkipChecksumCheck;
 
-                if (string.Equals(arg, "--No-Titlebar", StringComparison.InvariantCultureIgnoreCase))
+                if (arg.Equals("--No-Titlebar", StringComparison.InvariantCultureIgnoreCase))
                     programSpecialOptions |= ProgramFlags.NoTitleBar;
 
-                if (string.Equals(arg, "--Always-On-Top", StringComparison.InvariantCultureIgnoreCase))
+                if (arg.Equals("--Always-On-Top", StringComparison.InvariantCultureIgnoreCase))
                     programSpecialOptions |= ProgramFlags.AlwaysOnTop;
 
-                // Assigning here because debug will always be the sum of all of the options being on.
-                if (string.Equals(arg, "--Debug", StringComparison.InvariantCultureIgnoreCase))
-                    programSpecialOptions = ProgramFlags.Debug;
+                if (arg.Equals("--Transparent", StringComparison.InvariantCultureIgnoreCase))
+                    programSpecialOptions |= ProgramFlags.Transparent;
+
+                if (arg.StartsWith("--ScalingFactor=", StringComparison.InvariantCultureIgnoreCase))
+                    if (!double.TryParse(arg.Split(new char[1] { '=' }, 2, StringSplitOptions.None)[1], out INV_SLOT_SCALING))
+                        INV_SLOT_SCALING = 0.75d; // Default scaling factor for the inventory images. If we fail to process the user input, just set us to the default value.
+
+                if (arg.Equals("--Debug", StringComparison.InvariantCultureIgnoreCase))
+                    programSpecialOptions |= ProgramFlags.Debug;
             }
+
+            // Set item slot sizes after scaling is determined.
+            INV_SLOT_WIDTH = (int)Math.Round(112d * INV_SLOT_SCALING, MidpointRounding.AwayFromZero); // Individual inventory slot width.
+            INV_SLOT_HEIGHT = (int)Math.Round(112d * INV_SLOT_SCALING, MidpointRounding.AwayFromZero); // Individual inventory slot height.
 
             // Standard WinForms stuff.
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             // Transform the inventory image in resources down from 32bpp w/ Alpha to 16bpp w/o Alpha. This greatly improve performance especially when coupled with CompositingMode.SourceCopy because no complex alpha blending needs to occur.
-            inventoryImage = Properties.Resources.ui0100_iam_texout.Clone(new Rectangle(0, 0, Properties.Resources.ui0100_iam_texout.Width, Properties.Resources.ui0100_iam_texout.Height), PixelFormat.Format16bppRgb555);
+            //inventoryImage = Properties.Resources.ui0100_iam_texout.Clone(new Rectangle(0, 0, Properties.Resources.ui0100_iam_texout.Width, Properties.Resources.ui0100_iam_texout.Height), PixelFormat.Format16bppRgb555);
+            // Testing perf. with PARGB.
+            inventoryImage = Properties.Resources.ui0100_iam_texout.Clone(new Rectangle(0, 0, Properties.Resources.ui0100_iam_texout.Width, Properties.Resources.ui0100_iam_texout.Height), PixelFormat.Format32bppPArgb);
 
             // Rescales the image down if the scaling factor is not 1.
             if (INV_SLOT_SCALING != 1d)

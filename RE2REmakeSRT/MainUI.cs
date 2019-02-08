@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -21,23 +22,39 @@ namespace RE2REmakeSRT
         private System.Timers.Timer memoryPollingTimer;
         private long lastPtrUpdate;
         private long lastFullUIDraw;
-        
-        private SmoothingMode smoothingMode = SmoothingMode.HighSpeed;
-        private PixelOffsetMode pixelOffsetMode = PixelOffsetMode.HighSpeed;
-        private CompositingQuality compositingQuality = CompositingQuality.HighSpeed;
+
         private CompositingMode compositingMode = CompositingMode.SourceOver;
+        private CompositingQuality compositingQuality = CompositingQuality.HighSpeed;
+        private SmoothingMode smoothingMode = SmoothingMode.None;
+        private PixelOffsetMode pixelOffsetMode = PixelOffsetMode.Half;
         private InterpolationMode interpolationMode = InterpolationMode.NearestNeighbor;
+        private TextRenderingHint textRenderingHint = TextRenderingHint.AntiAliasGridFit;
         private StringFormat stringFormat = new StringFormat(StringFormat.GenericDefault) { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Far };
 
         public MainUI()
         {
             InitializeComponent();
 
+            // Set titlebar.
+            this.Text += string.Format(" v{0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+
             if (Program.programSpecialOptions.HasFlag(ProgramFlags.NoTitleBar))
                 this.FormBorderStyle = FormBorderStyle.None;
 
-            // Set titlebar.
-            this.Text += string.Format(" v{0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+            if (Program.programSpecialOptions.HasFlag(ProgramFlags.Transparent))
+                this.TransparencyKey = Color.Black;
+
+            // Set the width and height of the inventory display so it matches the maximum items and the scaling size of those items.
+            this.inventoryPanel.Width = Program.INV_SLOT_WIDTH * 4;
+            this.inventoryPanel.Height = Program.INV_SLOT_HEIGHT * 5;
+
+            // Adjust main form width as well.
+            this.Width = this.statisticsPanel.Width + this.inventoryPanel.Width + 24;
+
+            //// We may also want adjust the statistics panel height and the form height.
+            //// Commenting out for right now in case they want 50% scaling but still need the statistics height to view enemy hp?
+            //this.statisticsPanel.Height = this.inventoryPanel.Height - 66;
+            //this.Height = this.inventoryPanel.Height + 41;
 
             lastPtrUpdate = DateTime.UtcNow.Ticks;
             lastFullUIDraw = DateTime.UtcNow.Ticks;
@@ -112,6 +129,7 @@ namespace RE2REmakeSRT
             e.Graphics.CompositingMode = compositingMode;
             e.Graphics.InterpolationMode = interpolationMode;
             e.Graphics.PixelOffsetMode = pixelOffsetMode;
+            e.Graphics.TextRenderingHint = textRenderingHint;
 
             // Draw health.
             if (Program.gameMem.PlayerCurrentHealth > 1200 || Program.gameMem.PlayerCurrentHealth < 0) // Dead?
@@ -143,6 +161,7 @@ namespace RE2REmakeSRT
             e.Graphics.CompositingMode = compositingMode;
             e.Graphics.InterpolationMode = interpolationMode;
             e.Graphics.PixelOffsetMode = pixelOffsetMode;
+            e.Graphics.TextRenderingHint = textRenderingHint;
         }
 
         private void inventoryPanel_Paint(object sender, PaintEventArgs e)
@@ -152,6 +171,7 @@ namespace RE2REmakeSRT
             e.Graphics.CompositingMode = compositingMode;
             e.Graphics.InterpolationMode = interpolationMode;
             e.Graphics.PixelOffsetMode = pixelOffsetMode;
+            e.Graphics.TextRenderingHint = textRenderingHint;
 
             foreach (InventoryEntry inv in Program.gameMem.PlayerInventory)
             {
@@ -194,6 +214,7 @@ namespace RE2REmakeSRT
             e.Graphics.CompositingMode = compositingMode;
             e.Graphics.InterpolationMode = interpolationMode;
             e.Graphics.PixelOffsetMode = pixelOffsetMode;
+            e.Graphics.TextRenderingHint = textRenderingHint;
 
             // IGT Display.
             e.Graphics.DrawText(0, 0, string.Format("{0}", Program.gameMem.IGTString), Brushes.White, new Font("Consolas", 16, FontStyle.Bold));

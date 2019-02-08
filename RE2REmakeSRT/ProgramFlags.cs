@@ -9,6 +9,7 @@ namespace RE2REmakeSRT
         SkipChecksumCheck = 0x01,
         NoTitleBar = 0x02,
         AlwaysOnTop = 0x04,
+        Transparent = 0x08,
         Debug = SkipChecksumCheck
     }
 }
