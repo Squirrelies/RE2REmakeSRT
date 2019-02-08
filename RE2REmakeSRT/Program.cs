@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
@@ -15,7 +16,7 @@ namespace RE2REmakeSRT
         public static GameMemory gameMem;
         public static Bitmap inventoryImage; // The inventory item sheet.
         public static Bitmap inventoryError; // An error image.
-        public static double INV_SLOT_SCALING; // Scaling factor for the inventory images.
+        public static double INV_SLOT_SCALING = 0.75d; // Scaling factor for the inventory images.
         public static int INV_SLOT_WIDTH;
         public static int INV_SLOT_HEIGHT;
 
@@ -57,7 +58,7 @@ namespace RE2REmakeSRT
 
                 if (arg.StartsWith("--ScalingFactor=", StringComparison.InvariantCultureIgnoreCase))
                     if (!double.TryParse(arg.Split(new char[1] { '=' }, 2, StringSplitOptions.None)[1], out INV_SLOT_SCALING))
-                        INV_SLOT_SCALING = 0.75d; // Default scaling factor for the inventory images. If we fail to process the user input, just set us to the default value.
+                        INV_SLOT_SCALING = 0.75d; // Default scaling factor for the inventory images. If we fail to process the user input, ensure this gets set to the default value just in case.
 
                 if (arg.Equals("--Debug", StringComparison.InvariantCultureIgnoreCase))
                     programSpecialOptions |= ProgramFlags.Debug;
@@ -71,17 +72,19 @@ namespace RE2REmakeSRT
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // Transform the inventory image in resources down from 32bpp w/ Alpha to 16bpp w/o Alpha. This greatly improve performance especially when coupled with CompositingMode.SourceCopy because no complex alpha blending needs to occur.
-            //inventoryImage = Properties.Resources.ui0100_iam_texout.Clone(new Rectangle(0, 0, Properties.Resources.ui0100_iam_texout.Width, Properties.Resources.ui0100_iam_texout.Height), PixelFormat.Format16bppRgb555);
-            // Testing perf. with PARGB.
+            // Transform the inventory image in resources to 32bpp w/ pre-multiplied Alpha.
             inventoryImage = Properties.Resources.ui0100_iam_texout.Clone(new Rectangle(0, 0, Properties.Resources.ui0100_iam_texout.Width, Properties.Resources.ui0100_iam_texout.Height), PixelFormat.Format32bppPArgb);
-
+            
             // Rescales the image down if the scaling factor is not 1.
             if (INV_SLOT_SCALING != 1d)
-                inventoryImage = new Bitmap(inventoryImage, (int)(inventoryImage.Width * INV_SLOT_SCALING), (int)(inventoryImage.Height * INV_SLOT_SCALING));
+            {
+                int sheetWidth = (int)Math.Round(inventoryImage.Width * INV_SLOT_SCALING, MidpointRounding.AwayFromZero);
+                int sheetHeight = (int)Math.Round(inventoryImage.Height * INV_SLOT_SCALING, MidpointRounding.AwayFromZero);
+                inventoryImage = new Bitmap(inventoryImage, sheetWidth, sheetHeight);
+            }
 
             // Create a black slot image for when side-pack is not equipped.
-            inventoryError = new Bitmap(INV_SLOT_WIDTH, INV_SLOT_HEIGHT, PixelFormat.Format16bppRgb555);
+            inventoryError = new Bitmap(INV_SLOT_WIDTH, INV_SLOT_HEIGHT, PixelFormat.Format32bppPArgb);
             using (Graphics grp = Graphics.FromImage(inventoryError))
             {
                 grp.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0, 0)), 0, 0, inventoryError.Width, inventoryError.Height);
