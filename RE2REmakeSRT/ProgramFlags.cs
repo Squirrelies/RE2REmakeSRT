@@ -5,11 +5,11 @@ namespace RE2REmakeSRT
     [Flags]
     public enum ProgramFlags : byte
     {
-        None = 0x00,
-        SkipChecksumCheck = 0x01,
-        NoTitleBar = 0x02,
-        AlwaysOnTop = 0x04,
-        Transparent = 0x08,
-        Debug = SkipChecksumCheck
+        None = 0,
+        Debug = 1,
+        SkipChecksumCheck = 2,
+        NoTitleBar = 4,
+        AlwaysOnTop = 8,
+        Transparent = 16,
     }
 }
