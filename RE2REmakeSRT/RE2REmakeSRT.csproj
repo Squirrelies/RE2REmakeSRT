@@ -60,6 +60,7 @@
       <DependentUpon>AttachUI.cs</DependentUpon>
     </Compile>
     <Compile Include="CharacterEnumeration.cs" />
+    <Compile Include="EnemyHP.cs" />
     <Compile Include="GameHashes.cs" />
     <Compile Include="InventoryEntry.cs" />
     <Compile Include="MainUI.cs">

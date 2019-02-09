@@ -6,28 +6,6 @@ namespace RE2REmakeSRT
 {
     public static class Extensions
     {
-        private const int INVENTORY_ITEM_WIDTH = 96;
-        private const int INVENTORY_ITEM_HEIGHT = 96;
-
-        private const int ICON_OFFSET_X = 0;
-        private const int ICON_OFFSET_Y = 0;
-
-        public static void DrawInvItem(this Graphics g, ItemPositionEnumeration position, Image image = null, string text = "", Brush b = null, bool equipped = false)
-        {
-            
-        }
-
-        public static void DrawText(this Graphics g, float x, float y, string text = "", Brush b = null, Font f = null)
-        {
-            if (b == null)
-                b = Brushes.LawnGreen;
-
-            if (f == null)
-                f = new Font("Consolas", 14, FontStyle.Bold);
-
-            g.DrawString(text, f, b, x, y);
-        }
-
         public static void ThreadSafeSetHealthImage(this PictureBox picBox, Image image, string imageKey)
         {
             if (picBox.InvokeRequired)

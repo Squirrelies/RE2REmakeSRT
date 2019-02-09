@@ -23,13 +23,25 @@ namespace RE2REmakeSRT
         private long lastPtrUpdate;
         private long lastFullUIDraw;
 
+        // Quality settings (high performance).
         private CompositingMode compositingMode = CompositingMode.SourceOver;
         private CompositingQuality compositingQuality = CompositingQuality.HighSpeed;
         private SmoothingMode smoothingMode = SmoothingMode.None;
         private PixelOffsetMode pixelOffsetMode = PixelOffsetMode.Half;
         private InterpolationMode interpolationMode = InterpolationMode.NearestNeighbor;
         private TextRenderingHint textRenderingHint = TextRenderingHint.AntiAliasGridFit;
-        private StringFormat stringFormat = new StringFormat(StringFormat.GenericDefault) { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Far };
+
+        //// Quality settings (high quality).
+        //private CompositingMode compositingMode = CompositingMode.SourceOver;
+        //private CompositingQuality compositingQuality = CompositingQuality.HighQuality;
+        //private SmoothingMode smoothingMode = SmoothingMode.HighQuality;
+        //private PixelOffsetMode pixelOffsetMode = PixelOffsetMode.HighQuality;
+        //private InterpolationMode interpolationMode = InterpolationMode.HighQualityBicubic;
+        //private TextRenderingHint textRenderingHint = TextRenderingHint.ClearTypeGridFit;
+        
+        // Text alignment and formatting.
+        private StringFormat invStringFormat = new StringFormat(StringFormat.GenericDefault) { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Far };
+        private StringFormat stdStringFormat = new StringFormat(StringFormat.GenericDefault) { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Near };
 
         public MainUI()
         {
@@ -132,24 +144,25 @@ namespace RE2REmakeSRT
             e.Graphics.TextRenderingHint = textRenderingHint;
 
             // Draw health.
+            Font healthFont = new Font("Consolas", 14, FontStyle.Bold);
             if (Program.gameMem.PlayerCurrentHealth > 1200 || Program.gameMem.PlayerCurrentHealth < 0) // Dead?
             {
-                e.Graphics.DrawText(15, 37, "DEAD", Brushes.Red);
+                e.Graphics.DrawString("DEAD", healthFont, Brushes.Red, 15, 37, stdStringFormat);
                 playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.EMPTY, "EMPTY");
             }
             else if (Program.gameMem.PlayerCurrentHealth >= 801) // Fine (Green)
             {
-                e.Graphics.DrawText(15, 37, Program.gameMem.PlayerCurrentHealth.ToString(), Brushes.LawnGreen);
+                e.Graphics.DrawString(Program.gameMem.PlayerCurrentHealth.ToString(), healthFont, Brushes.LawnGreen, 15, 37, stdStringFormat);
                 playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.FINE, "FINE");
             }
             else if (Program.gameMem.PlayerCurrentHealth <= 800 && Program.gameMem.PlayerCurrentHealth >= 361) // Caution (Yellow)
             {
-                e.Graphics.DrawText(15, 37, Program.gameMem.PlayerCurrentHealth.ToString(), Brushes.Goldenrod);
+                e.Graphics.DrawString(Program.gameMem.PlayerCurrentHealth.ToString(), healthFont, Brushes.Goldenrod, 15, 37, stdStringFormat);
                 playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.CAUTION_YELLOW, "CAUTION_YELLOW");
             }
             else if (Program.gameMem.PlayerCurrentHealth <= 360) // Danger (Red)
             {
-                e.Graphics.DrawText(15, 37, Program.gameMem.PlayerCurrentHealth.ToString(), Brushes.Red);
+                e.Graphics.DrawString(Program.gameMem.PlayerCurrentHealth.ToString(), healthFont, Brushes.Red, 15, 37, stdStringFormat);
                 playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.DANGER, "DANGER");
             }
         }
@@ -203,7 +216,7 @@ namespace RE2REmakeSRT
                     textBrush = Brushes.DarkRed;
 
                 e.Graphics.DrawImage(image, imageX, imageY, imageRect, GraphicsUnit.Pixel);
-                e.Graphics.DrawString(inv.Quantity.ToString(), new Font("Consolas", 14, FontStyle.Bold), textBrush, textX, textY, stringFormat);
+                e.Graphics.DrawString(inv.Quantity.ToString(), new Font("Consolas", 14, FontStyle.Bold), textBrush, textX, textY, invStringFormat);
             }
         }
 
@@ -216,25 +229,29 @@ namespace RE2REmakeSRT
             e.Graphics.PixelOffsetMode = pixelOffsetMode;
             e.Graphics.TextRenderingHint = textRenderingHint;
 
-            // IGT Display.
-            e.Graphics.DrawText(0, 0, string.Format("{0}", Program.gameMem.IGTString), Brushes.White, new Font("Consolas", 16, FontStyle.Bold));
-            e.Graphics.DrawText(2, 25, "Raw IGT", Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
-            e.Graphics.DrawText(0, 37, Program.gameMem.IGTRaw.ToString(), Brushes.Gray, new Font("Consolas", 12, FontStyle.Bold));
-
             // Additional information and stats.
             // Adjustments for displaying text properly.
             int heightGap = 15;
-            int heightOffset = 25;
+            int heightOffset = 0;
             int i = 1;
 
-            e.Graphics.DrawText(0, heightOffset + (heightGap * ++i), string.Format("Rank: {0}", Program.gameMem.Rank), Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
-            e.Graphics.DrawText(0, heightOffset + (heightGap * ++i), string.Format("Score: {0}", Program.gameMem.RankScore), Brushes.Gray, new Font("Consolas", 9, FontStyle.Bold));
+            // IGT Display.
+            e.Graphics.DrawString(string.Format("{0}", Program.gameMem.IGTString), new Font("Consolas", 16, FontStyle.Bold), Brushes.White, 0, 0, stdStringFormat);
 
-            e.Graphics.DrawText(0, heightOffset + (heightGap * ++i), "Enemies", Brushes.Red, new Font("Consolas", 10, FontStyle.Bold));
-            for (int ehi = 0; ehi < Program.gameMem.EnemyCurrentHealth.Length; ++ehi)
+            if (Program.programSpecialOptions.HasFlag(ProgramFlags.Debug))
             {
-                if (Program.gameMem.EnemyCurrentHealth[ehi] != 0 && Program.gameMem.EnemyMaxHealth[ehi] != 0)
-                    e.Graphics.DrawText(0, heightOffset + (heightGap * ++i), string.Format("{0} {1:P1}", Program.gameMem.EnemyCurrentHealth[ehi], (decimal)Program.gameMem.EnemyCurrentHealth[ehi] / (decimal)Program.gameMem.EnemyMaxHealth[ehi]), Brushes.Red, new Font("Consolas", 10, FontStyle.Bold));
+                e.Graphics.DrawString("Raw IGT", new Font("Consolas", 9, FontStyle.Bold), Brushes.Gray, 2, 25, stdStringFormat);
+                e.Graphics.DrawString(Program.gameMem.IGTRaw.ToString(), new Font("Consolas", 12, FontStyle.Bold), Brushes.Gray, 0, 37, stdStringFormat);
+                heightOffset = 25; // Adding an additional offset to accomdate Raw IGT.
+            }
+
+            e.Graphics.DrawString(string.Format("Rank: {0}", Program.gameMem.Rank), new Font("Consolas", 9, FontStyle.Bold), Brushes.Gray, 0, heightOffset + (heightGap * ++i), stdStringFormat);
+            e.Graphics.DrawString(string.Format("Score: {0}", Program.gameMem.RankScore), new Font("Consolas", 9, FontStyle.Bold), Brushes.Gray, 0, heightOffset + (heightGap * ++i), stdStringFormat);
+            
+            e.Graphics.DrawString("Enemies", new Font("Consolas", 10, FontStyle.Bold), Brushes.Red, 0, heightOffset + (heightGap * ++i), stdStringFormat);
+            foreach (EnemyHP enemyHP in Program.gameMem.EnemyHealth.Where(a => a.IsAlive).OrderBy(a => a.Percentage).ThenByDescending(a => a.CurrentHP))
+            {
+                e.Graphics.DrawString(string.Format("{0} {1:P1}", enemyHP.CurrentHP, enemyHP.Percentage), new Font("Consolas", 10, FontStyle.Bold), Brushes.Red, 0, heightOffset + (heightGap * ++i), stdStringFormat);
             }
         }
 

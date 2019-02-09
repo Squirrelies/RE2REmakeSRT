@@ -27,8 +27,7 @@ namespace RE2REmakeSRT
         public int PlayerCurrentHealth { get; private set; }
         public int PlayerMaxHealth { get; private set; }
         public InventoryEntry[] PlayerInventory { get; private set; }
-        public int[] EnemyCurrentHealth { get; private set; }
-        public int[] EnemyMaxHealth { get; private set; }
+        public EnemyHP[] EnemyHealth { get; private set; }
         public long IGTRunningTimer { get; private set; }
         public long IGTCutsceneTimer { get; private set; }
         public long IGTMenuTimer { get; private set; }
@@ -95,8 +94,7 @@ namespace RE2REmakeSRT
             PlayerCurrentHealth = 0;
             PlayerMaxHealth = 0;
             PlayerInventory = new InventoryEntry[20];
-            EnemyCurrentHealth = new int[32];
-            EnemyMaxHealth = new int[32];
+            EnemyHealth = new EnemyHP[32];
             IGTRunningTimer = 0L;
             IGTCutsceneTimer = 0L;
             IGTMenuTimer = 0L;
@@ -122,7 +120,7 @@ namespace RE2REmakeSRT
         }
 
         /// <summary>
-        /// This call refreshes impotant variables such as IGT, HP and Ammo.
+        /// This call refreshes important variables such as IGT, HP and Ammo.
         /// </summary>
         /// <param name="cToken"></param>
         public void RefreshSlim()
@@ -132,13 +130,6 @@ namespace RE2REmakeSRT
             IGTCutsceneTimer = PointerIGT.DerefLong(0x20);
             IGTMenuTimer = PointerIGT.DerefLong(0x28);
             IGTPausedTimer = PointerIGT.DerefLong(0x30);
-
-            // Enemy HP
-            for (int i = 0; i < PointerEnemyEntries.Length; ++i)
-            {
-                EnemyMaxHealth[i] = PointerEnemyEntries[i].DerefInt(0x54);
-                EnemyCurrentHealth[i] = PointerEnemyEntries[i].DerefInt(0x58);
-            }
         }
 
         /// <summary>
@@ -154,6 +145,10 @@ namespace RE2REmakeSRT
             // Player HP
             PlayerMaxHealth = PointerPlayerHP.DerefInt(0x54);
             PlayerCurrentHealth = PointerPlayerHP.DerefInt(0x58);
+
+            // Enemy HP
+            for (int i = 0; i < PointerEnemyEntries.Length; ++i)
+                EnemyHealth[i] = new EnemyHP(PointerEnemyEntries[i].DerefInt(0x54), PointerEnemyEntries[i].DerefInt(0x58));
 
             // Inventory
             for (int i = 0; i < PointerInventoryEntries.Length; ++i)
