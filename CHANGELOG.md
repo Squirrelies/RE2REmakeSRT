@@ -2,6 +2,7 @@
 
 [.NET Framework v4.7.2 or newer](https://dotnet.microsoft.com/download/dotnet-framework-runtime) required!
 [Click here](https://dotnet.microsoft.com/download/dotnet-framework-runtime) to download the latest version of [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework-runtime).
+To extract .7z archives, use [7-Zip](https://www.7-zip.org/)!
 
 ### [Download 1.1.5.1 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1151-Alpha-Signed-Release.7z) (2019-02-08)
 * Fixed a bug where the program would crash and not open if a --ScalingFactor was not set.
