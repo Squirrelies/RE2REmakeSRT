@@ -8,10 +8,10 @@ namespace RE2REmakeSRT
         private const int WM_NCLBUTTONDOWN = 0xA1;
         private const int HT_CAPTION = 0x2;
 
-        [DllImportAttribute("user32.dll")]
+        [DllImport("user32.dll", SetLastError = true)]
         private static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
 
-        [DllImportAttribute("user32.dll")]
+        [DllImport("user32.dll", SetLastError = true)]
         private static extern bool ReleaseCapture();
 
         public static void DragControl(IntPtr controlHandle)
@@ -19,5 +19,10 @@ namespace RE2REmakeSRT
             ReleaseCapture();
             SendMessage(controlHandle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
         }
+
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern IntPtr GetForegroundWindow();
+
+        public static bool HasActiveFocus(IntPtr handle) => handle == GetForegroundWindow();
     }
 }

@@ -5,6 +5,8 @@ namespace RE2REmakeSRT
 {
     public partial class OptionsUI : Form
     {
+        private bool alwaysOnTop;
+
         public OptionsUI()
         {
             InitializeComponent();
@@ -18,10 +20,18 @@ namespace RE2REmakeSRT
             alwaysOnTopCheckBox.Checked = (Program.programSpecialOptions.Flags & ProgramFlags.AlwaysOnTop) == ProgramFlags.AlwaysOnTop;
             transparentBackgroundCheckBox.Checked = (Program.programSpecialOptions.Flags & ProgramFlags.Transparent) == ProgramFlags.Transparent;
             scalingFactorNumericUpDown.Value = (decimal)Program.programSpecialOptions.ScalingFactor;
+
+            // Temporarily disable always on top so the MainUI form doesn't take control over this form.
+            alwaysOnTop = alwaysOnTopCheckBox.Checked;
+            Program.programSpecialOptions.Flags &= ~ProgramFlags.AlwaysOnTop;
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
+            // If always on top was on prior to opening options, re-enable it.
+            if (alwaysOnTop)
+                Program.programSpecialOptions.Flags |= ProgramFlags.AlwaysOnTop;
+
             // Close form.
             this.Close();
         }

@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace RE2REmakeSRT
@@ -90,10 +91,19 @@ namespace RE2REmakeSRT
 
                 if (Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.AlwaysOnTop))
                 {
+                    bool hasFocus;
                     if (uiForm.InvokeRequired)
-                        uiForm.Invoke(new Action(() => uiForm.TopMost = true));
+                        hasFocus = PInvoke.HasActiveFocus((IntPtr)uiForm.Invoke(new Func<IntPtr>(() => uiForm.Handle)));
                     else
-                        uiForm.TopMost = true;
+                        hasFocus = PInvoke.HasActiveFocus(uiForm.Handle);
+
+                    if (!hasFocus)
+                    {
+                        if (uiForm.InvokeRequired)
+                            uiForm.Invoke(new Action(() => uiForm.TopMost = true));
+                        else
+                            uiForm.TopMost = true;
+                    }
                 }
 
                 // Only perform a pointer update occasionally.
