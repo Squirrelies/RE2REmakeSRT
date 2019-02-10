@@ -50,10 +50,10 @@ namespace RE2REmakeSRT
             // Set titlebar.
             this.Text += string.Format(" v{0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
 
-            if (Program.programSpecialOptions.HasFlag(ProgramFlags.NoTitleBar))
+            if (Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.NoTitleBar))
                 this.FormBorderStyle = FormBorderStyle.None;
 
-            if (Program.programSpecialOptions.HasFlag(ProgramFlags.Transparent))
+            if (Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.Transparent))
                 this.TransparencyKey = Color.Black;
 
             // Set the width and height of the inventory display so it matches the maximum items and the scaling size of those items.
@@ -71,6 +71,11 @@ namespace RE2REmakeSRT
             lastPtrUpdate = DateTime.UtcNow.Ticks;
             lastFullUIDraw = DateTime.UtcNow.Ticks;
             
+            this.ContextMenu = Program.contextMenu;
+            this.playerHealthStatus.ContextMenu = Program.contextMenu;
+            this.statisticsPanel.ContextMenu = Program.contextMenu;
+            this.inventoryPanel.ContextMenu = Program.contextMenu;
+
             memoryPollingTimer = new System.Timers.Timer() { AutoReset = false, Interval = SLIM_UI_DRAW_MS };
             memoryPollingTimer.Elapsed += MemoryPollingTimer_Elapsed;
             memoryPollingTimer.Start();
@@ -83,7 +88,7 @@ namespace RE2REmakeSRT
                 // Suspend UI layout logic to perform redrawing.
                 MainUI uiForm = (MainUI)Program.mainContext.MainForm;
 
-                if (Program.programSpecialOptions.HasFlag(ProgramFlags.AlwaysOnTop))
+                if (Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.AlwaysOnTop))
                 {
                     if (uiForm.InvokeRequired)
                         uiForm.Invoke(new Action(() => uiForm.TopMost = true));
@@ -238,7 +243,7 @@ namespace RE2REmakeSRT
             // IGT Display.
             e.Graphics.DrawString(string.Format("{0}", Program.gameMem.IGTString), new Font("Consolas", 16, FontStyle.Bold), Brushes.White, 0, 0, stdStringFormat);
 
-            if (Program.programSpecialOptions.HasFlag(ProgramFlags.Debug))
+            if (Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.Debug))
             {
                 e.Graphics.DrawString("Raw IGT", new Font("Consolas", 9, FontStyle.Bold), Brushes.Gray, 2, 25, stdStringFormat);
                 e.Graphics.DrawString(Program.gameMem.IGTRaw.ToString(), new Font("Consolas", 12, FontStyle.Bold), Brushes.Gray, 0, 37, stdStringFormat);

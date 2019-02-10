@@ -72,15 +72,26 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="ItemEnumeration.cs" />
     <Compile Include="ItemPositionEnumeration.cs" />
+    <Compile Include="Options.cs" />
+    <Compile Include="OptionsUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsUI.Designer.cs">
+      <DependentUpon>OptionsUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="PInvoke.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramFlags.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GameMemory.cs" />
+    <Compile Include="RegistryHelper.cs" />
     <Compile Include="REmake2VersionDetector.cs" />
     <Compile Include="REmake2VersionEnumeration.cs" />
     <EmbeddedResource Include="MainUI.resx">
       <DependentUpon>MainUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsUI.resx">
+      <DependentUpon>OptionsUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

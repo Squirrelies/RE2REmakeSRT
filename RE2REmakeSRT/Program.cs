@@ -11,12 +11,12 @@ namespace RE2REmakeSRT
     public static class Program
     {
         public static ApplicationContext mainContext;
-        public static ProgramFlags programSpecialOptions;
+        public static ContextMenu contextMenu;
+        public static Options programSpecialOptions;
         public static Process gameProc;
         public static GameMemory gameMem;
         public static Bitmap inventoryImage; // The inventory item sheet.
         public static Bitmap inventoryError; // An error image.
-        public static double INV_SLOT_SCALING = 0.75d; // Scaling factor for the inventory images.
         public static int INV_SLOT_WIDTH;
         public static int INV_SLOT_HEIGHT;
 
@@ -27,7 +27,9 @@ namespace RE2REmakeSRT
         public static void Main(string[] args)
         {
             // Handle command-line parameters.
-            programSpecialOptions = ProgramFlags.None;
+            programSpecialOptions = new Options();
+            programSpecialOptions.GetOptions();
+
             foreach (string arg in args)
             {
                 if (arg.Equals("--Help", StringComparison.InvariantCultureIgnoreCase))
@@ -45,28 +47,28 @@ namespace RE2REmakeSRT
                 }
 
                 if (arg.Equals("--Skip-Checksum", StringComparison.InvariantCultureIgnoreCase))
-                    programSpecialOptions |= ProgramFlags.SkipChecksumCheck;
+                    programSpecialOptions.Flags |= ProgramFlags.SkipChecksumCheck;
 
                 if (arg.Equals("--No-Titlebar", StringComparison.InvariantCultureIgnoreCase))
-                    programSpecialOptions |= ProgramFlags.NoTitleBar;
+                    programSpecialOptions.Flags |= ProgramFlags.NoTitleBar;
 
                 if (arg.Equals("--Always-On-Top", StringComparison.InvariantCultureIgnoreCase))
-                    programSpecialOptions |= ProgramFlags.AlwaysOnTop;
+                    programSpecialOptions.Flags |= ProgramFlags.AlwaysOnTop;
 
                 if (arg.Equals("--Transparent", StringComparison.InvariantCultureIgnoreCase))
-                    programSpecialOptions |= ProgramFlags.Transparent;
+                    programSpecialOptions.Flags |= ProgramFlags.Transparent;
 
                 if (arg.StartsWith("--ScalingFactor=", StringComparison.InvariantCultureIgnoreCase))
-                    if (!double.TryParse(arg.Split(new char[1] { '=' }, 2, StringSplitOptions.None)[1], out INV_SLOT_SCALING))
-                        INV_SLOT_SCALING = 0.75d; // Default scaling factor for the inventory images. If we fail to process the user input, ensure this gets set to the default value just in case.
+                    if (!double.TryParse(arg.Split(new char[1] { '=' }, 2, StringSplitOptions.None)[1], out programSpecialOptions.ScalingFactor))
+                        programSpecialOptions.ScalingFactor = 0.75d; // Default scaling factor for the inventory images. If we fail to process the user input, ensure this gets set to the default value just in case.
 
                 if (arg.Equals("--Debug", StringComparison.InvariantCultureIgnoreCase))
-                    programSpecialOptions |= ProgramFlags.Debug;
+                    programSpecialOptions.Flags |= ProgramFlags.Debug;
             }
 
             // Set item slot sizes after scaling is determined.
-            INV_SLOT_WIDTH = (int)Math.Round(112d * INV_SLOT_SCALING, MidpointRounding.AwayFromZero); // Individual inventory slot width.
-            INV_SLOT_HEIGHT = (int)Math.Round(112d * INV_SLOT_SCALING, MidpointRounding.AwayFromZero); // Individual inventory slot height.
+            INV_SLOT_WIDTH = (int)Math.Round(112d * programSpecialOptions.ScalingFactor, MidpointRounding.AwayFromZero); // Individual inventory slot width.
+            INV_SLOT_HEIGHT = (int)Math.Round(112d * programSpecialOptions.ScalingFactor, MidpointRounding.AwayFromZero); // Individual inventory slot height.
 
             // Standard WinForms stuff.
             Application.EnableVisualStyles();
@@ -76,10 +78,10 @@ namespace RE2REmakeSRT
             inventoryImage = Properties.Resources.ui0100_iam_texout.Clone(new Rectangle(0, 0, Properties.Resources.ui0100_iam_texout.Width, Properties.Resources.ui0100_iam_texout.Height), PixelFormat.Format32bppPArgb);
             
             // Rescales the image down if the scaling factor is not 1.
-            if (INV_SLOT_SCALING != 1d)
+            if (programSpecialOptions.ScalingFactor != 1d)
             {
-                int sheetWidth = (int)Math.Round(inventoryImage.Width * INV_SLOT_SCALING, MidpointRounding.AwayFromZero);
-                int sheetHeight = (int)Math.Round(inventoryImage.Height * INV_SLOT_SCALING, MidpointRounding.AwayFromZero);
+                int sheetWidth = (int)Math.Round(inventoryImage.Width * programSpecialOptions.ScalingFactor, MidpointRounding.AwayFromZero);
+                int sheetHeight = (int)Math.Round(inventoryImage.Height * programSpecialOptions.ScalingFactor, MidpointRounding.AwayFromZero);
                 inventoryImage = new Bitmap(inventoryImage, sheetWidth, sheetHeight);
             }
 
@@ -91,6 +93,18 @@ namespace RE2REmakeSRT
                 grp.DrawLine(new Pen(Color.FromArgb(150, 255, 0, 0), 3), 0, 0, inventoryError.Width, inventoryError.Height);
                 grp.DrawLine(new Pen(Color.FromArgb(150, 255, 0, 0), 3), inventoryError.Width, 0, 0, inventoryError.Height);
             }
+
+            contextMenu = new ContextMenu();
+            contextMenu.MenuItems.Add("Options", (object sender, EventArgs e) =>
+            {
+                using (OptionsUI optionsForm = new OptionsUI())
+                    optionsForm.ShowDialog();
+            });
+            contextMenu.MenuItems.Add("-", (object sender, EventArgs e) => { });
+            contextMenu.MenuItems.Add("Exit", (object sender, EventArgs e) =>
+            {
+                Environment.Exit(0);
+            });
 
             // This form finds the process for re2.exe (assigned to gameProc) or waits until it is found.
             using (mainContext = new ApplicationContext(new AttachUI()))

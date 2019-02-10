@@ -20,7 +20,7 @@ namespace RE2REmakeSRT
         public static REmake2VersionEnumeration GetVersion(Process remake2Proc)
         {
             // If we're skipping the checksum version check, return the latest version we kow about.
-            if (Program.programSpecialOptions.HasFlag(ProgramFlags.SkipChecksumCheck))
+            if (Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.SkipChecksumCheck))
                 return REmake2VersionEnumeration.Stock_1p01;
 
             byte[] processHash = GetSHA256Checksum(remake2Proc.MainModule.FileName);

@@ -11,6 +11,9 @@ namespace RE2REmakeSRT
         public AttachUI()
         {
             InitializeComponent();
+
+            this.ContextMenu = Program.contextMenu;
+
             processPollingTimer = new System.Timers.Timer() { AutoReset = false, Interval = 250 };
             processPollingTimer.Elapsed += ProcessPollingTimer_Elapsed;
             processPollingTimer.Start();
