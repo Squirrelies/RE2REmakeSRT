@@ -4,6 +4,9 @@
 [Click here](https://dotnet.microsoft.com/download/dotnet-framework-runtime) to download the latest version of [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework-runtime).
 To extract .7z archives, use [7-Zip](https://www.7-zip.org/)!
 
+### [Download 1.1.6.1 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1161-Beta-Signed-Release.7z) (2019-02-10)
+* Fixed a bug where Always on Top would steal focus away from the new Options UI.
+
 ### [Download 1.1.6.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1160-Beta-Signed-Release.7z) (2019-02-10)
 * Added options UI as a context menu. Right-click anywhere on the user interface and selection Options to open the dialog.
 
