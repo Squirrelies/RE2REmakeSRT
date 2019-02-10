@@ -4,6 +4,13 @@
 [Click here](https://dotnet.microsoft.com/download/dotnet-framework-runtime) to download the latest version of [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework-runtime).
 To extract .7z archives, use [7-Zip](https://www.7-zip.org/)!
 
+### [Download 1.1.6.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1160-Beta-Signed-Release.7z) (2019-02-10)
+* Added options UI as a context menu. Right-click anywhere on the user interface and selection Options to open the dialog.
+
+### [Download 1.1.5.2 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1152-Alpha-Signed-Release.7z) (2019-02-09)
+* Enemy HP is now sorted by percentage. Enemies which have been damaged will show up at the top of the list to better help you see which enemies you're engaging.
+* Raw IGT value is now hidden. You can show this value again by using the --Debug command-line argument. The human-readable IGT still shows by default.
+
 ### [Download 1.1.5.1 Alpha](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1151-Alpha-Signed-Release.7z) (2019-02-08)
 * Fixed a bug where the program would crash and not open if a --ScalingFactor was not set.
 
