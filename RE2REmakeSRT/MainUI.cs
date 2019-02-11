@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -31,18 +32,14 @@ namespace RE2REmakeSRT
         private PixelOffsetMode pixelOffsetMode = PixelOffsetMode.Half;
         private InterpolationMode interpolationMode = InterpolationMode.NearestNeighbor;
         private TextRenderingHint textRenderingHint = TextRenderingHint.AntiAliasGridFit;
-
-        //// Quality settings (high quality).
-        //private CompositingMode compositingMode = CompositingMode.SourceOver;
-        //private CompositingQuality compositingQuality = CompositingQuality.HighQuality;
-        //private SmoothingMode smoothingMode = SmoothingMode.HighQuality;
-        //private PixelOffsetMode pixelOffsetMode = PixelOffsetMode.HighQuality;
-        //private InterpolationMode interpolationMode = InterpolationMode.HighQualityBicubic;
-        //private TextRenderingHint textRenderingHint = TextRenderingHint.ClearTypeGridFit;
         
         // Text alignment and formatting.
         private StringFormat invStringFormat = new StringFormat(StringFormat.GenericDefault) { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Far };
         private StringFormat stdStringFormat = new StringFormat(StringFormat.GenericDefault) { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Near };
+
+        private Bitmap inventoryImage; // The inventory item sheet.
+        private Bitmap inventoryError; // An error image.
+
 
         public MainUI()
         {
@@ -51,31 +48,59 @@ namespace RE2REmakeSRT
             // Set titlebar.
             this.Text += string.Format(" v{0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
 
+            this.ContextMenu = Program.contextMenu;
+            this.playerHealthStatus.ContextMenu = Program.contextMenu;
+            this.statisticsPanel.ContextMenu = Program.contextMenu;
+            this.inventoryPanel.ContextMenu = Program.contextMenu;
+
             if (Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.NoTitleBar))
                 this.FormBorderStyle = FormBorderStyle.None;
 
             if (Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.Transparent))
                 this.TransparencyKey = Color.Black;
 
-            // Set the width and height of the inventory display so it matches the maximum items and the scaling size of those items.
-            this.inventoryPanel.Width = Program.INV_SLOT_WIDTH * 4;
-            this.inventoryPanel.Height = Program.INV_SLOT_HEIGHT * 5;
+            // Only run the following code if we're rendering inventory.
+            if (!Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.NoInventory))
+            {
+                // Transform the inventory image in resources to 32bpp w/ pre-multiplied Alpha.
+                inventoryImage = Properties.Resources.ui0100_iam_texout.Clone(new Rectangle(0, 0, Properties.Resources.ui0100_iam_texout.Width, Properties.Resources.ui0100_iam_texout.Height), PixelFormat.Format32bppPArgb);
 
-            // Adjust main form width as well.
-            this.Width = this.statisticsPanel.Width + this.inventoryPanel.Width + 24;
+                // Rescales the image down if the scaling factor is not 1.
+                if (Program.programSpecialOptions.ScalingFactor != 1d)
+                {
+                    int sheetWidth = (int)Math.Round(inventoryImage.Width * Program.programSpecialOptions.ScalingFactor, MidpointRounding.AwayFromZero);
+                    int sheetHeight = (int)Math.Round(inventoryImage.Height * Program.programSpecialOptions.ScalingFactor, MidpointRounding.AwayFromZero);
+                    inventoryImage = new Bitmap(inventoryImage, sheetWidth, sheetHeight);
+                }
 
-            //// We may also want adjust the statistics panel height and the form height.
-            //// Commenting out for right now in case they want 50% scaling but still need the statistics height to view enemy hp?
-            //this.statisticsPanel.Height = this.inventoryPanel.Height - 66;
-            //this.Height = this.inventoryPanel.Height + 41;
+                // Create a black slot image for when side-pack is not equipped.
+                inventoryError = new Bitmap(Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT, PixelFormat.Format32bppPArgb);
+                using (Graphics grp = Graphics.FromImage(inventoryError))
+                {
+                    grp.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0, 0)), 0, 0, inventoryError.Width, inventoryError.Height);
+                    grp.DrawLine(new Pen(Color.FromArgb(150, 255, 0, 0), 3), 0, 0, inventoryError.Width, inventoryError.Height);
+                    grp.DrawLine(new Pen(Color.FromArgb(150, 255, 0, 0), 3), inventoryError.Width, 0, 0, inventoryError.Height);
+                }
+
+
+                // Set the width and height of the inventory display so it matches the maximum items and the scaling size of those items.
+                this.inventoryPanel.Width = Program.INV_SLOT_WIDTH * 4;
+                this.inventoryPanel.Height = Program.INV_SLOT_HEIGHT * 5;
+
+                // Adjust main form width as well.
+                this.Width = this.statisticsPanel.Width + 24 + this.inventoryPanel.Width;
+            }
+            else
+            {
+                // Disable rendering of the inventory panel.
+                this.inventoryPanel.Visible = false;
+
+                // Adjust main form width as well.
+                this.Width = this.statisticsPanel.Width + 2;
+            }
 
             lastPtrUpdate = DateTime.UtcNow.Ticks;
             lastFullUIDraw = DateTime.UtcNow.Ticks;
-            
-            this.ContextMenu = Program.contextMenu;
-            this.playerHealthStatus.ContextMenu = Program.contextMenu;
-            this.statisticsPanel.ContextMenu = Program.contextMenu;
-            this.inventoryPanel.ContextMenu = Program.contextMenu;
 
             memoryPollingTimer = new System.Timers.Timer() { AutoReset = false, Interval = SLIM_UI_DRAW_MS };
             memoryPollingTimer.Elapsed += MemoryPollingTimer_Elapsed;
@@ -127,7 +152,8 @@ namespace RE2REmakeSRT
 
                     // Only draw these periodically to reduce CPU usage.
                     uiForm.playerHealthStatus.Invalidate();
-                    uiForm.inventoryPanel.Invalidate();
+                    if (!Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.NoInventory))
+                        uiForm.inventoryPanel.Invalidate();
                 }
                 else
                 {
@@ -194,44 +220,47 @@ namespace RE2REmakeSRT
 
         private void inventoryPanel_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.SmoothingMode = smoothingMode;
-            e.Graphics.CompositingQuality = compositingQuality;
-            e.Graphics.CompositingMode = compositingMode;
-            e.Graphics.InterpolationMode = interpolationMode;
-            e.Graphics.PixelOffsetMode = pixelOffsetMode;
-            e.Graphics.TextRenderingHint = textRenderingHint;
-
-            foreach (InventoryEntry inv in Program.gameMem.PlayerInventory)
+            if (!Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.NoInventory))
             {
-                if (inv == default || inv.SlotPosition < 0 || inv.SlotPosition > 19 || inv.IsEmptySlot)
-                    continue;
+                e.Graphics.SmoothingMode = smoothingMode;
+                e.Graphics.CompositingQuality = compositingQuality;
+                e.Graphics.CompositingMode = compositingMode;
+                e.Graphics.InterpolationMode = interpolationMode;
+                e.Graphics.PixelOffsetMode = pixelOffsetMode;
+                e.Graphics.TextRenderingHint = textRenderingHint;
 
-                Image image = Program.inventoryImage;
-                Rectangle imageRect;
-                Weapon weapon;
-                if (inv.IsItem && GameMemory.ItemToImageTranslation.ContainsKey(inv.ItemID))
-                    imageRect = GameMemory.ItemToImageTranslation[inv.ItemID];
-                else if (inv.IsWeapon && GameMemory.WeaponToImageTranslation.ContainsKey(weapon = new Weapon() { WeaponID = inv.WeaponID, Attachments = inv.Attachments }))
-                    imageRect = GameMemory.WeaponToImageTranslation[weapon];
-                else
+                foreach (InventoryEntry inv in Program.gameMem.PlayerInventory)
                 {
-                    imageRect = new Rectangle(0, 0, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT);
-                    image = Program.inventoryError;
+                    if (inv == default || inv.SlotPosition < 0 || inv.SlotPosition > 19 || inv.IsEmptySlot)
+                        continue;
+
+                    Image image = inventoryImage;
+                    Rectangle imageRect;
+                    Weapon weapon;
+                    if (inv.IsItem && GameMemory.ItemToImageTranslation.ContainsKey(inv.ItemID))
+                        imageRect = GameMemory.ItemToImageTranslation[inv.ItemID];
+                    else if (inv.IsWeapon && GameMemory.WeaponToImageTranslation.ContainsKey(weapon = new Weapon() { WeaponID = inv.WeaponID, Attachments = inv.Attachments }))
+                        imageRect = GameMemory.WeaponToImageTranslation[weapon];
+                    else
+                    {
+                        imageRect = new Rectangle(0, 0, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT);
+                        image = inventoryError;
+                    }
+
+                    int slotColumn = inv.SlotPosition % 4;
+                    int slotRow = inv.SlotPosition / 4;
+                    int imageX = slotColumn * Program.INV_SLOT_WIDTH;
+                    int imageY = slotRow * Program.INV_SLOT_HEIGHT;
+                    int textX = imageX + imageRect.Width;
+                    int textY = imageY + imageRect.Height;
+                    Brush textBrush = Brushes.White;
+
+                    if (inv.Quantity == 0)
+                        textBrush = Brushes.DarkRed;
+
+                    e.Graphics.DrawImage(image, imageX, imageY, imageRect, GraphicsUnit.Pixel);
+                    e.Graphics.DrawString(inv.Quantity.ToString(), new Font("Consolas", 14, FontStyle.Bold), textBrush, textX, textY, invStringFormat);
                 }
-
-                int slotColumn = inv.SlotPosition % 4;
-                int slotRow = inv.SlotPosition / 4;
-                int imageX = slotColumn * Program.INV_SLOT_WIDTH;
-                int imageY = slotRow * Program.INV_SLOT_HEIGHT;
-                int textX = imageX + imageRect.Width;
-                int textY = imageY + imageRect.Height;
-                Brush textBrush = Brushes.White;
-
-                if (inv.Quantity == 0)
-                    textBrush = Brushes.DarkRed;
-
-                e.Graphics.DrawImage(image, imageX, imageY, imageRect, GraphicsUnit.Pixel);
-                e.Graphics.DrawString(inv.Quantity.ToString(), new Font("Consolas", 14, FontStyle.Bold), textBrush, textX, textY, invStringFormat);
             }
         }
 
@@ -272,8 +301,9 @@ namespace RE2REmakeSRT
 
         private void inventoryPanel_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-                PInvoke.DragControl(((DoubleBufferedPanel)sender).Parent.Handle);
+            if (!Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.NoInventory))
+                if (e.Button == MouseButtons.Left)
+                    PInvoke.DragControl(((DoubleBufferedPanel)sender).Parent.Handle);
         }
 
         private void statisticsPanel_MouseDown(object sender, MouseEventArgs e)

@@ -11,5 +11,6 @@ namespace RE2REmakeSRT
         NoTitleBar = 4,
         AlwaysOnTop = 8,
         Transparent = 16,
+        NoInventory = 32,
     }
 }

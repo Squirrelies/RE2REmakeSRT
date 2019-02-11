@@ -38,6 +38,7 @@
             this.scalingFactorNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.cancelButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
+            this.noInventoryCheckBox = new System.Windows.Forms.CheckBox();
             this.optionsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scalingFactorNumericUpDown)).BeginInit();
             this.SuspendLayout();
@@ -45,7 +46,7 @@
             // debugCheckBox
             // 
             this.debugCheckBox.AutoSize = true;
-            this.debugCheckBox.Location = new System.Drawing.Point(6, 122);
+            this.debugCheckBox.Location = new System.Drawing.Point(6, 145);
             this.debugCheckBox.Name = "debugCheckBox";
             this.debugCheckBox.Size = new System.Drawing.Size(88, 17);
             this.debugCheckBox.TabIndex = 0;
@@ -94,6 +95,7 @@
             // 
             // optionsGroupBox
             // 
+            this.optionsGroupBox.Controls.Add(this.noInventoryCheckBox);
             this.optionsGroupBox.Controls.Add(this.label1);
             this.optionsGroupBox.Controls.Add(this.scalingFactorNumericUpDown);
             this.optionsGroupBox.Controls.Add(this.skipChecksumCheckBox);
@@ -103,7 +105,7 @@
             this.optionsGroupBox.Controls.Add(this.alwaysOnTopCheckBox);
             this.optionsGroupBox.Location = new System.Drawing.Point(2, 2);
             this.optionsGroupBox.Name = "optionsGroupBox";
-            this.optionsGroupBox.Size = new System.Drawing.Size(169, 174);
+            this.optionsGroupBox.Size = new System.Drawing.Size(169, 195);
             this.optionsGroupBox.TabIndex = 5;
             this.optionsGroupBox.TabStop = false;
             this.optionsGroupBox.Text = "Options";
@@ -111,7 +113,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(65, 147);
+            this.label1.Location = new System.Drawing.Point(65, 170);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 13);
             this.label1.TabIndex = 6;
@@ -125,7 +127,7 @@
             0,
             0,
             131072});
-            this.scalingFactorNumericUpDown.Location = new System.Drawing.Point(6, 145);
+            this.scalingFactorNumericUpDown.Location = new System.Drawing.Point(6, 168);
             this.scalingFactorNumericUpDown.Name = "scalingFactorNumericUpDown";
             this.scalingFactorNumericUpDown.Size = new System.Drawing.Size(53, 20);
             this.scalingFactorNumericUpDown.TabIndex = 5;
@@ -137,7 +139,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(2, 182);
+            this.cancelButton.Location = new System.Drawing.Point(2, 203);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 6;
@@ -147,7 +149,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(96, 182);
+            this.saveButton.Location = new System.Drawing.Point(96, 203);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 7;
@@ -155,11 +157,21 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
+            // noInventoryCheckBox
+            // 
+            this.noInventoryCheckBox.AutoSize = true;
+            this.noInventoryCheckBox.Location = new System.Drawing.Point(6, 122);
+            this.noInventoryCheckBox.Name = "noInventoryCheckBox";
+            this.noInventoryCheckBox.Size = new System.Drawing.Size(124, 17);
+            this.noInventoryCheckBox.TabIndex = 7;
+            this.noInventoryCheckBox.Text = "No Inventory Display";
+            this.noInventoryCheckBox.UseVisualStyleBackColor = true;
+            // 
             // OptionsUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(173, 207);
+            this.ClientSize = new System.Drawing.Size(173, 228);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.optionsGroupBox);
@@ -187,5 +199,6 @@
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown scalingFactorNumericUpDown;
+        private System.Windows.Forms.CheckBox noInventoryCheckBox;
     }
 }

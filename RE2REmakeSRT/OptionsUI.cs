@@ -19,6 +19,7 @@ namespace RE2REmakeSRT
             noTitlebarCheckBox.Checked = (Program.programSpecialOptions.Flags & ProgramFlags.NoTitleBar) == ProgramFlags.NoTitleBar;
             alwaysOnTopCheckBox.Checked = (Program.programSpecialOptions.Flags & ProgramFlags.AlwaysOnTop) == ProgramFlags.AlwaysOnTop;
             transparentBackgroundCheckBox.Checked = (Program.programSpecialOptions.Flags & ProgramFlags.Transparent) == ProgramFlags.Transparent;
+            noInventoryCheckBox.Checked = (Program.programSpecialOptions.Flags & ProgramFlags.NoInventory) == ProgramFlags.NoInventory;
             scalingFactorNumericUpDown.Value = (decimal)Program.programSpecialOptions.ScalingFactor;
 
             // Temporarily disable always on top so the MainUI form doesn't take control over this form.
@@ -64,10 +65,18 @@ namespace RE2REmakeSRT
             else if (!transparentBackgroundCheckBox.Checked && (Program.programSpecialOptions.Flags & ProgramFlags.Transparent) == ProgramFlags.Transparent)
                 Program.programSpecialOptions.Flags &= ~ProgramFlags.Transparent;
 
+            if (noInventoryCheckBox.Checked && (Program.programSpecialOptions.Flags & ProgramFlags.NoInventory) != ProgramFlags.NoInventory)
+                Program.programSpecialOptions.Flags |= ProgramFlags.NoInventory;
+            else if (!noInventoryCheckBox.Checked && (Program.programSpecialOptions.Flags & ProgramFlags.NoInventory) == ProgramFlags.NoInventory)
+                Program.programSpecialOptions.Flags &= ~ProgramFlags.NoInventory;
+
             Program.programSpecialOptions.ScalingFactor = (double)scalingFactorNumericUpDown.Value;
 
             // Write registry values.
             Program.programSpecialOptions.SetOptions();
+
+            // Warn the user, informing them to restart the SRT.
+            MessageBox.Show("Some options do not take effect immediately and you may experience weird display glitches until you restart the SRT.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             // Close form.
             this.Close();

@@ -38,6 +38,11 @@ namespace RE2REmakeSRT
             else
                 Flags &= ~ProgramFlags.Transparent;
 
+            if (RegistryHelper.GetBoolValue(optionsKey, "NoInventory", false))
+                Flags |= ProgramFlags.NoInventory;
+            else
+                Flags &= ~ProgramFlags.NoInventory;
+
             double.TryParse(RegistryHelper.GetValue(optionsKey, "ScalingFactor", "0.75"), out ScalingFactor);
         }
 
@@ -70,6 +75,11 @@ namespace RE2REmakeSRT
                 optionsKey.SetValue("Transparent", 1, RegistryValueKind.DWord);
             else
                 optionsKey.SetValue("Transparent", 0, RegistryValueKind.DWord);
+
+            if ((Flags & ProgramFlags.NoInventory) == ProgramFlags.NoInventory)
+                optionsKey.SetValue("NoInventory", 1, RegistryValueKind.DWord);
+            else
+                optionsKey.SetValue("NoInventory", 0, RegistryValueKind.DWord);
 
             optionsKey.SetValue("ScalingFactor", ScalingFactor.ToString(), RegistryValueKind.String);
         }

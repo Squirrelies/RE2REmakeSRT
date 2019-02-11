@@ -78,9 +78,12 @@ namespace RE2REmakeSRT
                         for (int i = 0; i < PointerEnemyEntries.Length; ++i)
                             PointerEnemyEntries[i] = new MultilevelPointer(memoryAccess, BaseAddress + 0x0707B758, 0x80 + (i * 0x08), 0x88, 0x18, 0x1A0);
 
-                        PointerInventoryEntries = new MultilevelPointer[20];
-                        for (int i = 0; i < PointerInventoryEntries.Length; ++i)
-                            PointerInventoryEntries[i] = new MultilevelPointer(memoryAccess, BaseAddress + 0x070ACA88, 0x50, 0x98, 0x10, 0x20 + (i * 0x08), 0x18);
+                        if (!Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.NoInventory))
+                        {
+                            PointerInventoryEntries = new MultilevelPointer[20];
+                            for (int i = 0; i < PointerInventoryEntries.Length; ++i)
+                                PointerInventoryEntries[i] = new MultilevelPointer(memoryAccess, BaseAddress + 0x070ACA88, 0x50, 0x98, 0x10, 0x20 + (i * 0x08), 0x18);
+                        }
 
                         break;
                     }
@@ -115,8 +118,11 @@ namespace RE2REmakeSRT
             for (int i = 0; i < PointerEnemyEntries.Length; ++i)
                 PointerEnemyEntries[i].UpdatePointers();
 
-            for (int i = 0; i < PointerInventoryEntries.Length; ++i)
-                PointerInventoryEntries[i].UpdatePointers();
+            if (!Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.NoInventory))
+            {
+                for (int i = 0; i < PointerInventoryEntries.Length; ++i)
+                    PointerInventoryEntries[i].UpdatePointers();
+            }
         }
 
         /// <summary>
@@ -151,11 +157,14 @@ namespace RE2REmakeSRT
                 EnemyHealth[i] = new EnemyHP(PointerEnemyEntries[i].DerefInt(0x54), PointerEnemyEntries[i].DerefInt(0x58));
 
             // Inventory
-            for (int i = 0; i < PointerInventoryEntries.Length; ++i)
+            if (!Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.NoInventory))
             {
-                long invDataPointer = PointerInventoryEntries[i].DerefLong(0x10);
-                long invDataOffset = invDataPointer - PointerInventoryEntries[i].Addresses[PointerInventoryEntries[i].Addresses.Count - 1];
-                PlayerInventory[i] = new InventoryEntry(PointerInventoryEntries[i].DerefInt(0x28), PointerInventoryEntries[i].DerefByteArray(invDataOffset + 0x10, 0x14));
+                for (int i = 0; i < PointerInventoryEntries.Length; ++i)
+                {
+                    long invDataPointer = PointerInventoryEntries[i].DerefLong(0x10);
+                    long invDataOffset = invDataPointer - PointerInventoryEntries[i].Addresses[PointerInventoryEntries[i].Addresses.Count - 1];
+                    PlayerInventory[i] = new InventoryEntry(PointerInventoryEntries[i].DerefInt(0x28), PointerInventoryEntries[i].DerefByteArray(invDataOffset + 0x10, 0x14));
+                }
             }
 
             // Rank
