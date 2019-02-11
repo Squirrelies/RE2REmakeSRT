@@ -39,6 +39,9 @@ namespace RE2REmakeSRT
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            // Warn the user, informing them to restart the SRT.
+            MessageBox.Show("Some options do not take effect immediately and you may experience weird display glitches until you restart the SRT.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             // Set flag changes prior to saving.
             if (debugCheckBox.Checked && (Program.programSpecialOptions.Flags & ProgramFlags.Debug) != ProgramFlags.Debug)
                 Program.programSpecialOptions.Flags |= ProgramFlags.Debug;
@@ -74,9 +77,6 @@ namespace RE2REmakeSRT
 
             // Write registry values.
             Program.programSpecialOptions.SetOptions();
-
-            // Warn the user, informing them to restart the SRT.
-            MessageBox.Show("Some options do not take effect immediately and you may experience weird display glitches until you restart the SRT.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             // Close form.
             this.Close();
