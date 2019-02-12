@@ -1,8 +1,18 @@
-# Changelog
+# Changelog and Downloads
+
+Prerequisites:
 
 [.NET Framework v4.7.2 or newer](https://dotnet.microsoft.com/download/dotnet-framework-runtime) required!
 [Click here](https://dotnet.microsoft.com/download/dotnet-framework-runtime) to download the latest version of [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework-runtime).
+
 To extract .7z archives, use [7-Zip](https://www.7-zip.org/)!
+
+## [Click here](http://dudley.gg/squirrelies/re2/latest.7z) to download the latest release!
+
+## [Download 1.1.8.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1180-Beta-Signed-Release.7z) (2019-02-12)
+* Improved performance by switching from DrawImage to TextureBrush/DrawRectangle.
+* Added some additional exception handling.
+* Changed how unknown versions are handled. It now warns users about the unknown version but proceeds anyways.
 
 ### [Download 1.1.7.1 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1171-Beta-Signed-Release.7z) (2019-02-10)
 * Fixed a bug where Always on Top would steal focus away from the new Options UI... again!
