@@ -12,7 +12,7 @@ namespace RE2REmakeSRT
             InitializeComponent();
 
             // Set titlebar.
-            this.Text += string.Format(" v{0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+            this.Text += string.Format(" {0}", Program.srtVersion);
 
             debugCheckBox.Checked = (Program.programSpecialOptions.Flags & ProgramFlags.Debug) == ProgramFlags.Debug;
             skipChecksumCheckBox.Checked = (Program.programSpecialOptions.Flags & ProgramFlags.SkipChecksumCheck) == ProgramFlags.SkipChecksumCheck;

@@ -37,7 +37,6 @@ namespace RE2REmakeSRT
         private StringFormat invStringFormat = new StringFormat(StringFormat.GenericDefault) { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Far };
         private StringFormat stdStringFormat = new StringFormat(StringFormat.GenericDefault) { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Near };
 
-        private Bitmap inventoryImage; // The inventory item sheet.
         private Bitmap inventoryError; // An error image.
 
 
@@ -46,7 +45,7 @@ namespace RE2REmakeSRT
             InitializeComponent();
 
             // Set titlebar.
-            this.Text += string.Format(" v{0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+            this.Text += string.Format(" {0}", Program.srtVersion);
 
             this.ContextMenu = Program.contextMenu;
             this.playerHealthStatus.ContextMenu = Program.contextMenu;
@@ -62,16 +61,7 @@ namespace RE2REmakeSRT
             // Only run the following code if we're rendering inventory.
             if (!Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.NoInventory))
             {
-                // Transform the inventory image in resources to 32bpp w/ pre-multiplied Alpha.
-                inventoryImage = Properties.Resources.ui0100_iam_texout.Clone(new Rectangle(0, 0, Properties.Resources.ui0100_iam_texout.Width, Properties.Resources.ui0100_iam_texout.Height), PixelFormat.Format32bppPArgb);
-
-                // Rescales the image down if the scaling factor is not 1.
-                if (Program.programSpecialOptions.ScalingFactor != 1d)
-                {
-                    int sheetWidth = (int)Math.Round(inventoryImage.Width * Program.programSpecialOptions.ScalingFactor, MidpointRounding.AwayFromZero);
-                    int sheetHeight = (int)Math.Round(inventoryImage.Height * Program.programSpecialOptions.ScalingFactor, MidpointRounding.AwayFromZero);
-                    inventoryImage = new Bitmap(inventoryImage, sheetWidth, sheetHeight);
-                }
+                GameMemory.GenerateImages();
 
                 // Create a black slot image for when side-pack is not equipped.
                 inventoryError = new Bitmap(Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT, PixelFormat.Format32bppPArgb);
@@ -81,7 +71,6 @@ namespace RE2REmakeSRT
                     grp.DrawLine(new Pen(Color.FromArgb(150, 255, 0, 0), 3), 0, 0, inventoryError.Width, inventoryError.Height);
                     grp.DrawLine(new Pen(Color.FromArgb(150, 255, 0, 0), 3), inventoryError.Width, 0, 0, inventoryError.Height);
                 }
-
 
                 // Set the width and height of the inventory display so it matches the maximum items and the scaling size of those items.
                 this.inventoryPanel.Width = Program.INV_SLOT_WIDTH * 4;
@@ -234,31 +223,37 @@ namespace RE2REmakeSRT
                     if (inv == default || inv.SlotPosition < 0 || inv.SlotPosition > 19 || inv.IsEmptySlot)
                         continue;
 
-                    Image image = inventoryImage;
-                    Rectangle imageRect;
-                    Weapon weapon;
-                    if (inv.IsItem && GameMemory.ItemToImageTranslation.ContainsKey(inv.ItemID))
-                        imageRect = GameMemory.ItemToImageTranslation[inv.ItemID];
-                    else if (inv.IsWeapon && GameMemory.WeaponToImageTranslation.ContainsKey(weapon = new Weapon() { WeaponID = inv.WeaponID, Attachments = inv.Attachments }))
-                        imageRect = GameMemory.WeaponToImageTranslation[weapon];
-                    else
-                    {
-                        imageRect = new Rectangle(0, 0, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT);
-                        image = inventoryError;
-                    }
-
                     int slotColumn = inv.SlotPosition % 4;
                     int slotRow = inv.SlotPosition / 4;
                     int imageX = slotColumn * Program.INV_SLOT_WIDTH;
                     int imageY = slotRow * Program.INV_SLOT_HEIGHT;
-                    int textX = imageX + imageRect.Width;
-                    int textY = imageY + imageRect.Height;
+                    int textX = imageX + Program.INV_SLOT_WIDTH;
+                    int textY = imageY + Program.INV_SLOT_HEIGHT;
                     Brush textBrush = Brushes.White;
 
                     if (inv.Quantity == 0)
                         textBrush = Brushes.DarkRed;
 
-                    e.Graphics.DrawImage(image, imageX, imageY, imageRect, GraphicsUnit.Pixel);
+                    Rectangle imageRect;
+                    TextureBrush imageBrush;
+                    Weapon weapon;
+                    if (inv.IsItem && GameMemory.ItemToImageTranslation.ContainsKey(inv.ItemID))
+                    {
+                        imageRect = GameMemory.ItemToImageTranslation[inv.ItemID];
+                        imageBrush = new TextureBrush(GameMemory.inventoryImage, imageRect);
+                    }
+                    else if (inv.IsWeapon && GameMemory.WeaponToImageTranslation.ContainsKey(weapon = new Weapon() { WeaponID = inv.WeaponID, Attachments = inv.Attachments }))
+                    {
+                        imageRect = GameMemory.WeaponToImageTranslation[weapon];
+                        imageBrush = new TextureBrush(GameMemory.inventoryImage, imageRect);
+                    }
+                    else
+                    {
+                        imageRect = new Rectangle(0, 0, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT);
+                        imageBrush = new TextureBrush(inventoryError, imageRect);
+                    }
+                    
+                    e.Graphics.FillRectangle(imageBrush, imageX, imageY, imageRect.Width, imageRect.Height);
                     e.Graphics.DrawString(inv.Quantity.ToString(), new Font("Consolas", 14, FontStyle.Bold), textBrush, textX, textY, invStringFormat);
                 }
             }

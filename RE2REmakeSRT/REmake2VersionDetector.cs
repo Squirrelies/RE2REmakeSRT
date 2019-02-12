@@ -47,8 +47,8 @@ namespace RE2REmakeSRT
                 }
                 sb.Length -= 2;
 
-                System.Windows.Forms.MessageBox.Show(null, string.Format("Unknown version of Resident Evil 2 (2019).\r\nHash: {0}", sb.ToString()), string.Empty, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
-                return REmake2VersionEnumeration.Unknown;
+                System.Windows.Forms.MessageBox.Show(null, string.Format("Unknown version of Resident Evil 2 (2019). You may encounter issues.\r\nHash: {0}", sb.ToString()), string.Empty, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                return REmake2VersionEnumeration.Stock_1p01;
             }
         }
     }
