@@ -105,7 +105,9 @@ namespace RE2REmakeSRT
             }
             catch (Exception ex)
             {
+                string title = "RE2 (2019) SRT - " + srtVersion;
                 string exception = string.Format("[{0}] An unhandled exception has occurred. Please see below for details.\r\n\r\n[{1}] {2}\r\n{3}.", srtVersion, ex.GetType().ToString(), ex.Message, ex.StackTrace);
+                MessageBox.Show(exception, title, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 Environment.FailFast(exception, ex);
             }
         }

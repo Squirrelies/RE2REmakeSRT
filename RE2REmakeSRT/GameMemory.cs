@@ -63,7 +63,7 @@ namespace RE2REmakeSRT
         {
             gameVersion = REmake2VersionDetector.GetVersion(proc);
             memoryAccess = new ProcessMemory.ProcessMemory(proc.Id);
-            BaseAddress = NativeWrappers.GetProcessBaseAddress(proc.Id).ToInt64(); // Bypass .NET's managed solution for getting this and attempt to get this info ourselves via PInvoke since some users are getting 299 PARTIAL COPY when they seemingly shouldn't. This is built as x64 only and RE2 is x64 only to my knowledge.
+            BaseAddress = NativeWrappers.GetProcessBaseAddress(proc.Id, ProcessMemory.PInvoke.ListModules.LIST_MODULES_64BIT).ToInt64(); // Bypass .NET's managed solution for getting this and attempt to get this info ourselves via PInvoke since some users are getting 299 PARTIAL COPY when they seemingly shouldn't. This is built as x64 only and RE2 is x64 only to my knowledge.
             //BaseAddress = proc.MainModule.BaseAddress.ToInt64();
 
             // Setup the pointers.
