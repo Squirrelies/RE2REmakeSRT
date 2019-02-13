@@ -9,7 +9,10 @@ To extract .7z archives, use [7-Zip](https://www.7-zip.org/)!
 
 ## [Click here](http://dudley.gg/squirrelies/re2/latest.7z) to download the latest release!
 
-## [Download 1.1.8.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1180-Beta-Signed-Release.7z) (2019-02-12)
+## [Download 1.1.8.1 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1181-Beta-Signed-Release.7z) (2019-02-12)
+* Possible fix for an error some users are experiencing. ERROR_PARTIAL_COPY (299) - Only part of a ReadProcessMemory or WriteProcessMemory request was completed.
+
+### [Download 1.1.8.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1180-Beta-Signed-Release.7z) (2019-02-12)
 * Improved performance by switching from DrawImage to TextureBrush/DrawRectangle.
 * Added some additional exception handling.
 * Changed how unknown versions are handled. It now warns users about the unknown version but proceeds anyways.
