@@ -105,7 +105,7 @@ namespace RE2REmakeSRT
             }
             catch (Exception ex)
             {
-                string exception = string.Format("{0} - Program.cs caught an exception that was not handled deeper in the code.\r\n\r\n[{1}] {2}\r\n{3}.", srtVersion, ex.GetType().ToString(), ex.Message, ex.StackTrace);
+                string exception = string.Format("[{0}] An unhandled exception has occurred. Please see below for details.\r\n\r\n[{1}] {2}\r\n{3}.", srtVersion, ex.GetType().ToString(), ex.Message, ex.StackTrace);
                 Environment.FailFast(exception, ex);
             }
         }
