@@ -89,6 +89,25 @@ namespace RE2REmakeSRT
 
                         break;
                     }
+                case REmake2VersionEnumeration.Stock_1p10:
+                    {
+                        PointerIGT = new MultilevelPointer(memoryAccess, BaseAddress + 0x070AFEE8, 0x2E0, 0x218, 0x610, 0x710, 0x60);
+                        PointerRank = new MultilevelPointer(memoryAccess, BaseAddress + 0x07089C98);
+                        PointerPlayerHP = new MultilevelPointer(memoryAccess, BaseAddress + 0x070AFE10, 0x50, 0x20);
+
+                        PointerEnemyEntries = new MultilevelPointer[32];
+                        for (int i = 0; i < PointerEnemyEntries.Length; ++i)
+                            PointerEnemyEntries[i] = new MultilevelPointer(memoryAccess, BaseAddress + 0x07081EA8, 0x80 + (i * 0x08), 0x88, 0x18, 0x1A0);
+
+                        if (!Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.NoInventory))
+                        {
+                            PointerInventoryEntries = new MultilevelPointer[20];
+                            for (int i = 0; i < PointerInventoryEntries.Length; ++i)
+                                PointerInventoryEntries[i] = new MultilevelPointer(memoryAccess, BaseAddress + 0x070AFE10, 0x50, 0x98, 0x10, 0x20 + (i * 0x08), 0x18);
+                        }
+
+                        break;
+                    }
                 default:
                     {
                         break;

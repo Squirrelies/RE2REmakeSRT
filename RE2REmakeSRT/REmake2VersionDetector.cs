@@ -22,7 +22,7 @@ namespace RE2REmakeSRT
         {
             // If we're skipping the checksum version check, return the latest version we kow about.
             if (Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.SkipChecksumCheck))
-                return REmake2VersionEnumeration.Stock_1p01;
+                return REmake2VersionEnumeration.Stock_1p10;
 
             byte[] processHash = GetSHA256Checksum(NativeWrappers.GetProcessPath(pid));
 
@@ -38,6 +38,10 @@ namespace RE2REmakeSRT
             {
                 return REmake2VersionEnumeration.Stock_1p01;
             }
+            else if (processHash.SequenceEqual(GameHashes.Stock_1p10))
+            {
+                return REmake2VersionEnumeration.Stock_1p10;
+            }
             else
             {
                 // Either a version we've never encountered before or this game was modified.
@@ -49,7 +53,7 @@ namespace RE2REmakeSRT
                 sb.Length -= 2;
 
                 MessageBox.Show(null, string.Format("Unknown version of Resident Evil 2 (2019). You may encounter issues.\r\nHash: {0}", sb.ToString()), string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return REmake2VersionEnumeration.Stock_1p01;
+                return REmake2VersionEnumeration.Stock_1p10;
             }
         }
     }
