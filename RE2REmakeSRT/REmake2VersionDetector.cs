@@ -1,9 +1,9 @@
 ﻿using ProcessMemory;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Forms;
 
 namespace RE2REmakeSRT
 {
@@ -34,7 +34,7 @@ namespace RE2REmakeSRT
             {
                 return REmake2VersionEnumeration.Stock_1p00;
             }
-            else if (processHash.SequenceEqual(GameHashes.Stock_1p01))
+            else if (processHash.SequenceEqual(GameHashes.Stock_1p01) || processHash.SequenceEqual(GameHashes.Unknown_1))
             {
                 return REmake2VersionEnumeration.Stock_1p01;
             }
@@ -48,7 +48,7 @@ namespace RE2REmakeSRT
                 }
                 sb.Length -= 2;
 
-                System.Windows.Forms.MessageBox.Show(null, string.Format("Unknown version of Resident Evil 2 (2019). You may encounter issues.\r\nHash: {0}", sb.ToString()), string.Empty, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                MessageBox.Show(null, string.Format("Unknown version of Resident Evil 2 (2019). You may encounter issues.\r\nHash: {0}", sb.ToString()), string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return REmake2VersionEnumeration.Stock_1p01;
             }
         }
