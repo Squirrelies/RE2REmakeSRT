@@ -78,6 +78,10 @@ namespace RE2REmakeSRT
 
                 // Adjust main form width as well.
                 this.Width = this.statisticsPanel.Width + 24 + this.inventoryPanel.Width;
+
+                // Only adjust form height if its greater than 461. We don't want it to go below this size.
+                if (41 + this.inventoryPanel.Height > 461)
+                    this.Height = 41 + this.inventoryPanel.Height;
             }
             else
             {

@@ -59,11 +59,11 @@ namespace RE2REmakeSRT
         /// 
         /// </summary>
         /// <param name="proc"></param>
-        public GameMemory(Process proc)
+        public GameMemory(int pid)
         {
-            gameVersion = REmake2VersionDetector.GetVersion(proc);
-            memoryAccess = new ProcessMemory.ProcessMemory(proc.Id);
-            BaseAddress = NativeWrappers.GetProcessBaseAddress(proc.Id, ProcessMemory.PInvoke.ListModules.LIST_MODULES_64BIT).ToInt64(); // Bypass .NET's managed solution for getting this and attempt to get this info ourselves via PInvoke since some users are getting 299 PARTIAL COPY when they seemingly shouldn't. This is built as x64 only and RE2 is x64 only to my knowledge.
+            gameVersion = REmake2VersionDetector.GetVersion(pid);
+            memoryAccess = new ProcessMemory.ProcessMemory(pid);
+            BaseAddress = NativeWrappers.GetProcessBaseAddress(pid, ProcessMemory.PInvoke.ListModules.LIST_MODULES_64BIT).ToInt64(); // Bypass .NET's managed solution for getting this and attempt to get this info ourselves via PInvoke since some users are getting 299 PARTIAL COPY when they seemingly shouldn't. This is built as x64 only and RE2 is x64 only to my knowledge.
             //BaseAddress = proc.MainModule.BaseAddress.ToInt64();
 
             // Setup the pointers.
@@ -180,14 +180,38 @@ namespace RE2REmakeSRT
         public static void GenerateImages()
         {
             // Transform the image into a 32-bit PARGB Bitmap.
-            inventoryImage = Properties.Resources.ui0100_iam_texout.Clone(new Rectangle(0, 0, Properties.Resources.ui0100_iam_texout.Width, Properties.Resources.ui0100_iam_texout.Height), PixelFormat.Format32bppPArgb);
+            try
+            {
+                inventoryImage = Properties.Resources.ui0100_iam_texout.Clone(new Rectangle(0, 0, Properties.Resources.ui0100_iam_texout.Width, Properties.Resources.ui0100_iam_texout.Height), PixelFormat.Format32bppPArgb);
+            }
+            catch (Exception ex)
+            {
+                Program.FailFast(string.Format("[{0}] An unhandled exception has occurred. Please see below for details.\r\n\r\n[{1}] {2}\r\n{3}.\r\n\r\nPARGB Transform.", Program.srtVersion, ex.GetType().ToString(), ex.Message, ex.StackTrace), ex);
+            }
 
             // Rescales the image down if the scaling factor is not 1.
             if (Program.programSpecialOptions.ScalingFactor != 1d)
             {
-                int sheetWidth = (int)Math.Round(inventoryImage.Width * Program.programSpecialOptions.ScalingFactor, MidpointRounding.AwayFromZero);
-                int sheetHeight = (int)Math.Round(inventoryImage.Height * Program.programSpecialOptions.ScalingFactor, MidpointRounding.AwayFromZero);
-                inventoryImage = new Bitmap(inventoryImage, sheetWidth, sheetHeight);
+                double sheetWidth = Math.Round(inventoryImage.Width * Program.programSpecialOptions.ScalingFactor, MidpointRounding.AwayFromZero);
+                double sheetHeight = Math.Round(inventoryImage.Height * Program.programSpecialOptions.ScalingFactor, MidpointRounding.AwayFromZero);
+                try
+                {
+                    inventoryImage = new Bitmap(inventoryImage, (int)sheetWidth, (int)sheetHeight);
+                }
+                catch (Exception ex)
+                {
+                    Program.FailFast(string.Format(@"[{0}] An unhandled exception has occurred. Please see below for details.
+---
+[{1}] {2}
+{3}
+---
+Resizing section.
+sheetWidth: {4} ({7} * {6})
+sheetHeight: {5} ({8} * {6})
+scalingFactor: {6}
+inventoryImage.Width: {7}
+inventoryImage.Height: {8}", Program.srtVersion, ex.GetType().ToString(), ex.Message, ex.StackTrace, sheetWidth.ToString(), sheetHeight.ToString(), Program.programSpecialOptions.ScalingFactor.ToString(), inventoryImage.Width.ToString(), inventoryImage.Height.ToString()), ex);
+                }
             }
 
             int itemColumnInc = -1;

@@ -1,10 +1,22 @@
 ﻿using Microsoft.Win32;
+using System;
 
 namespace RE2REmakeSRT
 {
     public static class RegistryHelper
     {
-        public static T GetValue<T>(RegistryKey baseKey, string valueKey, T defaultValue) => (T)baseKey.GetValue(valueKey, defaultValue);
+        public static T GetValue<T>(RegistryKey baseKey, string valueKey, T defaultValue)
+        {
+            try
+            {
+                return (T)baseKey.GetValue(valueKey, defaultValue);
+            }
+            catch (Exception ex)
+            {
+                Program.ShowError(Program.GetExceptionMessage(ex));
+                return defaultValue;
+            }
+        }
 
         public static bool GetBoolValue(RegistryKey baseKey, string valueKey, bool defaultValue)
         {

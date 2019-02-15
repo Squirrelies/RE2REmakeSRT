@@ -44,6 +44,10 @@ namespace RE2REmakeSRT
                 Flags &= ~ProgramFlags.NoInventory;
 
             double.TryParse(RegistryHelper.GetValue(optionsKey, "ScalingFactor", "0.75"), out ScalingFactor);
+
+            // Do not permit ScalingFactor values less than or equal to 0% and greater than 400%.
+            if (ScalingFactor <= 0 || ScalingFactor > 4)
+                ScalingFactor = 0.75d;
         }
 
         public void SetOptions()
@@ -81,7 +85,11 @@ namespace RE2REmakeSRT
             else
                 optionsKey.SetValue("NoInventory", 0, RegistryValueKind.DWord);
 
-            optionsKey.SetValue("ScalingFactor", ScalingFactor.ToString(), RegistryValueKind.String);
+            // Do not permit ScalingFactor values less than or equal to 0% and greater than 400%.
+            if (ScalingFactor <= 0 || ScalingFactor > 4)
+                optionsKey.SetValue("ScalingFactor", "0.75", RegistryValueKind.String);
+            else
+                optionsKey.SetValue("ScalingFactor", ScalingFactor.ToString(), RegistryValueKind.String);
         }
     }
 }

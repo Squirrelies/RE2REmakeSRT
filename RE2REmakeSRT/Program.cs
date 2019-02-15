@@ -17,6 +17,7 @@ namespace RE2REmakeSRT
         public static GameMemory gameMem;
 
         public static readonly string srtVersion = string.Format("v{0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+        public static readonly string srtTitle = string.Format("RE2(2019) SRT - {0}", srtVersion);
 
         public static int INV_SLOT_WIDTH;
         public static int INV_SLOT_HEIGHT;
@@ -99,17 +100,27 @@ namespace RE2REmakeSRT
                     Application.Run(mainContext);
 
                 // Attach to the re2.exe process now that we've found it and show the UI.
-                using (gameMem = new GameMemory(gameProc))
+                using (gameMem = new GameMemory(gameProc.Id))
                 using (mainContext = new ApplicationContext(new MainUI()))
                     Application.Run(mainContext);
             }
             catch (Exception ex)
             {
-                string title = "RE2 (2019) SRT - " + srtVersion;
-                string exception = string.Format("[{0}] An unhandled exception has occurred. Please see below for details.\r\n\r\n[{1}] {2}\r\n{3}.", srtVersion, ex.GetType().ToString(), ex.Message, ex.StackTrace);
-                MessageBox.Show(exception, title, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
-                Environment.FailFast(exception, ex);
+                FailFast(string.Format("[{0}] An unhandled exception has occurred. Please see below for details.\r\n\r\n[{1}] {2}\r\n{3}.", srtVersion, ex.GetType().ToString(), ex.Message, ex.StackTrace), ex);
             }
         }
+
+        public static void FailFast(string message, Exception ex)
+        {
+            ShowError(message);
+            Environment.FailFast(message, ex);
+        }
+
+        public static void ShowError(string message)
+        {
+            MessageBox.Show(message, srtTitle, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+        }
+
+        public static string GetExceptionMessage(Exception ex) => string.Format("[{0}] An unhandled exception has occurred. Please see below for details.\r\n\r\n[{1}] {2}\r\n{3}.", srtVersion, ex.GetType().ToString(), ex.Message, ex.StackTrace);
     }
 }

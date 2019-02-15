@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using ProcessMemory;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -17,13 +18,13 @@ namespace RE2REmakeSRT
             }
         }
 
-        public static REmake2VersionEnumeration GetVersion(Process remake2Proc)
+        public static REmake2VersionEnumeration GetVersion(int pid)
         {
             // If we're skipping the checksum version check, return the latest version we kow about.
             if (Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.SkipChecksumCheck))
                 return REmake2VersionEnumeration.Stock_1p01;
 
-            byte[] processHash = GetSHA256Checksum(remake2Proc.MainModule.FileName);
+            byte[] processHash = GetSHA256Checksum(NativeWrappers.GetProcessPath(pid));
 
             if (processHash.SequenceEqual(GameHashes.Stock_1ShotDemo))
             {
