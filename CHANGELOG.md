@@ -9,7 +9,10 @@ To extract .7z archives, use [7-Zip](https://www.7-zip.org/)!
 
 ## [Click here](http://dudley.gg/squirrelies/re2/latest.7z) to download the latest release!
 
-## [Download 1.1.8.4 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1184-Beta-Signed-Release.7z) (2019-02-14)
+## [Download 1.1.8.5 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1185-Beta-Signed-Release.7z) (2019-02-14)
+* Added checksum hash reported by T710MA on Speedrun.com forums.
+
+### [Download 1.1.8.4 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1184-Beta-Signed-Release.7z) (2019-02-14)
 * Fixes issue #12 Win32Exception Win32 Error 299 (ERROR_PARTIAL_COPY) and ArgumentException with scalingFactor out of range (less than or equal to 0 or greater than 4). The program now requires the scaling factor to be greater than 0 (0%) and less than or equal to 4 (400%).
 
 ### [Download 1.1.8.3 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1183-Beta-Signed-Release.7z) (2019-02-12)
