@@ -63,6 +63,16 @@ namespace RE2REmakeSRT.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _40d_texout {
+            get {
+                object obj = ResourceManager.GetObject("_40d_texout", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CAUTION_YELLOW {
             get {
                 object obj = ResourceManager.GetObject("CAUTION_YELLOW", resourceCulture);

@@ -128,6 +128,7 @@ namespace RE2REmakeSRT
         BoltCutter = 0xF4,
         StuffedDoll = 0xF5,
         HipPouch = 0x0106,
+        OldKey = 0x011E,
         PortableSafe = 0x0123,
         TinStorageBox1 = 0x0125,
         WoodenBox1 = 0x0126,

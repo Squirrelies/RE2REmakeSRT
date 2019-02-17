@@ -194,6 +194,7 @@ namespace RE2REmakeSRT
         }
 
         public static Bitmap inventoryImage;
+        public static Bitmap inventoryImagePatch1;
         public static IReadOnlyDictionary<ItemEnumeration, Rectangle> ItemToImageTranslation;
         public static IReadOnlyDictionary<Weapon, Rectangle> WeaponToImageTranslation;
         public static void GenerateImages()
@@ -202,6 +203,7 @@ namespace RE2REmakeSRT
             try
             {
                 inventoryImage = Properties.Resources.ui0100_iam_texout.Clone(new Rectangle(0, 0, Properties.Resources.ui0100_iam_texout.Width, Properties.Resources.ui0100_iam_texout.Height), PixelFormat.Format32bppPArgb);
+                inventoryImagePatch1 = Properties.Resources._40d_texout.Clone(new Rectangle(0, 0, Properties.Resources._40d_texout.Width, Properties.Resources._40d_texout.Height), PixelFormat.Format32bppPArgb);
             }
             catch (Exception ex)
             {
@@ -211,25 +213,17 @@ namespace RE2REmakeSRT
             // Rescales the image down if the scaling factor is not 1.
             if (Program.programSpecialOptions.ScalingFactor != 1d)
             {
-                double sheetWidth = Math.Round(inventoryImage.Width * Program.programSpecialOptions.ScalingFactor, MidpointRounding.AwayFromZero);
-                double sheetHeight = Math.Round(inventoryImage.Height * Program.programSpecialOptions.ScalingFactor, MidpointRounding.AwayFromZero);
                 try
                 {
-                    inventoryImage = new Bitmap(inventoryImage, (int)sheetWidth, (int)sheetHeight);
+                    inventoryImage = new Bitmap(inventoryImage, (int)Math.Round(inventoryImage.Width * Program.programSpecialOptions.ScalingFactor, MidpointRounding.AwayFromZero), (int)Math.Round(inventoryImage.Height * Program.programSpecialOptions.ScalingFactor, MidpointRounding.AwayFromZero));
+                    inventoryImagePatch1 = new Bitmap(inventoryImagePatch1, (int)Math.Round(inventoryImagePatch1.Width * Program.programSpecialOptions.ScalingFactor, MidpointRounding.AwayFromZero), (int)Math.Round(inventoryImagePatch1.Height * Program.programSpecialOptions.ScalingFactor, MidpointRounding.AwayFromZero));
                 }
                 catch (Exception ex)
                 {
                     Program.FailFast(string.Format(@"[{0}] An unhandled exception has occurred. Please see below for details.
 ---
 [{1}] {2}
-{3}
----
-Resizing section.
-sheetWidth: {4} ({7} * {6})
-sheetHeight: {5} ({8} * {6})
-scalingFactor: {6}
-inventoryImage.Width: {7}
-inventoryImage.Height: {8}", Program.srtVersion, ex.GetType().ToString(), ex.Message, ex.StackTrace, sheetWidth.ToString(), sheetHeight.ToString(), Program.programSpecialOptions.ScalingFactor.ToString(), inventoryImage.Width.ToString(), inventoryImage.Height.ToString()), ex);
+{3}", Program.srtVersion, ex.GetType().ToString(), ex.Message, ex.StackTrace), ex);
                 }
             }
 
@@ -241,9 +235,9 @@ inventoryImage.Height: {8}", Program.srtVersion, ex.GetType().ToString(), ex.Mes
 
                 // Row 0.
                 { ItemEnumeration.FirstAidSpray, new Rectangle(Program.INV_SLOT_WIDTH * (itemColumnInc = 0), Program.INV_SLOT_HEIGHT * ++itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
-                { ItemEnumeration.Herb_Green1, new Rectangle(Program.INV_SLOT_WIDTH * ++itemColumnInc, Program.INV_SLOT_HEIGHT * itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
-                { ItemEnumeration.Herb_Red1, new Rectangle(Program.INV_SLOT_WIDTH * ++itemColumnInc, Program.INV_SLOT_HEIGHT * itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
-                { ItemEnumeration.Herb_Blue1, new Rectangle(Program.INV_SLOT_WIDTH * ++itemColumnInc, Program.INV_SLOT_HEIGHT * itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
+                { ItemEnumeration.Herb_Green2, new Rectangle(Program.INV_SLOT_WIDTH * ++itemColumnInc, Program.INV_SLOT_HEIGHT * itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
+                { ItemEnumeration.Herb_Red2, new Rectangle(Program.INV_SLOT_WIDTH * ++itemColumnInc, Program.INV_SLOT_HEIGHT * itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
+                { ItemEnumeration.Herb_Blue2, new Rectangle(Program.INV_SLOT_WIDTH * ++itemColumnInc, Program.INV_SLOT_HEIGHT * itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
                 { ItemEnumeration.Herb_Mixed_GG, new Rectangle(Program.INV_SLOT_WIDTH * ++itemColumnInc, Program.INV_SLOT_HEIGHT * itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
                 { ItemEnumeration.Herb_Mixed_GR, new Rectangle(Program.INV_SLOT_WIDTH * ++itemColumnInc, Program.INV_SLOT_HEIGHT * itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
                 { ItemEnumeration.Herb_Mixed_GB, new Rectangle(Program.INV_SLOT_WIDTH * ++itemColumnInc, Program.INV_SLOT_HEIGHT * itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
@@ -251,9 +245,9 @@ inventoryImage.Height: {8}", Program.srtVersion, ex.GetType().ToString(), ex.Mes
                 { ItemEnumeration.Herb_Mixed_GGG, new Rectangle(Program.INV_SLOT_WIDTH * ++itemColumnInc, Program.INV_SLOT_HEIGHT * itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
                 { ItemEnumeration.Herb_Mixed_GRB, new Rectangle(Program.INV_SLOT_WIDTH * ++itemColumnInc, Program.INV_SLOT_HEIGHT * itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
                 { ItemEnumeration.Herb_Mixed_RB, new Rectangle(Program.INV_SLOT_WIDTH * ++itemColumnInc, Program.INV_SLOT_HEIGHT * itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
-                { ItemEnumeration.Herb_Green2, new Rectangle(Program.INV_SLOT_WIDTH * ++itemColumnInc, Program.INV_SLOT_HEIGHT * itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
-                { ItemEnumeration.Herb_Red2, new Rectangle(Program.INV_SLOT_WIDTH * ++itemColumnInc, Program.INV_SLOT_HEIGHT * itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
-                { ItemEnumeration.Herb_Blue2, new Rectangle(Program.INV_SLOT_WIDTH * ++itemColumnInc, Program.INV_SLOT_HEIGHT * itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
+                { ItemEnumeration.Herb_Green1, new Rectangle(Program.INV_SLOT_WIDTH * ++itemColumnInc, Program.INV_SLOT_HEIGHT * itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
+                { ItemEnumeration.Herb_Red1, new Rectangle(Program.INV_SLOT_WIDTH * ++itemColumnInc, Program.INV_SLOT_HEIGHT * itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
+                { ItemEnumeration.Herb_Blue1, new Rectangle(Program.INV_SLOT_WIDTH * ++itemColumnInc, Program.INV_SLOT_HEIGHT * itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
 
                 // Row 1.
                 { ItemEnumeration.HandgunBullets, new Rectangle(Program.INV_SLOT_WIDTH * (itemColumnInc = 0), Program.INV_SLOT_HEIGHT * ++itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
@@ -400,6 +394,9 @@ inventoryImage.Height: {8}", Program.srtVersion, ex.GetType().ToString(), ex.Mes
                 // Row 14.
                 { ItemEnumeration.WoodenBox1, new Rectangle(Program.INV_SLOT_WIDTH * (itemColumnInc = 9), Program.INV_SLOT_HEIGHT * ++itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
                 { ItemEnumeration.WoodenBox2, new Rectangle(Program.INV_SLOT_WIDTH * ++itemColumnInc, Program.INV_SLOT_HEIGHT * itemRowInc, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
+
+                // Patch Items.
+                { ItemEnumeration.OldKey, new Rectangle(0, 0, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT) },
             };
 
             int weaponColumnInc = -1;

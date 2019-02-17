@@ -244,7 +244,11 @@ namespace RE2REmakeSRT
                     if (inv.IsItem && GameMemory.ItemToImageTranslation.ContainsKey(inv.ItemID))
                     {
                         imageRect = GameMemory.ItemToImageTranslation[inv.ItemID];
-                        imageBrush = new TextureBrush(GameMemory.inventoryImage, imageRect);
+
+                        if (inv.ItemID == ItemEnumeration.OldKey)
+                            imageBrush = new TextureBrush(GameMemory.inventoryImagePatch1, imageRect);
+                        else
+                            imageBrush = new TextureBrush(GameMemory.inventoryImage, imageRect);
                     }
                     else if (inv.IsWeapon && GameMemory.WeaponToImageTranslation.ContainsKey(weapon = new Weapon() { WeaponID = inv.WeaponID, Attachments = inv.Attachments }))
                     {
@@ -258,7 +262,7 @@ namespace RE2REmakeSRT
                     }
                     
                     e.Graphics.FillRectangle(imageBrush, imageX, imageY, imageRect.Width, imageRect.Height);
-                    e.Graphics.DrawString(inv.Quantity.ToString(), new Font("Consolas", 14, FontStyle.Bold), textBrush, textX, textY, invStringFormat);
+                    e.Graphics.DrawString((inv.Quantity != -1) ? inv.Quantity.ToString() : "∞", new Font("Consolas", 14, FontStyle.Bold), textBrush, textX, textY, invStringFormat);
                 }
             }
         }
@@ -288,8 +292,8 @@ namespace RE2REmakeSRT
                 heightOffset = 25; // Adding an additional offset to accomdate Raw IGT.
             }
 
-            e.Graphics.DrawString(string.Format("Rank: {0}", Program.gameMem.Rank), new Font("Consolas", 9, FontStyle.Bold), Brushes.Gray, 0, heightOffset + (heightGap * ++i), stdStringFormat);
-            e.Graphics.DrawString(string.Format("Score: {0}", Program.gameMem.RankScore), new Font("Consolas", 9, FontStyle.Bold), Brushes.Gray, 0, heightOffset + (heightGap * ++i), stdStringFormat);
+            e.Graphics.DrawString(string.Format("DA Rank: {0}", Program.gameMem.Rank), new Font("Consolas", 9, FontStyle.Bold), Brushes.Gray, 0, heightOffset + (heightGap * ++i), stdStringFormat);
+            e.Graphics.DrawString(string.Format("DA Score: {0}", Program.gameMem.RankScore), new Font("Consolas", 9, FontStyle.Bold), Brushes.Gray, 0, heightOffset + (heightGap * ++i), stdStringFormat);
             
             e.Graphics.DrawString("Enemies", new Font("Consolas", 10, FontStyle.Bold), Brushes.Red, 0, heightOffset + (heightGap * ++i), stdStringFormat);
             foreach (EnemyHP enemyHP in Program.gameMem.EnemyHealth.Where(a => a.IsAlive).OrderBy(a => a.Percentage).ThenByDescending(a => a.CurrentHP))

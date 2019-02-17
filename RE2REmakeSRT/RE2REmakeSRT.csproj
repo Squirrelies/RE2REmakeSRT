@@ -142,6 +142,9 @@
   <ItemGroup>
     <None Include="Resources\ui0100_iam.texout.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\40d.texout.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' == '' Or '$(BuildingInsideVisualStudio)' == 'true'">
     <PostBuildEvent>"C:\Program Files (x86)\Windows Kits\10\bin\10.0.16299.0\x64\signtool.exe" sign /tr "http://timestamp.digicert.com" /td SHA1 /n "Travis J Gutjahr" /sm /fd SHA1 "$(TargetDir)\RE2REmakeSRT.exe"
