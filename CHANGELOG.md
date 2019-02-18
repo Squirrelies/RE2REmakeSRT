@@ -9,7 +9,10 @@ To extract .7z archives, use [7-Zip](https://www.7-zip.org/)!
 
 ## [Click here](http://dudley.gg/squirrelies/re2/latest.7z) to download the latest release!
 
-## [Download 1.2.1.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1210-Beta-Signed-Release.7z) (2019-02-15)
+## [Download 1.2.2.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1220-Beta-Signed-Release.7z) (2019-02-17)
+* Added poison status.
+
+### [Download 1.2.1.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1210-Beta-Signed-Release.7z) (2019-02-17)
 * Fixed the missing inventory icon for the Old Key.
 * Fixed infinite ammo quantity text from -1 to the infinite symbol.
 
