@@ -238,35 +238,38 @@ namespace RE2REmakeSRT
                     int imageY = slotRow * Program.INV_SLOT_HEIGHT;
                     int textX = imageX + Program.INV_SLOT_WIDTH;
                     int textY = imageY + Program.INV_SLOT_HEIGHT;
+                    bool evenSlotColumn = slotColumn % 2 == 0;
                     Brush textBrush = Brushes.White;
 
                     if (inv.Quantity == 0)
                         textBrush = Brushes.DarkRed;
-
-                    Rectangle imageRect;
+                    
                     TextureBrush imageBrush;
                     Weapon weapon;
                     if (inv.IsItem && GameMemory.ItemToImageTranslation.ContainsKey(inv.ItemID))
                     {
-                        imageRect = GameMemory.ItemToImageTranslation[inv.ItemID];
-
                         if (inv.ItemID == ItemEnumeration.OldKey)
-                            imageBrush = new TextureBrush(GameMemory.inventoryImagePatch1, imageRect);
+                            imageBrush = new TextureBrush(GameMemory.inventoryImagePatch1, GameMemory.ItemToImageTranslation[inv.ItemID]);
                         else
-                            imageBrush = new TextureBrush(GameMemory.inventoryImage, imageRect);
+                            imageBrush = new TextureBrush(GameMemory.inventoryImage, GameMemory.ItemToImageTranslation[inv.ItemID]);
                     }
                     else if (inv.IsWeapon && GameMemory.WeaponToImageTranslation.ContainsKey(weapon = new Weapon() { WeaponID = inv.WeaponID, Attachments = inv.Attachments }))
-                    {
-                        imageRect = GameMemory.WeaponToImageTranslation[weapon];
-                        imageBrush = new TextureBrush(GameMemory.inventoryImage, imageRect);
-                    }
+                        imageBrush = new TextureBrush(GameMemory.inventoryImage, GameMemory.WeaponToImageTranslation[weapon]);
                     else
+                        imageBrush = new TextureBrush(inventoryError, new Rectangle(0, 0, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT));
+
+                    // Double-slot item.
+                    if (imageBrush.Image.Width == Program.INV_SLOT_WIDTH * 2)
                     {
-                        imageRect = new Rectangle(0, 0, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT);
-                        imageBrush = new TextureBrush(inventoryError, imageRect);
+                        // If we're an odd column, we need to adjust the transform so the image doesn't get split in half and tiled. Not sure why it does this.
+                        if (!evenSlotColumn)
+                            imageBrush.TranslateTransform(Program.INV_SLOT_WIDTH, 0);
+
+                        // Shift the quantity text over into the 2nd slot's area.
+                        textX += Program.INV_SLOT_WIDTH;
                     }
-                    
-                    e.Graphics.FillRectangle(imageBrush, imageX, imageY, imageRect.Width, imageRect.Height);
+
+                    e.Graphics.FillRectangle(imageBrush, imageX, imageY, imageBrush.Image.Width, imageBrush.Image.Height);
                     e.Graphics.DrawString((inv.Quantity != -1) ? inv.Quantity.ToString() : "∞", new Font("Consolas", 14, FontStyle.Bold), textBrush, textX, textY, invStringFormat);
                 }
             }
