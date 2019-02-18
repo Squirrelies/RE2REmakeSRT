@@ -21,12 +21,14 @@ namespace RE2REmakeSRT
         public MultilevelPointer PointerIGT { get; private set; }
         public MultilevelPointer PointerRank { get; private set; }
         public MultilevelPointer PointerPlayerHP { get; private set; }
+        public MultilevelPointer PointerPlayerPoison { get; private set; }
         public MultilevelPointer[] PointerEnemyEntries { get; private set; }
         public MultilevelPointer[] PointerInventoryEntries { get; private set; }
 
         // Public Properties
         public int PlayerCurrentHealth { get; private set; }
         public int PlayerMaxHealth { get; private set; }
+        public bool PlayerPoisoned { get; private set; }
         public InventoryEntry[] PlayerInventory { get; private set; }
         public EnemyHP[] EnemyHealth { get; private set; }
         public long IGTRunningTimer { get; private set; }
@@ -75,6 +77,7 @@ namespace RE2REmakeSRT
                         PointerIGT = new MultilevelPointer(memoryAccess, BaseAddress + 0x070ACAE0, 0x2E0, 0x218, 0x610, 0x710, 0x60);
                         PointerRank = new MultilevelPointer(memoryAccess, BaseAddress + 0x07086DB0);
                         PointerPlayerHP = new MultilevelPointer(memoryAccess, BaseAddress + 0x070ACA88, 0x50, 0x20);
+                        PointerPlayerPoison = new MultilevelPointer(memoryAccess, BaseAddress + 0x070ACA88, 0x50, 0x20, 0xF8);
 
                         PointerEnemyEntries = new MultilevelPointer[32];
                         for (int i = 0; i < PointerEnemyEntries.Length; ++i)
@@ -94,6 +97,7 @@ namespace RE2REmakeSRT
                         PointerIGT = new MultilevelPointer(memoryAccess, BaseAddress + 0x070AFEE8, 0x2E0, 0x218, 0x610, 0x710, 0x60);
                         PointerRank = new MultilevelPointer(memoryAccess, BaseAddress + 0x07089C98);
                         PointerPlayerHP = new MultilevelPointer(memoryAccess, BaseAddress + 0x070AFE10, 0x50, 0x20);
+                        PointerPlayerPoison = new MultilevelPointer(memoryAccess, BaseAddress + 0x070AFE10, 0x50, 0x20, 0xF8);
 
                         PointerEnemyEntries = new MultilevelPointer[32];
                         for (int i = 0; i < PointerEnemyEntries.Length; ++i)
@@ -117,6 +121,7 @@ namespace RE2REmakeSRT
             // Initialize variables to default values.
             PlayerCurrentHealth = 0;
             PlayerMaxHealth = 0;
+            PlayerPoisoned = false;
             PlayerInventory = new InventoryEntry[20];
             EnemyHealth = new EnemyHP[32];
             IGTRunningTimer = 0L;
@@ -135,6 +140,7 @@ namespace RE2REmakeSRT
             PointerIGT.UpdatePointers();
             PointerRank.UpdatePointers();
             PointerPlayerHP.UpdatePointers();
+            PointerPlayerPoison.UpdatePointers();
 
             for (int i = 0; i < PointerEnemyEntries.Length; ++i)
                 PointerEnemyEntries[i].UpdatePointers();
@@ -172,6 +178,7 @@ namespace RE2REmakeSRT
             // Player HP
             PlayerMaxHealth = PointerPlayerHP.DerefInt(0x54);
             PlayerCurrentHealth = PointerPlayerHP.DerefInt(0x58);
+            PlayerPoisoned = PointerPlayerPoison.DerefByte(0x258) == 0x01;
 
             // Enemy HP
             for (int i = 0; i < PointerEnemyEntries.Length; ++i)
