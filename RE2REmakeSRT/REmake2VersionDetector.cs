@@ -42,6 +42,10 @@ namespace RE2REmakeSRT
             {
                 return REmake2VersionEnumeration.Stock_1p10;
             }
+            else if (processHash.SequenceEqual(GameHashes.Stock_1p11))
+            {
+                return REmake2VersionEnumeration.Stock_1p11;
+            }
             else
             {
                 // Either a version we've never encountered before or this game was modified.

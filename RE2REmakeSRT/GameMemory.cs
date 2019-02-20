@@ -112,6 +112,26 @@ namespace RE2REmakeSRT
 
                         break;
                     }
+                case REmake2VersionEnumeration.Stock_1p11: // NEW
+                    {
+                        PointerIGT = new MultilevelPointer(memoryAccess, BaseAddress + 0x070B0910, 0x2E0, 0x218, 0x610, 0x710, 0x60);
+                        PointerRank = new MultilevelPointer(memoryAccess, BaseAddress + 0x0708A9D8);
+                        PointerPlayerHP = new MultilevelPointer(memoryAccess, BaseAddress + 0x070B0840, 0x50, 0x20);
+                        PointerPlayerPoison = new MultilevelPointer(memoryAccess, BaseAddress + 0x070B0840, 0x50, 0x20, 0xF8);
+
+                        PointerEnemyEntries = new MultilevelPointer[32];
+                        for (int i = 0; i < PointerEnemyEntries.Length; ++i)
+                            PointerEnemyEntries[i] = new MultilevelPointer(memoryAccess, BaseAddress + 0x070838A8, 0x80 + (i * 0x08), 0x88, 0x18, 0x1A0);
+
+                        if (!Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.NoInventory))
+                        {
+                            PointerInventoryEntries = new MultilevelPointer[20];
+                            for (int i = 0; i < PointerInventoryEntries.Length; ++i)
+                                PointerInventoryEntries[i] = new MultilevelPointer(memoryAccess, BaseAddress + 0x070B0840, 0x50, 0x98, 0x10, 0x20 + (i * 0x08), 0x18);
+                        }
+
+                        break;
+                    }
                 default:
                     {
                         break;

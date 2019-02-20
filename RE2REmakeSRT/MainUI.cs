@@ -184,11 +184,6 @@ namespace RE2REmakeSRT
                 e.Graphics.DrawString("DEAD", healthFont, Brushes.Red, 15, 37, stdStringFormat);
                 playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.EMPTY, "EMPTY");
             }
-            else if (Program.gameMem.PlayerPoisoned)
-            {
-                e.Graphics.DrawString(Program.gameMem.PlayerCurrentHealth.ToString(), healthFont, Brushes.MediumPurple, 15, 37, stdStringFormat);
-                playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.POISON, "POISON");
-            }
             else if (Program.gameMem.PlayerCurrentHealth >= 801) // Fine (Green)
             {
                 e.Graphics.DrawString(Program.gameMem.PlayerCurrentHealth.ToString(), healthFont, Brushes.LawnGreen, 15, 37, stdStringFormat);
@@ -204,6 +199,9 @@ namespace RE2REmakeSRT
                 e.Graphics.DrawString(Program.gameMem.PlayerCurrentHealth.ToString(), healthFont, Brushes.Red, 15, 37, stdStringFormat);
                 playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.DANGER, "DANGER");
             }
+
+            if (Program.gameMem.PlayerPoisoned)
+                playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.POISON, "POISON");
         }
 
         private void playerInfoPanel_Paint(object sender, PaintEventArgs e)
