@@ -14,6 +14,8 @@ To extract .7z archives, use [7-Zip](https://www.7-zip.org/)!
 * Removed version checking code (incl. --Skip-Checksum).
 * Added code to close the SRT if re2.exe is closed.
 * Restructured some code.
+* Adjusted enemy hp text from "Enemies" to "Enemy HP".
+* Debug moe now shows all 4 timer values. (A)lways running, (C)utscenes, (M)enus and (P)aused. As a reminder, IGT = A - C - P. Menu timer is tracked but not used in the IGT calculation.
 
 ### [Download 1.2.4.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1240-Beta-Signed-Release.7z) (2019-02-20)
 * Updated for latest patch.
