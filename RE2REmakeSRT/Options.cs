@@ -18,11 +18,6 @@ namespace RE2REmakeSRT
             else
                 Flags &= ~ProgramFlags.Debug;
 
-            if (RegistryHelper.GetBoolValue(optionsKey, "SkipChecksumCheck", false))
-                Flags |= ProgramFlags.SkipChecksumCheck;
-            else
-                Flags &= ~ProgramFlags.SkipChecksumCheck;
-
             if (RegistryHelper.GetBoolValue(optionsKey, "NoTitleBar", false))
                 Flags |= ProgramFlags.NoTitleBar;
             else
@@ -59,11 +54,6 @@ namespace RE2REmakeSRT
                 optionsKey.SetValue("Debug", 1, RegistryValueKind.DWord);
             else
                 optionsKey.SetValue("Debug", 0, RegistryValueKind.DWord);
-
-            if ((Flags & ProgramFlags.SkipChecksumCheck) == ProgramFlags.SkipChecksumCheck)
-                optionsKey.SetValue("SkipChecksumCheck", 1, RegistryValueKind.DWord);
-            else
-                optionsKey.SetValue("SkipChecksumCheck", 0, RegistryValueKind.DWord);
 
             if ((Flags & ProgramFlags.NoTitleBar) == ProgramFlags.NoTitleBar)
                 optionsKey.SetValue("NoTitleBar", 1, RegistryValueKind.DWord);

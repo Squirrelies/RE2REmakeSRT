@@ -23,28 +23,28 @@ namespace RE2REmakeSRT
         {
             try
             {
-                Process[] gameProcesses = Process.GetProcessesByName("re2");
-                Debug.WriteLine("RE2 (2019) processes found: {0}", gameProcesses.Length);
-                if (gameProcesses.Length != 0)
-                {
-                    Program.gameProc = gameProcesses[0];
-
-                    if (this.InvokeRequired)
-                    {
-                        this.Invoke(new Action(() =>
-                        {
-                            this.Close();
-                        }));
-                    }
-                    else
-                        this.Close();
-                }
+                Program.GetProcessPid();
             }
             finally
             {
-                if (Program.gameProc == null)
+                if (Program.gamePID == -1)
                     ((System.Timers.Timer)sender).Start();
+                else
+                    CloseForm();
             }
+        }
+
+        private void CloseForm()
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() =>
+                {
+                    this.Close();
+                }));
+            }
+            else
+                this.Close();
         }
     }
 }

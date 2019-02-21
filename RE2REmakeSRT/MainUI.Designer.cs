@@ -80,6 +80,8 @@
             this.Name = "MainUI";
             this.ShowIcon = false;
             this.Text = "RE2 (2019) SRT";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainUI_FormClosed);
+            this.Load += new System.EventHandler(this.MainUI_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainUI_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.playerHealthStatus)).EndInit();
             this.ResumeLayout(false);

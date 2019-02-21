@@ -39,7 +39,6 @@ namespace RE2REmakeSRT
 
         private Bitmap inventoryError; // An error image.
 
-
         public MainUI()
         {
             InitializeComponent();
@@ -94,33 +93,37 @@ namespace RE2REmakeSRT
 
             lastPtrUpdate = DateTime.UtcNow.Ticks;
             lastFullUIDraw = DateTime.UtcNow.Ticks;
-
-            memoryPollingTimer = new System.Timers.Timer() { AutoReset = false, Interval = SLIM_UI_DRAW_MS };
-            memoryPollingTimer.Elapsed += MemoryPollingTimer_Elapsed;
-            memoryPollingTimer.Start();
         }
 
         private void MemoryPollingTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
+            bool exitLoop = false;
+
             try
             {
-                // Suspend UI layout logic to perform redrawing.
-                MainUI uiForm = (MainUI)Program.mainContext.MainForm;
+                bool procRun = Program.gameMem.memoryAccess.ProcessRunning;
+                int procExitCode = Program.gameMem.memoryAccess.ProcessExitCode;
+                if (!procRun)
+                {
+                    Program.gamePID = -1;
+                    exitLoop = true;
+                    return;
+                }
 
                 if (Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.AlwaysOnTop))
                 {
                     bool hasFocus;
-                    if (uiForm.InvokeRequired)
-                        hasFocus = PInvoke.HasActiveFocus((IntPtr)uiForm.Invoke(new Func<IntPtr>(() => uiForm.Handle)));
+                    if (this.InvokeRequired)
+                        hasFocus = PInvoke.HasActiveFocus((IntPtr)this.Invoke(new Func<IntPtr>(() => this.Handle)));
                     else
-                        hasFocus = PInvoke.HasActiveFocus(uiForm.Handle);
+                        hasFocus = PInvoke.HasActiveFocus(this.Handle);
 
                     if (!hasFocus)
                     {
-                        if (uiForm.InvokeRequired)
-                            uiForm.Invoke(new Action(() => uiForm.TopMost = true));
+                        if (this.InvokeRequired)
+                            this.Invoke(new Action(() => this.TopMost = true));
                         else
-                            uiForm.TopMost = true;
+                            this.TopMost = true;
                     }
                 }
 
@@ -144,9 +147,9 @@ namespace RE2REmakeSRT
                     Program.gameMem.Refresh();
 
                     // Only draw these periodically to reduce CPU usage.
-                    uiForm.playerHealthStatus.Invalidate();
+                    this.playerHealthStatus.Invalidate();
                     if (!Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.NoInventory))
-                        uiForm.inventoryPanel.Invalidate();
+                        this.inventoryPanel.Invalidate();
                 }
                 else
                 {
@@ -155,7 +158,7 @@ namespace RE2REmakeSRT
                 }
 
                 // Always draw this as these are simple text draws and contains the IGT/frame count.
-                uiForm.statisticsPanel.Invalidate();
+                this.statisticsPanel.Invalidate();
             }
             catch (Exception ex)
             {
@@ -163,8 +166,11 @@ namespace RE2REmakeSRT
             }
             finally
             {
-                // Trigger the timer to start once again.
-                ((System.Timers.Timer)sender).Start();
+                // Trigger the timer to start once again. if we're not in fatal error.
+                if (!exitLoop)
+                    ((System.Timers.Timer)sender).Start();
+                else
+                    CloseForm();
             }
         }
 
@@ -293,15 +299,18 @@ namespace RE2REmakeSRT
 
             if (Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.Debug))
             {
-                e.Graphics.DrawString("Raw IGT", new Font("Consolas", 9, FontStyle.Bold), Brushes.Gray, 2, 25, stdStringFormat);
-                e.Graphics.DrawString(Program.gameMem.IGTRaw.ToString(), new Font("Consolas", 12, FontStyle.Bold), Brushes.Gray, 0, 37, stdStringFormat);
-                heightOffset = 25; // Adding an additional offset to accomdate Raw IGT.
+                e.Graphics.DrawString("Raw IGT", new Font("Consolas", 9, FontStyle.Bold), Brushes.Gray, 0, 25, stdStringFormat);
+                e.Graphics.DrawString("A:" + Program.gameMem.IGTRunningTimer.ToString("00000000000000000000"), new Font("Consolas", 9, FontStyle.Bold), Brushes.Gray, 0, 38, stdStringFormat);
+                e.Graphics.DrawString("C:" + Program.gameMem.IGTCutsceneTimer.ToString("00000000000000000000"), new Font("Consolas", 9, FontStyle.Bold), Brushes.Gray, 0, 53, stdStringFormat);
+                e.Graphics.DrawString("M:" + Program.gameMem.IGTMenuTimer.ToString("00000000000000000000"), new Font("Consolas", 9, FontStyle.Bold), Brushes.Gray, 0, 68, stdStringFormat);
+                e.Graphics.DrawString("P:" + Program.gameMem.IGTPausedTimer.ToString("00000000000000000000"), new Font("Consolas", 9, FontStyle.Bold), Brushes.Gray, 0, 83, stdStringFormat);
+                heightOffset = 70; // Adding an additional offset to accomdate Raw IGT.
             }
 
             e.Graphics.DrawString(string.Format("DA Rank: {0}", Program.gameMem.Rank), new Font("Consolas", 9, FontStyle.Bold), Brushes.Gray, 0, heightOffset + (heightGap * ++i), stdStringFormat);
             e.Graphics.DrawString(string.Format("DA Score: {0}", Program.gameMem.RankScore), new Font("Consolas", 9, FontStyle.Bold), Brushes.Gray, 0, heightOffset + (heightGap * ++i), stdStringFormat);
             
-            e.Graphics.DrawString("Enemies", new Font("Consolas", 10, FontStyle.Bold), Brushes.Red, 0, heightOffset + (heightGap * ++i), stdStringFormat);
+            e.Graphics.DrawString("Enemy HP", new Font("Consolas", 10, FontStyle.Bold), Brushes.Red, 0, heightOffset + (heightGap * ++i), stdStringFormat);
             foreach (EnemyHP enemyHP in Program.gameMem.EnemyHealth.Where(a => a.IsAlive).OrderBy(a => a.Percentage).ThenByDescending(a => a.CurrentHP))
             {
                 e.Graphics.DrawString(string.Format("{0} {1:P1}", enemyHP.CurrentHP, enemyHP.Percentage), new Font("Consolas", 10, FontStyle.Bold), Brushes.Red, 0, heightOffset + (heightGap * ++i), stdStringFormat);
@@ -331,6 +340,32 @@ namespace RE2REmakeSRT
         {
             if (e.Button == MouseButtons.Left)
                 PInvoke.DragControl(((Form)sender).Handle);
+        }
+
+        private void MainUI_Load(object sender, EventArgs e)
+        {
+            memoryPollingTimer = new System.Timers.Timer() { AutoReset = false, Interval = SLIM_UI_DRAW_MS };
+            memoryPollingTimer.Elapsed += MemoryPollingTimer_Elapsed;
+            memoryPollingTimer.Start();
+        }
+
+        private void MainUI_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            memoryPollingTimer.Stop();
+            memoryPollingTimer.Dispose();
+        }
+
+        private void CloseForm()
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() =>
+                {
+                    this.Close();
+                }));
+            }
+            else
+                this.Close();
         }
     }
 }

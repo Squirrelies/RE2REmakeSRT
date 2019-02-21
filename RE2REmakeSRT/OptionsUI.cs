@@ -15,7 +15,6 @@ namespace RE2REmakeSRT
             this.Text += string.Format(" {0}", Program.srtVersion);
 
             debugCheckBox.Checked = (Program.programSpecialOptions.Flags & ProgramFlags.Debug) == ProgramFlags.Debug;
-            skipChecksumCheckBox.Checked = (Program.programSpecialOptions.Flags & ProgramFlags.SkipChecksumCheck) == ProgramFlags.SkipChecksumCheck;
             noTitlebarCheckBox.Checked = (Program.programSpecialOptions.Flags & ProgramFlags.NoTitleBar) == ProgramFlags.NoTitleBar;
             alwaysOnTopCheckBox.Checked = (Program.programSpecialOptions.Flags & ProgramFlags.AlwaysOnTop) == ProgramFlags.AlwaysOnTop;
             transparentBackgroundCheckBox.Checked = (Program.programSpecialOptions.Flags & ProgramFlags.Transparent) == ProgramFlags.Transparent;
@@ -47,11 +46,6 @@ namespace RE2REmakeSRT
                 Program.programSpecialOptions.Flags |= ProgramFlags.Debug;
             else if (!debugCheckBox.Checked && (Program.programSpecialOptions.Flags & ProgramFlags.Debug) == ProgramFlags.Debug)
                 Program.programSpecialOptions.Flags &= ~ProgramFlags.Debug;
-
-            if (skipChecksumCheckBox.Checked && (Program.programSpecialOptions.Flags & ProgramFlags.SkipChecksumCheck) != ProgramFlags.SkipChecksumCheck)
-                Program.programSpecialOptions.Flags |= ProgramFlags.SkipChecksumCheck;
-            else if (!skipChecksumCheckBox.Checked && (Program.programSpecialOptions.Flags & ProgramFlags.SkipChecksumCheck) == ProgramFlags.SkipChecksumCheck)
-                Program.programSpecialOptions.Flags &= ~ProgramFlags.SkipChecksumCheck;
 
             if (noTitlebarCheckBox.Checked && (Program.programSpecialOptions.Flags & ProgramFlags.NoTitleBar) != ProgramFlags.NoTitleBar)
                 Program.programSpecialOptions.Flags |= ProgramFlags.NoTitleBar;

@@ -4,16 +4,16 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace RE2REmakeSRT
 {
     public static class Program
     {
-        public static ApplicationContext mainContext;
         public static ContextMenu contextMenu;
         public static Options programSpecialOptions;
-        public static Process gameProc;
+        public static int gamePID;
         public static GameMemory gameMem;
 
         public static readonly string srtVersion = string.Format("v{0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
@@ -39,7 +39,6 @@ namespace RE2REmakeSRT
                     if (arg.Equals("--Help", StringComparison.InvariantCultureIgnoreCase))
                     {
                         StringBuilder message = new StringBuilder("Command-line arguments:\r\n\r\n");
-                        message.AppendFormat("{0}\r\n\t{1}\r\n\r\n", "--Skip-Checksum", "Skip the checksum file validation step.");
                         message.AppendFormat("{0}\r\n\t{1}\r\n\r\n", "--No-Titlebar", "Hide the titlebar and window frame.");
                         message.AppendFormat("{0}\r\n\t{1}\r\n\r\n", "--Always-On-Top", "Always appear on top of other windows.");
                         message.AppendFormat("{0}\r\n\t{1}\r\n\r\n", "--Transparent", "Make the background transparent.");
@@ -50,9 +49,6 @@ namespace RE2REmakeSRT
                         MessageBox.Show(null, message.ToString().Trim(), string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Environment.Exit(0);
                     }
-
-                    if (arg.Equals("--Skip-Checksum", StringComparison.InvariantCultureIgnoreCase))
-                        programSpecialOptions.Flags |= ProgramFlags.SkipChecksumCheck;
 
                     if (arg.Equals("--No-Titlebar", StringComparison.InvariantCultureIgnoreCase))
                         programSpecialOptions.Flags |= ProgramFlags.NoTitleBar;
@@ -94,20 +90,52 @@ namespace RE2REmakeSRT
                 // Standard WinForms stuff.
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-
-                // This form finds the process for re2.exe (assigned to gameProc) or waits until it is found.
-                using (mainContext = new ApplicationContext(new AttachUI()))
-                    Application.Run(mainContext);
-
-                // Attach to the re2.exe process now that we've found it and show the UI.
-                using (gameMem = new GameMemory(gameProc.Id))
-                using (mainContext = new ApplicationContext(new MainUI()))
-                    Application.Run(mainContext);
+                AttachAndShowUI();
             }
             catch (Exception ex)
             {
                 FailFast(string.Format("[{0}] An unhandled exception has occurred. Please see below for details.\r\n\r\n[{1}] {2}\r\n{3}.", srtVersion, ex.GetType().ToString(), ex.Message, ex.StackTrace), ex);
             }
+        }
+
+        public static void AttachAndShowUI()
+        {
+            // This form finds the process for re2.exe (assigned to gameProc) or waits until it is found.
+            using (AttachUI attachUI = new AttachUI())
+            using (ApplicationContext mainContext = new ApplicationContext(attachUI))
+            {
+                Application.Run(mainContext);
+            }
+
+            // If we exited the attach UI without finding a PID, bail out completely.
+            Debug.WriteLine("Checking PID for -1...");
+            if (gamePID == -1)
+                return;
+
+            // Attach to the re2.exe process now that we've found it and show the UI.
+            Debug.WriteLine("Showing MainUI...");
+            using (gameMem = new GameMemory(gamePID))
+            using (MainUI mainUI = new MainUI())
+            using (ApplicationContext mainContext = new ApplicationContext(mainUI))
+            {
+                Application.Run(mainContext);
+            }
+        }
+
+        public static void GetProcessPid()
+        {
+            Process[] gameProcesses = Process.GetProcessesByName("re2");
+            Debug.WriteLine("RE2 (2019) processes found: {0}", gameProcesses.Length);
+            if (gameProcesses.Length != 0)
+            {
+                foreach (Process p in gameProcesses)
+                {
+                    Debug.WriteLine("PID: {0}", p.Id);
+                }
+                gamePID = gameProcesses[0].Id;
+            }
+            else
+                gamePID = -1;
         }
 
         public static void FailFast(string message, Exception ex)
