@@ -193,21 +193,30 @@ namespace RE2REmakeSRT
             else if (Program.gameMem.PlayerCurrentHealth >= 801) // Fine (Green)
             {
                 e.Graphics.DrawString(Program.gameMem.PlayerCurrentHealth.ToString(), healthFont, Brushes.LawnGreen, 15, 37, stdStringFormat);
-                playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.FINE, "FINE");
+
+                if (!Program.gameMem.PlayerPoisoned)
+                    playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.FINE, "FINE");
+                else
+                    playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.POISON, "POISON");
             }
             else if (Program.gameMem.PlayerCurrentHealth <= 800 && Program.gameMem.PlayerCurrentHealth >= 361) // Caution (Yellow)
             {
                 e.Graphics.DrawString(Program.gameMem.PlayerCurrentHealth.ToString(), healthFont, Brushes.Goldenrod, 15, 37, stdStringFormat);
-                playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.CAUTION_YELLOW, "CAUTION_YELLOW");
+
+                if (!Program.gameMem.PlayerPoisoned)
+                    playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.CAUTION_YELLOW, "CAUTION_YELLOW");
+                else
+                    playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.POISON, "POISON");
             }
             else if (Program.gameMem.PlayerCurrentHealth <= 360) // Danger (Red)
             {
                 e.Graphics.DrawString(Program.gameMem.PlayerCurrentHealth.ToString(), healthFont, Brushes.Red, 15, 37, stdStringFormat);
-                playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.DANGER, "DANGER");
-            }
 
-            if (Program.gameMem.PlayerPoisoned)
-                playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.POISON, "POISON");
+                if (!Program.gameMem.PlayerPoisoned)
+                    playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.DANGER, "DANGER");
+                else
+                    playerHealthStatus.ThreadSafeSetHealthImage(Properties.Resources.POISON, "POISON");
+            }
         }
 
         private void playerInfoPanel_Paint(object sender, PaintEventArgs e)
