@@ -7,6 +7,7 @@ using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace RE2REmakeSRT
@@ -14,10 +15,10 @@ namespace RE2REmakeSRT
     public partial class MainUI : Form
     {
         // How often to perform more expensive operations.
-        // 2500 milliseconds for updating pointers.
+        // 2000 milliseconds for updating pointers.
         // 333 milliseconds for a full scan.
         // 16 milliseconds for a slim scan.
-        public const long PTR_UPDATE_TICKS = TimeSpan.TicksPerMillisecond * 2500L;
+        public const long PTR_UPDATE_TICKS = TimeSpan.TicksPerMillisecond * 2000L;
         public const long FULL_UI_DRAW_TICKS = TimeSpan.TicksPerMillisecond * 333L;
         public const double SLIM_UI_DRAW_MS = 16d;
 
@@ -39,6 +40,13 @@ namespace RE2REmakeSRT
 
         private Bitmap inventoryError; // An error image.
 
+        private DXOverlay overlay;
+        private GameOverlay.Drawing.Font font = null;
+        private GameOverlay.Drawing.SolidBrush redBrush = null;
+        private GameOverlay.Drawing.SolidBrush whiteBrush = null;
+        private GameOverlay.Drawing.SolidBrush greyBrush = null;
+        private GameOverlay.Drawing.SolidBrush blackBrush = null;
+
         public MainUI()
         {
             InitializeComponent();
@@ -50,6 +58,29 @@ namespace RE2REmakeSRT
             this.playerHealthStatus.ContextMenu = Program.contextMenu;
             this.statisticsPanel.ContextMenu = Program.contextMenu;
             this.inventoryPanel.ContextMenu = Program.contextMenu;
+
+            //GDI+
+            this.playerHealthStatus.Paint += this.playerHealthStatus_Paint;
+            this.statisticsPanel.Paint += this.statisticsPanel_Paint;
+            this.inventoryPanel.Paint += this.inventoryPanel_Paint;
+
+            // DirectX
+            if (Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.DirectXOverlay))
+            {
+                overlay = new DXOverlay(Program.gameWindowHandle);
+                overlay.Initialize((GameOverlay.Windows.OverlayWindow w, GameOverlay.Drawing.Graphics g) =>
+                {
+                    font = g.CreateFont("Consolas", 8, true);
+                    redBrush = g.CreateSolidBrush(255, 0, 0);
+                    whiteBrush = g.CreateSolidBrush(255, 255, 255);
+                    greyBrush = g.CreateSolidBrush(150, 150, 150);
+                    blackBrush = g.CreateSolidBrush(0, 0, 0);
+
+                    backBrushDirectX = g.CreateSolidBrush(60, 60, 60);
+                    foreBrushDirectX = g.CreateSolidBrush(100, 0, 0);
+                });
+                overlay.Run(statisticsPanelDirectX_Paint, CancellationToken.None);
+            }
 
             if (Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.NoTitleBar))
                 this.FormBorderStyle = FormBorderStyle.None;
@@ -229,6 +260,62 @@ namespace RE2REmakeSRT
             e.Graphics.TextRenderingHint = textRenderingHint;
         }
 
+        private void inventoryPanelDirectX_Paint(GameOverlay.Windows.OverlayWindow w, GameOverlay.Drawing.Graphics g)
+        {
+            //if (!Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.NoInventory))
+            //{
+            //    foreach (InventoryEntry inv in Program.gameMem.PlayerInventory)
+            //    {
+            //        if (inv == default || inv.SlotPosition < 0 || inv.SlotPosition > 19 || inv.IsEmptySlot)
+            //            continue;
+
+            //        int slotColumn = inv.SlotPosition % 4;
+            //        int slotRow = inv.SlotPosition / 4;
+            //        int imageX = slotColumn * Program.INV_SLOT_WIDTH;
+            //        int imageY = slotRow * Program.INV_SLOT_HEIGHT;
+            //        int textX = imageX + Program.INV_SLOT_WIDTH;
+            //        int textY = imageY + Program.INV_SLOT_HEIGHT;
+            //        bool evenSlotColumn = slotColumn % 2 == 0;
+            //        Brush textBrush = Brushes.White;
+
+            //        if (inv.Quantity == 0)
+            //            textBrush = Brushes.DarkRed;
+
+            //        GameOverlay.Drawing.Image imageBrush;
+            //        Weapon weapon;
+            //        if (inv.IsItem && GameMemory.ItemToImageTranslation.ContainsKey(inv.ItemID))
+            //        {
+            //            if (inv.ItemID == ItemEnumeration.OldKey)
+            //                imageBrush = new TextureBrush(GameMemory.inventoryImagePatch1, GameMemory.ItemToImageTranslation[inv.ItemID]);
+            //            else
+            //                imageBrush = new TextureBrush(GameMemory.inventoryImage, GameMemory.ItemToImageTranslation[inv.ItemID]);
+            //        }
+            //        else if (inv.IsWeapon && GameMemory.WeaponToImageTranslation.ContainsKey(weapon = new Weapon() { WeaponID = inv.WeaponID, Attachments = inv.Attachments }))
+            //            imageBrush = new TextureBrush(GameMemory.inventoryImage, GameMemory.WeaponToImageTranslation[weapon]);
+            //        else
+            //            imageBrush = new TextureBrush(inventoryError, new Rectangle(0, 0, Program.INV_SLOT_WIDTH, Program.INV_SLOT_HEIGHT));
+
+            //        // Double-slot item.
+            //        if (imageBrush.Image.Width == Program.INV_SLOT_WIDTH * 2)
+            //        {
+            //            // If we're an odd column, we need to adjust the transform so the image doesn't get split in half and tiled. Not sure why it does this.
+            //            if (!evenSlotColumn)
+            //                imageBrush.TranslateTransform(Program.INV_SLOT_WIDTH, 0);
+
+            //            // Shift the quantity text over into the 2nd slot's area.
+            //            textX += Program.INV_SLOT_WIDTH;
+            //        }
+                    
+            //        g.CreateImage(Properties.Resources.ui0100_iam_texout.);
+
+            //        g.FillRectangle(imageBrush, imageX, imageY, imageBrush.Image.Width, imageBrush.Image.Height);
+            //        g.DrawText(font, 14, greyBrush, textX, textY, (inv.Quantity != -1) ? inv.Quantity.ToString() : "∞");
+
+            //        //font, 14, greyBrush
+            //    }
+            //}
+        }
+
         private void inventoryPanel_Paint(object sender, PaintEventArgs e)
         {
             if (!Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.NoInventory))
@@ -288,6 +375,43 @@ namespace RE2REmakeSRT
             }
         }
 
+        private void statisticsPanelDirectX_Paint(GameOverlay.Windows.OverlayWindow w, GameOverlay.Drawing.Graphics g)
+        {
+            // Additional information and stats.
+            // Adjustments for displaying text properly.
+            int xOffset = 5;
+            int yOffset = 640;
+            int heightGap = 15;
+            int i = 1;
+
+            // IGT Display.
+            g.DrawText(font, 22, whiteBrush, xOffset + 0, yOffset + 0, string.Format("{0}", Program.gameMem.IGTString));
+
+            if (Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.Debug))
+            {
+                g.DrawText(font, 14, greyBrush, xOffset + 0, yOffset + 25, "Raw IGT");
+                g.DrawText(font, 14, greyBrush, xOffset + 0, yOffset + 38, "A:" + Program.gameMem.IGTRunningTimer.ToString("00000000000000000000"));
+                g.DrawText(font, 14, greyBrush, xOffset + 0, yOffset + 53, "C:" + Program.gameMem.IGTCutsceneTimer.ToString("00000000000000000000"));
+                g.DrawText(font, 14, greyBrush, xOffset + 0, yOffset + 68, "M:" + Program.gameMem.IGTMenuTimer.ToString("00000000000000000000"));
+                g.DrawText(font, 14, greyBrush, xOffset + 0, yOffset + 83, "P:" + Program.gameMem.IGTPausedTimer.ToString("00000000000000000000"));
+                yOffset += 70; // Adding an additional offset to accomdate Raw IGT.
+            }
+
+            g.DrawText(font, 16, greyBrush, xOffset + 0, yOffset + (heightGap * ++i), string.Format("DA Rank: {0}", Program.gameMem.Rank));
+            g.DrawText(font, 16, greyBrush, xOffset + 0, yOffset + (heightGap * ++i), string.Format("DA Score: {0}", Program.gameMem.RankScore));
+
+            g.DrawText(font, 16, redBrush, xOffset + 0, yOffset + (heightGap * ++i), "Enemy HP");
+            yOffset += 6;
+            foreach (EnemyHP enemyHP in Program.gameMem.EnemyHealth.Where(a => a.IsAlive).OrderBy(a => a.Percentage).ThenByDescending(a => a.CurrentHP))
+            {
+                int x = xOffset + 0;
+                int y = yOffset + (heightGap * ++i);
+
+                DrawProgressBarDirectX(g, backBrushDirectX, foreBrushDirectX, x, y, 158, heightGap, enemyHP.Percentage * 100f, 100f);
+                g.DrawText(font, 12, redBrush, x + 5, y, string.Format("{0} {1:P1}", enemyHP.CurrentHP, enemyHP.Percentage));
+            }
+        }
+
         private void statisticsPanel_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = smoothingMode;
@@ -318,12 +442,53 @@ namespace RE2REmakeSRT
 
             e.Graphics.DrawString(string.Format("DA Rank: {0}", Program.gameMem.Rank), new Font("Consolas", 9, FontStyle.Bold), Brushes.Gray, 0, heightOffset + (heightGap * ++i), stdStringFormat);
             e.Graphics.DrawString(string.Format("DA Score: {0}", Program.gameMem.RankScore), new Font("Consolas", 9, FontStyle.Bold), Brushes.Gray, 0, heightOffset + (heightGap * ++i), stdStringFormat);
-            
+
             e.Graphics.DrawString("Enemy HP", new Font("Consolas", 10, FontStyle.Bold), Brushes.Red, 0, heightOffset + (heightGap * ++i), stdStringFormat);
             foreach (EnemyHP enemyHP in Program.gameMem.EnemyHealth.Where(a => a.IsAlive).OrderBy(a => a.Percentage).ThenByDescending(a => a.CurrentHP))
             {
-                e.Graphics.DrawString(string.Format("{0} {1:P1}", enemyHP.CurrentHP, enemyHP.Percentage), new Font("Consolas", 10, FontStyle.Bold), Brushes.Red, 0, heightOffset + (heightGap * ++i), stdStringFormat);
+                int x = 0;
+                int y = heightOffset + (heightGap * ++i);
+
+                DrawProgressBarGDI(e, backBrushGDI, foreBrushGDI, x, y, 146, heightGap, enemyHP.Percentage * 100f, 100f);
+                e.Graphics.DrawString(string.Format("{0} {1:P1}", enemyHP.CurrentHP, enemyHP.Percentage), new Font("Consolas", 10, FontStyle.Bold), Brushes.Red, x, y, stdStringFormat);
             }
+        }
+
+        // Customisation in future?
+        private Brush backBrushGDI = new SolidBrush(Color.FromArgb(255, 60, 60, 60));
+        private Brush foreBrushGDI = new SolidBrush(Color.FromArgb(255, 100, 0, 0));
+
+        private GameOverlay.Drawing.SolidBrush backBrushDirectX = null;
+        private GameOverlay.Drawing.SolidBrush foreBrushDirectX = null;
+
+        private void DrawProgressBarGDI(PaintEventArgs e, Brush bgBrush, Brush foreBrush, float x, float y, float width, float height, float value, float maximum = 100)
+        {
+            // Draw BG.
+            e.Graphics.DrawRectangles(new Pen(bgBrush, 2f), new RectangleF[1] { new RectangleF(x, y, width, height) });
+
+            // Draw FG.
+            RectangleF foreRect = new RectangleF(
+                x + 1f,
+                y + 1f,
+                (width * value / maximum) - 2f,
+                height - 2f
+                );
+            e.Graphics.FillRectangle(foreBrush, foreRect);
+        }
+
+        private void DrawProgressBarDirectX(GameOverlay.Drawing.Graphics g, GameOverlay.Drawing.SolidBrush bgBrush, GameOverlay.Drawing.SolidBrush foreBrush, float x, float y, float width, float height, float value, float maximum = 100)
+        {
+            // Draw BG.
+            g.DrawRectangle(bgBrush, x, y, x + width, y + height, 3f);
+
+            // Draw FG.
+            GameOverlay.Drawing.Rectangle foreRect = new GameOverlay.Drawing.Rectangle(
+                x,
+                y,
+                x + ((width * value / maximum)),
+                y + (height)
+                );
+            g.FillRectangle(foreBrush, foreRect);
         }
 
         private void inventoryPanel_MouseDown(object sender, MouseEventArgs e)

@@ -12,5 +12,6 @@ namespace RE2REmakeSRT
         AlwaysOnTop = 8,
         Transparent = 16,
         NoInventory = 32,
+        DirectXOverlay = 64,
     }
 }

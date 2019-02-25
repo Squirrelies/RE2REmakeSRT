@@ -43,7 +43,6 @@
             this.playerHealthStatus.Size = new System.Drawing.Size(150, 60);
             this.playerHealthStatus.TabIndex = 0;
             this.playerHealthStatus.TabStop = false;
-            this.playerHealthStatus.Paint += new System.Windows.Forms.PaintEventHandler(this.playerHealthStatus_Paint);
             this.playerHealthStatus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.playerHealthStatus_MouseDown);
             // 
             // statisticsPanel
@@ -52,7 +51,6 @@
             this.statisticsPanel.Name = "statisticsPanel";
             this.statisticsPanel.Size = new System.Drawing.Size(150, 354);
             this.statisticsPanel.TabIndex = 2;
-            this.statisticsPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.statisticsPanel_Paint);
             this.statisticsPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.statisticsPanel_MouseDown);
             // 
             // inventoryPanel
@@ -61,7 +59,6 @@
             this.inventoryPanel.Name = "inventoryPanel";
             this.inventoryPanel.Size = new System.Drawing.Size(336, 420);
             this.inventoryPanel.TabIndex = 3;
-            this.inventoryPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.inventoryPanel_Paint);
             this.inventoryPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.inventoryPanel_MouseDown);
             // 
             // MainUI

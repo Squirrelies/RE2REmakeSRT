@@ -19,6 +19,7 @@ namespace RE2REmakeSRT
             alwaysOnTopCheckBox.Checked = (Program.programSpecialOptions.Flags & ProgramFlags.AlwaysOnTop) == ProgramFlags.AlwaysOnTop;
             transparentBackgroundCheckBox.Checked = (Program.programSpecialOptions.Flags & ProgramFlags.Transparent) == ProgramFlags.Transparent;
             noInventoryCheckBox.Checked = (Program.programSpecialOptions.Flags & ProgramFlags.NoInventory) == ProgramFlags.NoInventory;
+            directxOverlayCheckBox.Checked = (Program.programSpecialOptions.Flags & ProgramFlags.DirectXOverlay) == ProgramFlags.DirectXOverlay;
             scalingFactorNumericUpDown.Value = (decimal)Program.programSpecialOptions.ScalingFactor;
 
             // Temporarily disable always on top so the MainUI form doesn't take control over this form.
@@ -66,6 +67,11 @@ namespace RE2REmakeSRT
                 Program.programSpecialOptions.Flags |= ProgramFlags.NoInventory;
             else if (!noInventoryCheckBox.Checked && (Program.programSpecialOptions.Flags & ProgramFlags.NoInventory) == ProgramFlags.NoInventory)
                 Program.programSpecialOptions.Flags &= ~ProgramFlags.NoInventory;
+
+            if (directxOverlayCheckBox.Checked && (Program.programSpecialOptions.Flags & ProgramFlags.DirectXOverlay) != ProgramFlags.DirectXOverlay)
+                Program.programSpecialOptions.Flags |= ProgramFlags.DirectXOverlay;
+            else if (!directxOverlayCheckBox.Checked && (Program.programSpecialOptions.Flags & ProgramFlags.DirectXOverlay) == ProgramFlags.DirectXOverlay)
+                Program.programSpecialOptions.Flags &= ~ProgramFlags.DirectXOverlay;
 
             Program.programSpecialOptions.ScalingFactor = (double)scalingFactorNumericUpDown.Value;
 

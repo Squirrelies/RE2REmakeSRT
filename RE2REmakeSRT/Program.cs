@@ -14,6 +14,7 @@ namespace RE2REmakeSRT
         public static ContextMenu contextMenu;
         public static Options programSpecialOptions;
         public static int gamePID;
+        public static IntPtr gameWindowHandle;
         public static GameMemory gameMem;
 
         public static readonly string srtVersion = string.Format("v{0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
@@ -44,6 +45,7 @@ namespace RE2REmakeSRT
                         message.AppendFormat("{0}\r\n\t{1}\r\n\r\n", "--Transparent", "Make the background transparent.");
                         message.AppendFormat("{0}\r\n\t{1}\r\n\r\n", "--ScalingFactor=n", "Set the inventory slot scaling factor on a scale of 0.0 to 1.0. Default: 0.75 (75%)");
                         message.AppendFormat("{0}\r\n\t{1}\r\n\r\n", "--NoInventory", "Disables the inventory display.");
+                        message.AppendFormat("{0}\r\n\t{1}\r\n\r\n", "--DirectX", "Enables the DirectX overlay.");
                         message.AppendFormat("{0}\r\n\t{1}\r\n\r\n", "--Debug", "Debug mode.");
 
                         MessageBox.Show(null, message.ToString().Trim(), string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -61,6 +63,9 @@ namespace RE2REmakeSRT
 
                     if (arg.Equals("--NoInventory", StringComparison.InvariantCultureIgnoreCase))
                         programSpecialOptions.Flags |= ProgramFlags.NoInventory;
+
+                    if (arg.Equals("--DirectX", StringComparison.InvariantCultureIgnoreCase))
+                        programSpecialOptions.Flags |= ProgramFlags.DirectXOverlay;
 
                     if (arg.StartsWith("--ScalingFactor=", StringComparison.InvariantCultureIgnoreCase))
                         if (!double.TryParse(arg.Split(new char[1] { '=' }, 2, StringSplitOptions.None)[1], out programSpecialOptions.ScalingFactor))
@@ -122,7 +127,7 @@ namespace RE2REmakeSRT
             }
         }
 
-        public static void GetProcessPid()
+        public static void GetProcessInfo()
         {
             Process[] gameProcesses = Process.GetProcessesByName("re2");
             Debug.WriteLine("RE2 (2019) processes found: {0}", gameProcesses.Length);
@@ -133,9 +138,13 @@ namespace RE2REmakeSRT
                     Debug.WriteLine("PID: {0}", p.Id);
                 }
                 gamePID = gameProcesses[0].Id;
+                gameWindowHandle = gameProcesses[0].MainWindowHandle;
             }
             else
+            {
                 gamePID = -1;
+                gameWindowHandle = IntPtr.Zero;
+            }
         }
 
         public static void FailFast(string message, Exception ex)

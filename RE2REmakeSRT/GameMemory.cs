@@ -102,9 +102,9 @@ namespace RE2REmakeSRT
         public void UpdatePointers()
         {
             PointerIGT.UpdatePointers();
-            PointerRank.UpdatePointers();
             PointerPlayerHP.UpdatePointers();
             PointerPlayerPoison.UpdatePointers();
+            PointerRank.UpdatePointers();
 
             for (int i = 0; i < PointerEnemyEntries.Length; ++i)
                 PointerEnemyEntries[i].UpdatePointers();
@@ -143,6 +143,8 @@ namespace RE2REmakeSRT
             PlayerMaxHealth = PointerPlayerHP.DerefInt(0x54);
             PlayerCurrentHealth = PointerPlayerHP.DerefInt(0x58);
             PlayerPoisoned = PointerPlayerPoison.DerefByte(0x258) == 0x01;
+            Rank = PointerRank.DerefInt(0x58);
+            RankScore = PointerRank.DerefFloat(0x5C);
 
             // Enemy HP
             for (int i = 0; i < PointerEnemyEntries.Length; ++i)
@@ -154,14 +156,10 @@ namespace RE2REmakeSRT
                 for (int i = 0; i < PointerInventoryEntries.Length; ++i)
                 {
                     long invDataPointer = PointerInventoryEntries[i].DerefLong(0x10);
-                    long invDataOffset = invDataPointer - PointerInventoryEntries[i].Addresses[PointerInventoryEntries[i].Addresses.Count - 1];
+                    long invDataOffset = invDataPointer - PointerInventoryEntries[i].Address;
                     PlayerInventory[i] = new InventoryEntry(PointerInventoryEntries[i].DerefInt(0x28), PointerInventoryEntries[i].DerefByteArray(invDataOffset + 0x10, 0x14));
                 }
             }
-
-            // Rank
-            Rank = PointerRank.DerefInt(0x58);
-            RankScore = PointerRank.DerefFloat(0x5C);
         }
 
         public static Bitmap inventoryImage;

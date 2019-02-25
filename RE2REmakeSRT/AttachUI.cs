@@ -23,7 +23,7 @@ namespace RE2REmakeSRT
         {
             try
             {
-                Program.GetProcessPid();
+                Program.GetProcessInfo();
             }
             finally
             {
