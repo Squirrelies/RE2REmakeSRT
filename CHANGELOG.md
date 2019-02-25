@@ -9,7 +9,10 @@ To extract .7z archives, use [7-Zip](https://www.7-zip.org/)!
 
 ## [Click here](http://dudley.gg/squirrelies/re2/latest.7z) to download the latest release!
 
-## [Download 1.3.1.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1310-Beta-Signed-Release.7z) (2019-02-21)
+## [Download 1.3.2.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1320-Beta-Signed-Release.7z) (2019-02-24)
+* Fixed an OverflowException with the enemy HP bars.
+
+### [Download 1.3.1.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1310-Beta-Signed-Release.7z) (2019-02-21)
 * Added progress bars to enemy hp.
 
 ### [Download 1.3.0.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1300-Beta-Signed-Release.7z) (2019-02-20)
