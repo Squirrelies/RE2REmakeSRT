@@ -15,11 +15,12 @@ Features implemented:
 * Enemy health and percentage.
 * In-game timer.
 * Rank and score progress.
+* Inventory display.
 
 Features planned:
 
-* Inventory display.
-* Equipped weapon and equipped defensive item.
+* DirectX overlay.
+* Equipped weapon and defensive item.
 * Saves used.
 
 Notice: Some planned features may be cancelled due to practicality or other issues. This list is not intended to be a guarantee.
