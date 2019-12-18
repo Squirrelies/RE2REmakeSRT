@@ -165,9 +165,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' == '' Or '$(BuildingInsideVisualStudio)' == 'true'">
-    <PostBuildEvent>"C:\Program Files (x86)\Windows Kits\10\bin\10.0.16299.0\x64\signtool.exe" sign /tr "http://timestamp.digicert.com" /td SHA1 /n "Travis J Gutjahr" /sm /fd SHA1 "$(TargetDir)\RE2REmakeSRT.exe"
-"C:\Program Files (x86)\Windows Kits\10\bin\10.0.16299.0\x64\signtool.exe" sign /tr "http://timestamp.digicert.com" /td SHA256 /n "Travis J Gutjahr" /sm /fd SHA256 /as "$(TargetDir)\RE2REmakeSRT.exe"
-"C:\Program Files (x86)\Windows Kits\10\bin\10.0.16299.0\x64\signtool.exe" sign /tr "http://timestamp.digicert.com" /td SHA512 /n "Travis J Gutjahr" /sm /fd SHA512 /as "$(TargetDir)\RE2REmakeSRT.exe"
+    <PostBuildEvent>"C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x64\signtool.exe" sign /tr "http://timestamp.digicert.com" /td SHA1 /n "Travis J Gutjahr" /sm /fd SHA1 "$(TargetDir)\RE2REmakeSRT.exe"
+"C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x64\signtool.exe" sign /tr "http://timestamp.digicert.com" /td SHA256 /n "Travis J Gutjahr" /sm /fd SHA256 /as "$(TargetDir)\RE2REmakeSRT.exe"
+"C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x64\signtool.exe" sign /tr "http://timestamp.digicert.com" /td SHA512 /n "Travis J Gutjahr" /sm /fd SHA512 /as "$(TargetDir)\RE2REmakeSRT.exe"
 </PostBuildEvent>
   </PropertyGroup>
 </Project>
