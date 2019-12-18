@@ -66,20 +66,20 @@ namespace RE2REmakeSRT
             BaseAddress = NativeWrappers.GetProcessBaseAddress(pid, ProcessMemory.PInvoke.ListModules.LIST_MODULES_64BIT).ToInt64(); // Bypass .NET's managed solution for getting this and attempt to get this info ourselves via PInvoke since some users are getting 299 PARTIAL COPY when they seemingly shouldn't. This is built as x64 only and RE2 is x64 only to my knowledge.
 
             // Setup the pointers.
-            PointerIGT = new MultilevelPointer(memoryAccess, BaseAddress + 0x070936F0, 0x2E0, 0x218, 0x610, 0x710, 0x60);
-            PointerRank = new MultilevelPointer(memoryAccess, BaseAddress + 0x070A3770);
-            PointerPlayerHP = new MultilevelPointer(memoryAccess, BaseAddress + 0x0709A630, 0x50, 0x20);
-            PointerPlayerPoison = new MultilevelPointer(memoryAccess, BaseAddress + 0x0709A630, 0x50, 0x20, 0xF8);
+            PointerIGT = new MultilevelPointer(memoryAccess, BaseAddress + 0x07097EF8, 0x2E0L, 0x218L, 0x610L, 0x710L, 0x60L); // *
+            PointerRank = new MultilevelPointer(memoryAccess, BaseAddress + 0x070A7C88); // *
+            PointerPlayerHP = new MultilevelPointer(memoryAccess, BaseAddress + 0x070A17E0, 0x50L, 0x20L); // *
+            PointerPlayerPoison = new MultilevelPointer(memoryAccess, BaseAddress + 0x070A17E0, 0x50L, 0x20L, 0xF8L); // *
 
             PointerEnemyEntries = new MultilevelPointer[32];
-            for (int i = 0; i < PointerEnemyEntries.Length; ++i)
-                PointerEnemyEntries[i] = new MultilevelPointer(memoryAccess, BaseAddress + 0x070A35B8, 0x80 + (i * 0x08), 0x88, 0x18, 0x1A0);
+            for (long i = 0; i < PointerEnemyEntries.Length; ++i)
+                PointerEnemyEntries[i] = new MultilevelPointer(memoryAccess, BaseAddress + 0x070960E0, 0x80L + (i * 0x08L), 0x88L, 0x18L, 0x1A0L); // *
 
             if (!Program.programSpecialOptions.Flags.HasFlag(ProgramFlags.NoInventory))
             {
                 PointerInventoryEntries = new MultilevelPointer[20];
-                for (int i = 0; i < PointerInventoryEntries.Length; ++i)
-                    PointerInventoryEntries[i] = new MultilevelPointer(memoryAccess, BaseAddress + 0x0709A630, 0x50, 0x98, 0x10, 0x20 + (i * 0x08), 0x18);
+                for (long i = 0; i < PointerInventoryEntries.Length; ++i)
+                    PointerInventoryEntries[i] = new MultilevelPointer(memoryAccess, BaseAddress + 0x070A17E0, 0x50L, 0x98L, 0x10L, 0x20L + (i * 0x08L), 0x18L); // *
             }
 
             // Initialize variables to default values.
