@@ -9,7 +9,10 @@ To extract .7z archives, use [7-Zip](https://www.7-zip.org/)!
 
 ## [Click here](http://dudley.gg/squirrelies/re2/latest.7z) to download the latest release!
 
-## [Download 1.3.3.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1330-Beta-Signed-Release.7z) (2019-04-26)
+## [Download 1.3.4.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1340-Beta-Signed-Release.7z) (2019-12-18)
+* Updated offsets for latest patch.
+
+### [Download 1.3.3.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1330-Beta-Signed-Release.7z) (2019-04-26)
 * Updated offsets for latest patch.
 
 ### [Download 1.3.2.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1320-Beta-Signed-Release.7z) (2019-02-24)
