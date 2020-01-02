@@ -35,4 +35,4 @@ Notice: Some planned features may be cancelled due to practicality or other issu
 * [Darazanjoll](https://www.twitch.tv/Darazanjoll) for testing.
 * [AGENTiCE](https://www.twitch.tv/AGENTiCEX) for feedback on image handling.
 * [Orchlon](https://www.twitch.tv/Orchlon) for testing.
-* [KevinsGaming22] for testing the DirectX overlay and finding a memory leak.
+* KevinsGaming22 for testing the DirectX overlay and finding a memory leak.
