@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace RE2REmakeSRT
@@ -26,15 +24,15 @@ namespace RE2REmakeSRT
         }
 
         // Storage variable.
-        public readonly int SlotPosition;
-        public readonly byte[] Data;
+        public int SlotPosition { get; private set; }
+        private byte[] Data { get; set; }
 
         // Accessor properties.
         public ItemEnumeration ItemID => (ItemEnumeration)ProcessMemory.HighPerfBitConverter.ToInt32(Data, 0x00);
         public WeaponEnumeration WeaponID => (WeaponEnumeration)ProcessMemory.HighPerfBitConverter.ToInt32(Data, 0x04);
         public AttachmentsFlag Attachments => (AttachmentsFlag)ProcessMemory.HighPerfBitConverter.ToInt32(Data, 0x08);
         public int Quantity => ProcessMemory.HighPerfBitConverter.ToInt32(Data, 0x10);
-        
+
         public bool IsItem => ItemID != ItemEnumeration.None && (WeaponID == WeaponEnumeration.None || WeaponID == 0);
         public bool IsWeapon => ItemID == ItemEnumeration.None && WeaponID != WeaponEnumeration.None && WeaponID != 0;
         public bool IsEmptySlot => !IsItem && !IsWeapon;

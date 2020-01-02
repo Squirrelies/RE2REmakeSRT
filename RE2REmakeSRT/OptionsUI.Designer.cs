@@ -109,7 +109,6 @@
             this.directxOverlayCheckBox.TabIndex = 8;
             this.directxOverlayCheckBox.Text = "DirectX Overlay";
             this.directxOverlayCheckBox.UseVisualStyleBackColor = true;
-            this.directxOverlayCheckBox.Visible = false;
             // 
             // noInventoryCheckBox
             // 
