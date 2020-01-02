@@ -16,10 +16,11 @@ Features implemented:
 * In-game timer.
 * Rank and score progress.
 * Inventory display.
+* DirectX overlay.
+* JSON HTTP Endpoint.
 
 Features planned:
 
-* DirectX overlay.
 * Equipped weapon and defensive item.
 * Saves used.
 
