@@ -9,7 +9,12 @@ To extract .7z archives, use [7-Zip](https://www.7-zip.org/)!
 
 ## [Click here](http://dudley.gg/squirrelies/re2/latest.7z) to download the latest release!
 
-## [Download 1.3.4.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1340-Beta-Signed-Release.7z) (2019-12-18)
+## [Download 1.4.0.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1400-Beta-Signed-Release.7z) (2020-01-02)
+* DirectX Overlay implemented.
+* JSON HTTP Endpoint implemented.
+* Performance modifications and code cleanup.
+
+### [Download 1.3.4.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1340-Beta-Signed-Release.7z) (2019-12-18)
 * Updated offsets for latest patch.
 
 ### [Download 1.3.3.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1330-Beta-Signed-Release.7z) (2019-04-26)
