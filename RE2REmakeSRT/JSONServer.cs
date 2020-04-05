@@ -23,7 +23,7 @@ namespace RE2REmakeSRT
 
             hostBuilder = new WebHostBuilder()
                 .UseKestrel()
-                .UseUrls("http://localhost:7190")
+                .UseUrls("http://::7190;http://0.0.0.0:7190")
                 .UseContentRoot(contentRoot)
                 .UseStartup<JSONServerStartup>()
                 .UseEnvironment("Development")

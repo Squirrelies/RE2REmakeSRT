@@ -9,7 +9,11 @@ To extract .7z archives, use [7-Zip](https://www.7-zip.org/)!
 
 ## [Click here](http://dudley.gg/squirrelies/re2/latest.7z) to download the latest release!
 
-## [Download 1.4.1.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1410-Beta-Signed-Release.7z) (2020-01-02)
+## [Download 1.4.2.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1420-Beta-Signed-Release.7z) (2020-04-05)
+* Fix for JSON endpoint not listening on all interfaces. Listens on all IPv4 and IPv6 interfaces now.
+* Moved some variables around in the Sample JSON HTML file. User configurable settings are near the top now.
+
+### [Download 1.4.1.0 Beta](http://dudley.gg/squirrelies/re2/RE2REmakeSRT-1410-Beta-Signed-Release.7z) (2020-01-02)
 * Added Microsoft.AspNetCore.Cors so I could allow cross-origin requests from any origin (such as the file server). Useful for local querying of the JSON data.
 * Added a sample HTML page with javascript query code to display the JSON values similar to how the SRT lays it out. Useful for OBS Browser Source displaying.
 

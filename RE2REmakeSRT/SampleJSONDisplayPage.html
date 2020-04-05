@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>RE2 REmake SRT JSON Display Page</title>
+    <title>RE3 REmake SRT JSON Display Page</title>
+    <script>
+        // USER CONFIGURABLE VARIABLES.
+        const JSON_ADDRESS = '127.0.0.1'; // IP OR HOSTNAME OF THE COMPUTER RUNNING THE SRT. USEFUL FOR MULTIPLE PC STREAMING SETUPS.
+        const JSON_PORT = 7190; // PORT OF THE JSON ENDPOINT. NOT LIKELY TO CHANGE UNLESS YOU COMPILED THE SRT YOURSELF FROM SOURCE CODE.
+        const POLLING_RATE = 333; // THE TIME IN MILLISECONDS WE'LL REQUEST UPDATED VALUES.
+    </script>
     <style>
         body {
             background-color: #000000;
             color: #FFFFFF;
+            font-family: Arial;
         }
 
         a {
@@ -30,14 +37,20 @@
             a:active {
                 text-decoration: underline;
             }
+
+        td {
+            text-align: right;
+        }
     </style>
 </head>
 <body>
     <div id="srtQueryData"></div>
     <script>
+        const JSON_ENDPOINT = `http://${JSON_ADDRESS}:${JSON_PORT}/`;
+
         window.onload = function () {
             getData();
-            setInterval(getData, 333);
+            setInterval(getData, POLLING_RATE);
         }
 
         var Asc = function (a, b) {
@@ -53,7 +66,7 @@
         }
 
         function getData() {
-            fetch('http://localhost:7190/')
+            fetch(JSON_ENDPOINT)
                 .then(function (response) {
                     return response.json();
                 })
@@ -69,14 +82,16 @@
             var mainContainer = document.getElementById("srtQueryData");
             mainContainer.innerHTML = "";
 
-            if (data.PlayerCurrentHealth <= 1200 && data.PlayerCurrentHealth >= 801)
-                mainContainer.innerHTML += '<font size="6" color="#7cfc00"><b>' + data.PlayerCurrentHealth + '</b></font><br>';
+            if (data.PlayerPoisoned)
+                mainContainer.innerHTML += '<font size="6" color="#7851a9"><b>' + data.PlayerCurrentHealth + '</b></font><br>'; // Toxic
+            else if (data.PlayerCurrentHealth <= 1200 && data.PlayerCurrentHealth >= 801)
+                mainContainer.innerHTML += '<font size="6" color="#7cfc00"><b>' + data.PlayerCurrentHealth + '</b></font><br>'; // aFineBoi
             else if (data.PlayerCurrentHealth <= 800 && data.PlayerCurrentHealth >= 361)
-                mainContainer.innerHTML += '<font size="6" color="#daa520"><b>' + data.PlayerCurrentHealth + '</b></font><br>';
+                mainContainer.innerHTML += '<font size="6" color="#daa520"><b>' + data.PlayerCurrentHealth + '</b></font><br>'; // Caution!
             else if (data.PlayerCurrentHealth <= 360 && data.PlayerCurrentHealth >= 1)
-                mainContainer.innerHTML += '<font size="6" color="#ff0000"><b>' + data.PlayerCurrentHealth + '</b></font><br>';
+                mainContainer.innerHTML += '<font size="6" color="#ff0000"><b>' + data.PlayerCurrentHealth + '</b></font><br>'; // Dangerops!
             else
-                mainContainer.innerHTML += '<font size="6" color="#ff0000"><b>' + data.PlayerCurrentHealth + '</b></font><br>';
+                mainContainer.innerHTML += '<font size="6" color="#ff0000"><b>' + data.PlayerCurrentHealth + '</b></font><br>'; // Deaded.
 
             mainContainer.innerHTML += '<font size="6"><b>' + data.IGTFormattedString + '</b></font><br>';
             //mainContainer.innerHTML += '<font size="4" color="#969696"><b>A:' + data.IGTRunningTimer + '</b></font><br>';
@@ -86,16 +101,21 @@
             //mainContainer.innerHTML += '<br>';
 
             mainContainer.innerHTML += '<font size="4" color="#969696"><b>DA&nbsp;Rank:&nbsp;' + data.Rank + '</b></font><br>';
-            mainContainer.innerHTML += '<font size="4" color="#969696"><b>DA&nbsp;Rank:&nbsp;' + data.RankScore + '</b></font><br>';
+            mainContainer.innerHTML += '<font size="4" color="#969696"><b>DA&nbsp;Score:&nbsp;' + data.RankScore + '</b></font><br>';
 
             mainContainer.innerHTML += '<font size="4" color="#ff0000"><b>Enemy&nbsp;HP</b></font><br>';
+            var table = document.createElement("table");
             data.EnemyHealth.sort(function (a, b) { return Asc(a.Percentage, b.Percentage) || Desc(a.CurrentHP, b.CurrentHP) }).forEach(function (item, index, arr) {
                 if (item.IsAlive) {
-                    var div = document.createElement("div");
-                    div.innerHTML = '<font size="3" color="#ff0000">' + item.CurrentHP + '&nbsp;&nbsp;&nbsp;' + parseFloat(item.Percentage * 100).toFixed(1) + '%</font><br>';
-                    mainContainer.appendChild(div);
+                    table.innerHTML += `<tr>
+<td><font size="4" color="#ff0000"><b>${item.CurrentHP}</b></font></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><font size="4" color="#ff0000"><b>${parseFloat(item.Percentage * 100).toFixed(1)}%</b></font></td>
+</tr>`;
                 }
             });
+            mainContainer.appendChild(table);
 
             //mainContainer.innerHTML += '<BR>Last Updated: ' + new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString();
         }
