@@ -1,5 +1,7 @@
 # Changelog and Downloads
 
+## THE NEW SRT DOWNLOADS ARE LOCATED AT [https://www.neonblu.com/SRT/](https://www.neonblu.com/SRT/)!
+
 Prerequisites:
 
 [.NET Framework v4.7.2 or newer](https://dotnet.microsoft.com/download/dotnet-framework-runtime) required!
